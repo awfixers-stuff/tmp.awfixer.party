@@ -1,5 +1,6 @@
 import { Separator } from "@/components/ui/separator"
 import { Button } from "@/components/ui/button"
+import Link from "next/link"
 
 export function SiteFooter() {
   return (
@@ -22,6 +23,27 @@ export function SiteFooter() {
           </Button>
           .
         </p>
+        <Separator className="bg-border/60" />
+        <nav className="flex justify-center gap-4 text-[0.8125rem]">
+          <Link
+            href="/privacy"
+            className="text-foreground/85 underline-offset-4 hover:underline"
+          >
+            Privacy Policy
+          </Link>
+          <Link
+            href="/terms-of-use"
+            className="text-foreground/85 underline-offset-4 hover:underline"
+          >
+            Terms of Use
+          </Link>
+          <Link
+            href="/terms-of-access"
+            className="text-foreground/85 underline-offset-4 hover:underline"
+          >
+            Terms of Access
+          </Link>
+        </nav>
         <Separator className="bg-border/60" />
         <p className="text-pretty text-center text-[0.8125rem] leading-relaxed text-muted-foreground">
           AWFixer Political Party and PAC are operationally separate and
