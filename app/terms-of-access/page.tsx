@@ -3,6 +3,7 @@ import type { Metadata } from "next"
 import { Separator } from "@/components/ui/separator"
 
 import { TermsOfAccessContent } from "./terms-of-access-content"
+import { TableOfContents } from "./toc"
 
 export const metadata: Metadata = {
   title: "Terms of Access | AWFixer Political Party",
@@ -12,6 +13,7 @@ export const metadata: Metadata = {
 export default function TermsOfAccessPage() {
   return (
     <main className="mx-auto flex w-full max-w-2xl flex-1 flex-col gap-12 px-4 pb-16 sm:gap-14 sm:px-6 sm:pb-20">
+      <TableOfContents />
       <header className="space-y-3">
         <h1 className="font-heading text-2xl font-semibold tracking-tight sm:text-3xl">
           Terms of Access
