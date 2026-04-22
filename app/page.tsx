@@ -1,45 +1,11 @@
 "use client"
 
-import { useRef, useState, useEffect } from "react"
-
-import { Separator } from "@/components/ui/separator"
-import { ChevronDown } from "lucide-react"
+import { useRef } from "react"
 
 import { PageContent } from "./page-content"
 
-const FULL_TITLE = "AWFixer Political Party"
-
 export default function Page() {
   const contentRef = useRef<HTMLElement>(null)
-  const [displayedTitle, setDisplayedTitle] = useState("")
-  const [showUnderConstruction, setShowUnderConstruction] = useState(false)
-  const [showButton, setShowButton] = useState(false)
-
-  useEffect(() => {
-    const titleDuration = 3500
-    const charsPerChunk = Math.ceil(FULL_TITLE.length / (titleDuration / 80))
-    let currentIndex = 0
-
-    const interval = setInterval(() => {
-      currentIndex += charsPerChunk
-      if (currentIndex >= FULL_TITLE.length) {
-        setDisplayedTitle(FULL_TITLE)
-        clearInterval(interval)
-        setTimeout(() => setShowUnderConstruction(true), 500)
-      } else {
-        setDisplayedTitle(FULL_TITLE.slice(0, currentIndex))
-      }
-    }, 80)
-
-    return () => clearInterval(interval)
-  }, [])
-
-  useEffect(() => {
-    if (showUnderConstruction) {
-      const timer = setTimeout(() => setShowButton(true), 2000)
-      return () => clearTimeout(timer)
-    }
-  }, [showUnderConstruction])
 
   const scrollToContent = () => {
     contentRef.current?.scrollIntoView({ behavior: "smooth" })
@@ -47,33 +13,27 @@ export default function Page() {
 
   return (
     <>
-      <section className="flex h-screen flex-col items-center justify-center px-4 sm:px-6">
+      <section className="flex h-[70vh] min-h-[500px] flex-col items-center justify-center px-4 sm:px-6">
         <div className="flex flex-col items-center gap-8">
           <div className="max-w-2xl text-center">
-            <h1 className="font-heading text-3xl font-bold tracking-tight text-balance sm:text-4xl min-h-[1.2em]">
-              <span className="typewriter">{displayedTitle}</span>
-              <span className="animate-pulse">|</span>
+            <p className="font-mono text-xs uppercase tracking-widest text-red-500 animate-fade-up">
+              AWFixer Political Party
+            </p>
+            <h1 className="mt-4 font-heading text-5xl font-bold tracking-tight text-balance sm:text-7xl animate-fade-up animate-fade-up-delay-1">
+              Fix the <span className="text-red-500">System.</span>
             </h1>
-            <p
-              className={`mt-2 text-base text-foreground/80 transition-all duration-500 overflow-hidden ${
-                showUnderConstruction
-                  ? "opacity-100 translate-y-0"
-                  : "opacity-0 translate-y-2"
-              }`}
-            >
-              Under construction
+            <p className="mt-6 max-w-xl text-lg text-muted-foreground animate-fade-up animate-fade-up-delay-2">
+              Not the left. Not the right. The AWFixer Party exists because the existing political establishment has had thirty years to fix America's foundational problems and has instead made most of them worse.
             </p>
           </div>
           <button
             onClick={scrollToContent}
-            className={`flex flex-col items-center gap-1 text-sm text-foreground/80 transition-all duration-500 hover:text-foreground ${
-              showButton
-                ? "opacity-100 translate-y-0"
-                : "opacity-0 translate-y-4 pointer-events-none"
-            }`}
+            className="mt-4 flex flex-col items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-foreground animate-fade-up animate-fade-up-delay-3"
           >
             <span>Read More</span>
-            <ChevronDown className="h-5 w-5 animate-bounce" />
+            <svg className="h-5 w-5 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+            </svg>
           </button>
         </div>
       </section>
@@ -81,7 +41,6 @@ export default function Page() {
         ref={contentRef}
         className="mx-auto flex w-full max-w-2xl flex-1 flex-col gap-12 px-4 pb-16 sm:gap-14 sm:px-6 sm:pb-20"
       >
-        <Separator className="bg-border/60" />
         <div className="prose prose-neutral dark:prose-invert max-w-none text-[0.9375rem] leading-relaxed text-foreground/90 prose-headings:scroll-mt-24 prose-h1:mb-8 prose-h1:mt-0 prose-h2:mb-5 prose-h2:mt-12 prose-p:mb-6 prose-p:mt-0 prose-ul:my-6 prose-ol:my-6 prose-li:my-2">
           <PageContent />
         </div>
