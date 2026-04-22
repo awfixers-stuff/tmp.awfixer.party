@@ -31,7 +31,9 @@ function EventTypeBadge({ type }: { type: string }) {
     hybrid: "Hybrid",
   }
   return (
-    <span className={`rounded-full px-2 py-0.5 text-xs font-medium ${colors[type as keyof typeof colors]}`}>
+    <span
+      className={`rounded-full px-2 py-0.5 text-xs font-medium ${colors[type as keyof typeof colors]}`}
+    >
       {labels[type as keyof typeof labels]}
     </span>
   )
@@ -45,14 +47,15 @@ export default function EventsPage() {
     <div className="flex">
       <main className="mx-auto flex w-full max-w-2xl flex-1 flex-col gap-12 px-4 pb-16 sm:gap-14 sm:px-6 sm:pb-20">
         <header className="space-y-3">
-          <p className="font-mono text-xs uppercase tracking-widest text-purple-600">
+          <p className="font-mono text-xs tracking-widest text-purple-600 uppercase">
             AWFixer Political Party
           </p>
           <h1 className="font-heading text-3xl font-bold tracking-tight sm:text-4xl">
             Events
           </h1>
           <p className="text-lg text-muted-foreground">
-            Join us at our events to learn about and help shape the AWFixer platform.
+            Join us at our events to learn about and help shape the AWFixer
+            platform.
           </p>
         </header>
 
@@ -60,7 +63,9 @@ export default function EventsPage() {
 
         {upcomingEvents.length > 0 && (
           <>
-            <h2 className="font-heading text-xl font-semibold">Upcoming Events</h2>
+            <h2 className="font-heading text-xl font-semibold">
+              Upcoming Events
+            </h2>
             <div className="grid gap-4">
               {upcomingEvents.map((event) => (
                 <a
@@ -82,10 +87,15 @@ export default function EventsPage() {
                     </div>
                     <div className="shrink-0 text-right">
                       <p className="font-mono text-sm font-semibold text-purple-600">
-                        {new Date(event.date).toLocaleDateString("en-US", { month: "short", day: "numeric" })}
+                        {new Date(event.date).toLocaleDateString("en-US", {
+                          month: "short",
+                          day: "numeric",
+                        })}
                       </p>
                       {event.time && (
-                        <p className="text-xs text-muted-foreground">{event.time}</p>
+                        <p className="text-xs text-muted-foreground">
+                          {event.time}
+                        </p>
                       )}
                     </div>
                   </div>
@@ -98,7 +108,9 @@ export default function EventsPage() {
         {pastEvents.length > 0 && (
           <>
             <Separator className="bg-border/60" />
-            <h2 className="font-heading text-xl font-semibold text-muted-foreground">Past Events</h2>
+            <h2 className="font-heading text-xl font-semibold text-muted-foreground">
+              Past Events
+            </h2>
             <div className="grid gap-4 opacity-60">
               {pastEvents.map((event) => (
                 <a
@@ -120,7 +132,11 @@ export default function EventsPage() {
                     </div>
                     <div className="shrink-0 text-right">
                       <p className="font-mono text-sm text-muted-foreground">
-                        {new Date(event.date).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}
+                        {new Date(event.date).toLocaleDateString("en-US", {
+                          month: "short",
+                          day: "numeric",
+                          year: "numeric",
+                        })}
                       </p>
                     </div>
                   </div>
@@ -140,7 +156,7 @@ export default function EventsPage() {
 
         <div className="flex flex-col gap-4 sm:flex-row">
           <a
-            href="https://discord.awfixer.party"
+            href="https://mee6.gg/awfixerpolitics"
             className="inline-flex items-center justify-center rounded-md bg-purple-600 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-purple-700"
           >
             Join Discord
