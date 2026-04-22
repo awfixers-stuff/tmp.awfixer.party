@@ -43,7 +43,10 @@ export function FloatingSiteNav() {
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
         setPolicyOpen(false)
       }
     }
@@ -67,7 +70,7 @@ export function FloatingSiteNav() {
           <Link
             href="/"
             className={cn(
-              "font-heading shrink-0 px-2 text-sm font-semibold tracking-tight text-foreground sm:text-base",
+              "shrink-0 px-2 font-heading text-sm font-semibold tracking-tight text-foreground sm:text-base",
               "rounded-full py-1 outline-none focus-visible:ring-2 focus-visible:ring-ring"
             )}
           >
@@ -75,11 +78,11 @@ export function FloatingSiteNav() {
           </Link>
 
           {/* Desktop nav */}
-          <div className="hidden sm:flex items-center gap-2">
+          <div className="hidden items-center gap-2 sm:flex">
             <span className="h-5 w-px shrink-0 bg-border" aria-hidden />
-<Button size="sm" className="rounded-full" asChild>
+            <Button size="sm" className="rounded-full" asChild>
               <a
-                href="https://discord.awfixer.party"
+                href="https://mee6.gg/awfixerpolitics"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -92,7 +95,10 @@ export function FloatingSiteNav() {
               className="rounded-full"
               asChild
             >
-              <Link href="/platform" aria-current={isPlatform ? "page" : undefined}>
+              <Link
+                href="/platform"
+                aria-current={isPlatform ? "page" : undefined}
+              >
                 Platform
               </Link>
             </Button>
@@ -125,14 +131,14 @@ export function FloatingSiteNav() {
               </Button>
               <div
                 className={cn(
-                  "absolute right-0 top-full z-50 mt-2 w-56 overflow-hidden rounded-2xl border border-border bg-background/95 shadow-2xl shadow-black/20 backdrop-blur-xl",
-                  "opacity-0 translate-y-[-0.5rem] transition-all duration-200",
-                  policyOpen && "opacity-100 translate-y-0"
+                  "absolute top-full right-0 z-50 mt-2 w-56 overflow-hidden rounded-2xl border border-border bg-background/95 shadow-2xl shadow-black/20 backdrop-blur-xl",
+                  "translate-y-[-0.5rem] opacity-0 transition-all duration-200",
+                  policyOpen && "translate-y-0 opacity-100"
                 )}
                 style={{ pointerEvents: policyOpen ? "auto" : "none" }}
               >
                 <div className="flex flex-col p-2">
-                  <p className="mb-1 px-2 text-[10px] font-semibold uppercase tracking-widest text-foreground/40">
+                  <p className="mb-1 px-2 text-[10px] font-semibold tracking-widest text-foreground/40 uppercase">
                     Policy
                   </p>
                   {policyItems.map((item) => (
@@ -159,7 +165,10 @@ export function FloatingSiteNav() {
               className="rounded-full"
               asChild
             >
-              <Link href="/philosophy" aria-current={isPhilosophy ? "page" : undefined}>
+              <Link
+                href="/philosophy"
+                aria-current={isPhilosophy ? "page" : undefined}
+              >
                 Philosophy
               </Link>
             </Button>
@@ -167,7 +176,7 @@ export function FloatingSiteNav() {
 
           {/* Mobile hamburger */}
           <button
-            className="sm:hidden flex items-center justify-center rounded-full p-2 text-foreground/70 transition-colors hover:bg-accent hover:text-foreground"
+            className="flex items-center justify-center rounded-full p-2 text-foreground/70 transition-colors hover:bg-accent hover:text-foreground sm:hidden"
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileOpen}
@@ -186,7 +195,9 @@ export function FloatingSiteNav() {
         className={cn(
           "fixed inset-0 z-40 bg-black/50 backdrop-blur-sm sm:hidden",
           "transition-opacity duration-200",
-          mobileOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+          mobileOpen
+            ? "pointer-events-auto opacity-100"
+            : "pointer-events-none opacity-0"
         )}
         onClick={() => setMobileOpen(false)}
         aria-hidden
@@ -202,13 +213,13 @@ export function FloatingSiteNav() {
           "rounded-3xl border border-border bg-background/95 shadow-2xl shadow-black/30 backdrop-blur-xl",
           "transition-all duration-200 ease-out",
           mobileOpen
-            ? "opacity-100 translate-y-0 pointer-events-auto"
-            : "opacity-0 -translate-y-3 pointer-events-none"
+            ? "pointer-events-auto translate-y-0 opacity-100"
+            : "pointer-events-none -translate-y-3 opacity-0"
         )}
       >
         {/* Scrollable nav items */}
         <div className="flex-1 overflow-y-auto p-3">
-          <p className="mb-1.5 px-2 text-[10px] font-semibold uppercase tracking-widest text-foreground/40">
+          <p className="mb-1.5 px-2 text-[10px] font-semibold tracking-widest text-foreground/40 uppercase">
             Policy
           </p>
           {policyItems.map((item) => (
@@ -256,7 +267,11 @@ export function FloatingSiteNav() {
 
         {/* Discord CTA — prominent at the bottom */}
         <div className="p-3">
-          <Button size="lg" className="w-full rounded-2xl text-base font-semibold" asChild>
+          <Button
+            size="lg"
+            className="w-full rounded-2xl text-base font-semibold"
+            asChild
+          >
             <a
               href="https://mee6.gg/awfixerpolitics"
               target="_blank"
