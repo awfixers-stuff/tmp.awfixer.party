@@ -112,21 +112,26 @@ export function FloatingSiteNav() {
               </Button>
               <div
                 className={cn(
-                  "absolute right-0 top-full z-50 mt-2 w-56 overflow-hidden rounded-lg border border-border bg-background shadow-xl",
+                  "absolute right-0 top-full z-50 mt-2 w-56 overflow-hidden rounded-2xl border border-border bg-background/95 shadow-2xl shadow-black/20 backdrop-blur-xl",
                   "opacity-0 translate-y-[-0.5rem] transition-all duration-200",
                   policyOpen && "opacity-100 translate-y-0"
                 )}
                 style={{ pointerEvents: policyOpen ? "auto" : "none" }}
               >
-                <div className="flex flex-col py-1">
+                <div className="flex flex-col p-2">
+                  <p className="mb-1 px-2 text-[10px] font-semibold uppercase tracking-widest text-foreground/40">
+                    Policy
+                  </p>
                   {policyItems.map((item) => (
                     <Link
                       key={item.href}
                       href={item.href}
                       className={cn(
-                        "px-3 py-2 text-sm text-foreground/80 transition-colors",
+                        "rounded-xl px-3 py-2 text-sm font-medium transition-colors",
                         "hover:bg-accent hover:text-foreground focus:bg-accent focus:text-foreground",
-                        pathname === item.href && "bg-accent text-foreground font-medium"
+                        pathname === item.href
+                          ? "bg-accent text-foreground"
+                          : "text-foreground/70"
                       )}
                     >
                       {item.label}

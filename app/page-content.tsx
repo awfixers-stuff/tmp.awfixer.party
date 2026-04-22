@@ -1,7 +1,14 @@
 "use client"
 
-import Content from "./content.mdx"
+import { Separator } from "@/components/ui/separator"
+
+import { HomeContent, HomePageTOC } from "./home-content"
 
 export function PageContent() {
-  return <Content />
+  return (
+    <>
+      <HomePageTOC />
+      <HomeContent />
+    </>
+  )
 }

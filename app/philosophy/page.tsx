@@ -2,8 +2,8 @@ import type { Metadata } from "next"
 
 import { Separator } from "@/components/ui/separator"
 
-import { PhilosophyContent } from "./philosophy-content"
-import { TableOfContents } from "./toc"
+import { PhilosophyContent } from "./philosophy-content-new"
+import { TableOfContents } from "./toc-new"
 
 export const metadata: Metadata = {
   title: "Philosophy | AWFixer Political Party",
