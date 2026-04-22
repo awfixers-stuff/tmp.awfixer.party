@@ -226,8 +226,6 @@ interface HeroImageProps {
   alt: string
 }
 
-export { ScheduleGrid }
-
 export function HeroImage({ src, alt }: HeroImageProps) {
   return (
     <div className="relative aspect-[21/9] w-full overflow-hidden rounded-2xl my-8">
