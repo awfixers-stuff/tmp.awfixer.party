@@ -1,5 +1,6 @@
 import { Geist_Mono, Inter } from "next/font/google"
 import type { Metadata } from "next"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 import "./globals.css"
 import { SiteChrome } from "@/components/site-chrome"
@@ -48,6 +49,7 @@ export default function RootLayout({
           />
           <SiteChrome>{children}</SiteChrome>
         </ThemeProvider>
+        <SpeedInsights />
       </body>
     </html>
   )
