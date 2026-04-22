@@ -1,10 +1,5 @@
 import createMDX from "@next/mdx"
 import remarkGfm from "remark-gfm"
-import defaultComponents from "./app/mdx-components"
-
-const components = {
-  ...defaultComponents,
-}
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -24,7 +19,6 @@ const withMDX = createMDX({
     remarkPlugins: [remarkGfm],
     rehypePlugins: [],
   },
-  components,
 })
 
 export default withMDX(nextConfig)
