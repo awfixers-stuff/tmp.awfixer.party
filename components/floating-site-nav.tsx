@@ -22,6 +22,8 @@ const policyItems = [
   { href: "/policy/anti-corruption", label: "Anti-Corruption" },
   { href: "/policy/immigration", label: "Immigration" },
   { href: "/policy/education", label: "Education" },
+  { href: "/policy/technology", label: "Technology & AI" },
+  { href: "/policy/civil-standard", label: "Civil Standard of Living" },
 ]
 
 export function FloatingSiteNav() {
