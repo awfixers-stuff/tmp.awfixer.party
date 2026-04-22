@@ -22,7 +22,7 @@ const components = {
   EventCard,
   HeroImage,
   img: (props: React.ComponentProps<"img">) => (
-    <InlineImage src={props.src || ""} alt={props.alt || ""} />
+    <InlineImage src={String(props.src) || ""} alt={props.alt || ""} />
   ),
 }
 
