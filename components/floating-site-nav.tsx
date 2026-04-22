@@ -10,6 +10,7 @@ import { cn } from "@/lib/utils"
 
 import { upcomingEventsMeta } from "@/app/events/events-meta"
 import { plansMeta } from "@/app/plans/plans-meta"
+import { notesMeta } from "@/app/notes/notes-meta"
 
 const policyItems = [
   { href: "/policy/competition", label: "Competition" },
@@ -57,6 +58,7 @@ export function FloatingSiteNav() {
   const isEventsPage = pathname.startsWith("/events")
   const isGladiatorPage = pathname === "/gladiator"
   const isPlansPage = pathname.startsWith("/plans")
+  const isNotesPage = pathname.startsWith("/notes")
 
   useEffect(() => {
     setMobileOpen(false)
@@ -132,6 +134,20 @@ export function FloatingSiteNav() {
                 </Link>
               </Button>
             </div>
+
+            <span className="mx-2 h-5 w-px shrink-0 bg-border" aria-hidden />
+
+            {/* Group 1.5: Notes */}
+            <Button
+              size="sm"
+              variant={isNotesPage ? "secondary" : "ghost"}
+              className="rounded-full"
+              asChild
+            >
+              <Link href="/notes" aria-current={isNotesPage ? "page" : undefined}>
+                Notes
+              </Link>
+            </Button>
 
             <span className="mx-2 h-5 w-px shrink-0 bg-border" aria-hidden />
 
