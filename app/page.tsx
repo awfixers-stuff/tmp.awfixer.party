@@ -16,11 +16,11 @@ export default function Page() {
       <section className="flex h-[70vh] min-h-[500px] flex-col items-center justify-center px-4 sm:px-6">
         <div className="flex flex-col items-center gap-8">
           <div className="max-w-2xl text-center">
-            <p className="font-mono text-xs uppercase tracking-widest text-red-500 animate-fade-up">
+            <p className="font-mono text-xs uppercase tracking-widest text-purple-500 animate-fade-up">
               AWFixer Political Party
             </p>
             <h1 className="mt-4 font-heading text-5xl font-bold tracking-tight text-balance sm:text-7xl animate-fade-up animate-fade-up-delay-1">
-              Fix the <span className="text-red-500">System.</span>
+              Fix the <span className="text-purple-500">System.</span>
             </h1>
             <p className="mt-6 max-w-xl text-lg text-muted-foreground animate-fade-up animate-fade-up-delay-2">
               Not the left. Not the right. The AWFixer Party exists because the existing political establishment has had thirty years to fix America's foundational problems and has instead made most of them worse.
@@ -39,7 +39,7 @@ export default function Page() {
       </section>
       <main
         ref={contentRef}
-        className="mx-auto flex w-full max-w-2xl flex-1 flex-col gap-12 px-4 pb-16 sm:gap-14 sm:px-6 sm:pb-20"
+        className="mx-auto flex w-full max-w-2xl flex-1 flex-col gap-12 px-4 pb-16 sm:gap-14 sm:px-6 sm:pb-20 pt-[40vh]"
       >
         <div className="prose prose-neutral dark:prose-invert max-w-none text-[0.9375rem] leading-relaxed text-foreground/90 prose-headings:scroll-mt-24 prose-h1:mb-8 prose-h1:mt-0 prose-h2:mb-5 prose-h2:mt-12 prose-p:mb-6 prose-p:mt-0 prose-ul:my-6 prose-ol:my-6 prose-li:my-2">
           <PageContent />

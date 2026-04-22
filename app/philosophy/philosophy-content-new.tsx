@@ -3,11 +3,11 @@
 export function PhilosophyContent() {
   return (
     <>
-      <section className="rounded-lg border-l-4 border-red-600 bg-card p-6 animate-fade-up">
+      <section className="rounded-lg border-l-4 border-purple-600 bg-card p-6 animate-fade-up">
         <h2 className="font-heading text-2xl font-bold">
-          America does not have a <span className="text-red-500">people problem.</span>
+          America does not have a <span className="text-purple-500">people problem.</span>
           <br />
-          It has a <span className="text-red-500">structure problem.</span>
+          It has a <span className="text-purple-500">structure problem.</span>
         </h2>
         <p className="mt-4 text-muted-foreground">
           Every policy AWFixer proposes begins from the same observation: when a system consistently produces bad outcomes across administrations, parties, and decades, the problem is the system — not the individuals operating inside it.
@@ -33,7 +33,7 @@ export function PhilosophyContent() {
         We believe the American political system has reached a point where its dysfunction is no longer a bug that can be patched. It requires structural repair. That is what this party exists to do.
       </p>
 
-      <blockquote className="border-l-4 border-red-500 pl-4 italic animate-fade-up animate-fade-up-delay-2">
+      <blockquote className="border-l-4 border-purple-500 pl-4 italic animate-fade-up animate-fade-up-delay-2">
         "Corruption is not a Republican problem or a Democratic problem. It is a power problem. Wherever power concentrates without accountability, corruption follows. The American system was designed with this explicitly in mind. That architecture has been allowed to decay."
       </blockquote>
 
@@ -79,64 +79,64 @@ export function PhilosophyContent() {
       </p>
 
       <div className="my-8 space-y-2 animate-fade-up animate-fade-up-delay-3">
-        <div className="rounded-lg border bg-card p-4 border-l-4 border-l-red-500">
-          <span className="text-xs font-mono text-red-500">01</span>
+        <div className="rounded-lg border bg-card p-4 border-l-4 border-l-purple-500">
+          <span className="text-xs font-mono text-purple-500">01</span>
           <h4 className="mt-2 font-mono text-sm font-semibold uppercase">On Markets</h4>
           <p className="mt-1 text-sm text-muted-foreground">
             Deregulation without antitrust enforcement does not create competition. It creates permission slips for monopoly. We support the former and demand the latter simultaneously.
           </p>
         </div>
         
-        <div className="rounded-lg border bg-card p-4 border-l-4 border-l-red-500">
-          <span className="text-xs font-mono text-red-500">02</span>
+        <div className="rounded-lg border bg-card p-4 border-l-4 border-l-purple-500">
+          <span className="text-xs font-mono text-purple-500">02</span>
           <h4 className="mt-2 font-mono text-sm font-semibold uppercase">On Taxation</h4>
           <p className="mt-1 text-sm text-muted-foreground">
             A healthy, growing economy with a broad tax base generates more revenue at lower rates than an economy dominated by a handful of mega-corporations paying effective rates near zero. Pro-business and pro-revenue are not opposites.
           </p>
         </div>
         
-        <div className="rounded-lg border bg-card p-4 border-l-4 border-l-red-500">
-          <span className="text-xs font-mono text-red-500">03</span>
+        <div className="rounded-lg border bg-card p-4 border-l-4 border-l-purple-500">
+          <span className="text-xs font-mono text-purple-500">03</span>
           <h4 className="mt-2 font-mono text-sm font-semibold uppercase">On Evidence</h4>
           <p className="mt-1 text-sm text-muted-foreground">
             Policies should be evaluated by outcomes, not by how they feel or what they signal. If it works, we keep it. If it doesn't, we change it. The party that proposed it is irrelevant to that calculation.
           </p>
         </div>
         
-        <div className="rounded-lg border bg-card p-4 border-l-4 border-l-red-500">
-          <span className="text-xs font-mono text-red-500">04</span>
+        <div className="rounded-lg border bg-card p-4 border-l-4 border-l-purple-500">
+          <span className="text-xs font-mono text-purple-500">04</span>
           <h4 className="mt-2 font-mono text-sm font-semibold uppercase">On Honesty</h4>
           <p className="mt-1 text-sm text-muted-foreground">
             The American people are capable of handling the truth about what is broken. A political class that treats them otherwise is not protecting them — it is protecting itself.
           </p>
         </div>
         
-        <div className="rounded-lg border bg-card p-4 border-l-4 border-l-red-500">
-          <span className="text-xs font-mono text-red-500">05</span>
+        <div className="rounded-lg border bg-card p-4 border-l-4 border-l-purple-500">
+          <span className="text-xs font-mono text-purple-500">05</span>
           <h4 className="mt-2 font-mono text-sm font-semibold uppercase">On Accountability</h4>
           <p className="mt-1 text-sm text-muted-foreground">
             Every branch. Every level. Every uniform. No institution is too important, too sensitive, or too trusted to require the scrutiny that preventing corruption demands.
           </p>
         </div>
         
-        <div className="rounded-lg border bg-card p-4 border-l-4 border-l-red-500">
-          <span className="text-xs font-mono text-red-500">06</span>
+        <div className="rounded-lg border bg-card p-4 border-l-4 border-l-purple-500">
+          <span className="text-xs font-mono text-purple-500">06</span>
           <h4 className="mt-2 font-mono text-sm font-semibold uppercase">On Consequences</h4>
           <p className="mt-1 text-sm text-muted-foreground">
             You cannot have nice things and be soft on crime. Real consequences and genuine rehabilitation are not opposites — they are the same goal stated from different angles.
           </p>
         </div>
         
-        <div className="rounded-lg border bg-card p-4 border-l-4 border-l-red-500">
-          <span className="text-xs font-mono text-red-500">07</span>
+        <div className="rounded-lg border bg-card p-4 border-l-4 border-l-purple-500">
+          <span className="text-xs font-mono text-purple-500">07</span>
           <h4 className="mt-2 font-mono text-sm font-semibold uppercase">On Transparency</h4>
           <p className="mt-1 text-sm text-muted-foreground">
             Any system that exercises power over people must be understandable by those people or their representatives. This is not a technology principle. It is a democracy principle.
           </p>
         </div>
         
-        <div className="rounded-lg border bg-card p-4 border-l-4 border-l-red-500">
-          <span className="text-xs font-mono text-red-500">08</span>
+        <div className="rounded-lg border bg-card p-4 border-l-4 border-l-purple-500">
+          <span className="text-xs font-mono text-purple-500">08</span>
           <h4 className="mt-2 font-mono text-sm font-semibold uppercase">On Curiosity</h4>
           <p className="mt-1 text-sm text-muted-foreground">
             The impulse to understand how things work — to probe, test, and find the edges of a system — is one of civilization's most valuable traits. It should be rewarded, not criminalized.
@@ -160,7 +160,7 @@ export function PhilosophyContent() {
         We support real consequences for crime and a 77% recidivism rate as evidence of systemic failure simultaneously. We support open-source AI in government and the decriminalization of good-faith security research simultaneously. We support strengthening union organizing rights and establishing independent union oversight simultaneously. These are not contradictions. They are what it looks like to follow evidence rather than ideology.
       </p>
 
-      <div className="my-8 rounded-lg bg-red-600 p-6 text-white animate-fade-up animate-fade-up-delay-4">
+      <div className="my-8 rounded-lg bg-purple-600 p-6 text-white animate-fade-up animate-fade-up-delay-4">
         <div className="flex items-start gap-4">
           <span className="font-heading text-6xl font-bold text-white/20">77%</span>
           <div>
@@ -224,7 +224,7 @@ export function PhilosophyContent() {
         </p>
       </div>
 
-      <blockquote className="border-l-4 border-red-500 pl-4 italic animate-fade-up animate-fade-up-delay-5">
+      <blockquote className="border-l-4 border-purple-500 pl-4 italic animate-fade-up animate-fade-up-delay-5">
         "The measure of a political party is not how it describes the problem. It is whether it is willing to name <em>who benefits from it staying that way.</em>"
       </blockquote>
 
@@ -239,7 +239,7 @@ export function PhilosophyContent() {
       <div className="mt-8 flex flex-col gap-4 sm:flex-row animate-fade-up animate-fade-up-delay-5">
         <a
           href="/platform"
-          className="inline-flex items-center justify-center rounded-md bg-red-600 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-red-700"
+          className="inline-flex items-center justify-center rounded-md bg-purple-600 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-purple-700"
         >
           Explore the Full Platform
         </a>

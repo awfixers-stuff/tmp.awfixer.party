@@ -14,7 +14,7 @@ export default function PhilosophyPage() {
   return (
     <main className="mx-auto flex w-full max-w-2xl flex-1 flex-col gap-12 px-4 pb-16 sm:gap-14 sm:px-6 sm:pb-20">
       <header className="space-y-3">
-        <p className="font-mono text-xs uppercase tracking-widest text-red-500">AWFixer Political Party</p>
+        <p className="font-mono text-xs uppercase tracking-widest text-purple-500">AWFixer Political Party</p>
         <h1 className="font-heading text-3xl font-bold tracking-tight sm:text-4xl">
           Our Philosophy
         </h1>
