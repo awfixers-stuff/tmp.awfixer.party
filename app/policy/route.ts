@@ -1,5 +1,5 @@
-import { NextResponse } from "next/server"
+import { redirect } from "next/navigation"
 
 export function GET() {
-  return NextResponse.redirect("/platform")
+  redirect("/platform")
 }
