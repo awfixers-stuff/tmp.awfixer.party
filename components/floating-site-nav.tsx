@@ -26,6 +26,12 @@ const policyItems = [
   { href: "/policy/civil-standard", label: "Civil Standard of Living" },
 ]
 
+const policySections = [
+  { label: "Core Policies", items: policyItems.slice(0, 5) },
+  { label: "Social Policies", items: policyItems.slice(5, 10) },
+  { label: "Additional", items: policyItems.slice(10) },
+]
+
 export function FloatingSiteNav() {
   const pathname = usePathname()
   const [mobileOpen, setMobileOpen] = useState(false)
@@ -131,30 +137,34 @@ export function FloatingSiteNav() {
               </Button>
               <div
                 className={cn(
-                  "absolute top-full right-0 z-50 mt-2 w-56 overflow-hidden rounded-2xl border border-border bg-background/95 shadow-2xl shadow-black/20 backdrop-blur-xl",
+                  "absolute top-full right-0 z-50 mt-2 w-72 overflow-hidden rounded-2xl border border-border bg-background/95 shadow-2xl shadow-black/20 backdrop-blur-xl",
                   "translate-y-[-0.5rem] opacity-0 transition-all duration-200",
                   policyOpen && "translate-y-0 opacity-100"
                 )}
                 style={{ pointerEvents: policyOpen ? "auto" : "none" }}
               >
                 <div className="flex flex-col p-2">
-                  <p className="mb-1 px-2 text-[10px] font-semibold tracking-widest text-foreground/40 uppercase">
-                    Policy
-                  </p>
-                  {policyItems.map((item) => (
-                    <Link
-                      key={item.href}
-                      href={item.href}
-                      className={cn(
-                        "rounded-xl px-3 py-2 text-sm font-medium transition-colors",
-                        "hover:bg-accent hover:text-foreground focus:bg-accent focus:text-foreground",
-                        pathname === item.href
-                          ? "bg-accent text-foreground"
-                          : "text-foreground/70"
-                      )}
-                    >
-                      {item.label}
-                    </Link>
+                  {policySections.map((section) => (
+                    <div key={section.label} className="mb-2 last:mb-0">
+                      <p className="mb-1 px-2 text-[10px] font-semibold tracking-widest text-purple-500 uppercase">
+                        {section.label}
+                      </p>
+                      {section.items.map((item) => (
+                        <Link
+                          key={item.href}
+                          href={item.href}
+                          className={cn(
+                            "rounded-xl px-3 py-2 text-sm font-medium transition-colors",
+                            "hover:bg-accent hover:text-foreground focus:bg-accent focus:text-foreground",
+                            pathname === item.href
+                              ? "bg-accent text-foreground"
+                              : "text-foreground/70"
+                          )}
+                        >
+                          {item.label}
+                        </Link>
+                      ))}
+                    </div>
                   ))}
                 </div>
               </div>
@@ -217,53 +227,83 @@ export function FloatingSiteNav() {
             : "pointer-events-none -translate-y-3 opacity-0"
         )}
       >
-        {/* Scrollable nav items */}
-        <div className="flex-1 overflow-y-auto p-3">
-          <p className="mb-1.5 px-2 text-[10px] font-semibold tracking-widest text-foreground/40 uppercase">
-            Policy
-          </p>
-          {policyItems.map((item) => (
+{/* Scrollable nav items */}
+          <div className="flex-1 overflow-y-auto p-3">
+            {/* Policy dropdown - collapsible on mobile */}
+            <div className="mb-2">
+              <button
+                onClick={() => setPolicyOpen(!policyOpen)}
+                className={cn(
+                  "flex w-full items-center justify-between rounded-2xl px-3 py-2.5 text-sm font-medium transition-colors",
+                  "hover:bg-accent",
+                  isPolicyPage ? "bg-accent text-foreground" : "text-foreground/70"
+                )}
+              >
+                <span>Policy</span>
+                <svg
+                  className={cn(
+                    "h-4 w-4 transition-transform duration-200",
+                    policyOpen && "rotate-180"
+                  )}
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              <div
+                className={cn(
+                  "overflow-hidden transition-all duration-200",
+                  policyOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
+                )}
+              >
+                <div className="mt-1 flex flex-col gap-1 pl-2">
+                  {policyItems.map((item) => (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className={cn(
+                        "block rounded-xl px-3 py-2 text-sm transition-colors",
+                        "hover:bg-accent",
+                        pathname === item.href
+                          ? "bg-accent text-foreground"
+                          : "text-foreground/70"
+                      )}
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <div className="my-2 h-px bg-border" />
+
             <Link
-              key={item.href}
-              href={item.href}
+              href="/platform"
+              aria-current={isPlatform ? "page" : undefined}
               className={cn(
                 "block rounded-2xl px-3 py-2.5 text-sm font-medium transition-colors",
                 "hover:bg-accent",
-                pathname === item.href
-                  ? "bg-accent text-foreground"
-                  : "text-foreground/70"
+                isPlatform ? "bg-accent text-foreground" : "text-foreground/70"
               )}
             >
-              {item.label}
+              Platform
             </Link>
-          ))}
 
-          <div className="my-3 h-px bg-border" />
-
-          <Link
-            href="/platform"
-            aria-current={isPlatform ? "page" : undefined}
-            className={cn(
-              "block rounded-2xl px-3 py-2.5 text-sm font-medium transition-colors",
-              "hover:bg-accent",
-              isPlatform ? "bg-accent text-foreground" : "text-foreground/70"
-            )}
-          >
-            Platform
-          </Link>
-
-          <Link
-            href="/philosophy"
-            aria-current={isPhilosophy ? "page" : undefined}
-            className={cn(
-              "block rounded-2xl px-3 py-2.5 text-sm font-medium transition-colors",
-              "hover:bg-accent",
-              isPhilosophy ? "bg-accent text-foreground" : "text-foreground/70"
-            )}
-          >
-            Philosophy
-          </Link>
-        </div>
+            <Link
+              href="/philosophy"
+              aria-current={isPhilosophy ? "page" : undefined}
+              className={cn(
+                "block rounded-2xl px-3 py-2.5 text-sm font-medium transition-colors",
+                "hover:bg-accent",
+                isPhilosophy ? "bg-accent text-foreground" : "text-foreground/70"
+              )}
+            >
+              Philosophy
+            </Link>
+          </div>
 
         {/* Discord CTA — prominent at the bottom */}
         <div className="p-3">
