@@ -20,7 +20,7 @@ export const events: Event[] = [
     title: "AWFixer Party Launch",
     description:
       "Join us for the official launch of the AWFixer Political Party.",
-    date: "2025-01-15",
+    date: "2026-05-20",
     time: "7:00 PM EST",
     type: "virtual",
     Component: LaunchParty,
