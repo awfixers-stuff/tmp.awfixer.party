@@ -559,6 +559,18 @@ export function FloatingSiteNav() {
             Philosophy
           </Link>
 
+          <Link
+            href="/notes"
+            aria-current={isNotesPage ? "page" : undefined}
+            className={cn(
+              "block rounded-2xl px-3 py-2.5 text-sm font-medium transition-colors",
+              "hover:bg-accent",
+              isNotesPage ? "bg-accent text-foreground" : "text-foreground/70"
+            )}
+          >
+            Notes
+          </Link>
+
           <div className="my-2 h-px bg-border" />
 
           {/* Events dropdown - collapsible on mobile */}
