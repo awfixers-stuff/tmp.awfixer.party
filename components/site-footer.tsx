@@ -49,11 +49,13 @@ export function SiteFooter() {
           AWFixer Political Party and PAC are operationally separate and
           distinct from AWFixer Enterprising Company Inc.
         </p>
+        <Separator className="bg-border/60" />
         <p className="text-center text-[0.8125rem] leading-relaxed text-pretty text-muted-foreground">
           AWFixer Political Party is an independant organization that is not
           affiliated with any corporation, Political Action Committie or current
           political party.
         </p>
+        <Separator className="bg-border/60" />
         <p className="text-center text-[0.8125rem] leading-relaxed text-pretty text-muted-foreground">
           Canidates, Staff and Volenteers working for and with the AWFixer
           Political Party are vetted and legally checked before endorsement and
@@ -61,6 +63,7 @@ export function SiteFooter() {
           any canidate or party member who is deemed to be acting in an
           extralegal or illegal manor.
         </p>
+        <Separator className="bg-border/60" />
       </div>
     </footer>
   )
