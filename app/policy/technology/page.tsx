@@ -30,7 +30,7 @@ export default function TechnologyPage() {
           <TechnologyContent />
         </div>
       </main>
-      <aside className="hidden lg:block lg:w-64 lg:shrink-0">
+      <aside className="hidden lg:block lg:w-80 lg:shrink-0">
         <div className="sticky top-20">
           <TableOfContents />
         </div>

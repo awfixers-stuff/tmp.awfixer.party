@@ -61,9 +61,10 @@ export function ScrollTOC({ items }: ScrollTOCProps) {
           "border border-border bg-background shadow-2xl shadow-black/20",
           "transform transition-transform duration-200",
           isOpen ? "translate-x-0" : "translate-x-[calc(100%+0.75rem)]",
-          /* Desktop: unstyled inline sidebar */
-          "lg:static lg:w-64 lg:max-h-none lg:translate-x-0 lg:transform-none lg:overflow-visible",
-          "lg:rounded-none lg:border-none lg:bg-transparent lg:shadow-none"
+          /* Desktop: glass-box sidebar */
+          "lg:static lg:w-full lg:max-h-[calc(100vh-10rem)] lg:translate-x-0 lg:transform-none lg:overflow-y-auto",
+          "lg:rounded-3xl lg:border lg:border-border/50 lg:bg-card/30 lg:p-6 lg:shadow-sm lg:backdrop-blur-md",
+          "lg:ml-12 lg:mr-4"
         )}
       >
         {/* Mobile header */}
@@ -79,7 +80,7 @@ export function ScrollTOC({ items }: ScrollTOCProps) {
         </div>
 
         <div className="hidden lg:block">
-          <h4 className="mb-4 text-sm font-semibold">On this page</h4>
+          <h4 className="mb-4 text-sm font-semibold uppercase tracking-wider text-purple-600/80">On this page</h4>
         </div>
 
         {/* Scrollable list — ensures all items are reachable */}
@@ -91,7 +92,7 @@ export function ScrollTOC({ items }: ScrollTOCProps) {
             >
               <button
                 onClick={() => handleClick(item.id)}
-                className="w-full rounded-xl px-2 py-1.5 text-left text-foreground/70 transition-colors hover:bg-accent hover:text-foreground lg:rounded-none lg:px-0 lg:py-0 lg:hover:bg-transparent lg:hover:underline"
+                className="w-full rounded-xl px-2 py-1.5 text-left text-foreground/70 transition-colors hover:bg-accent hover:text-foreground lg:rounded-lg lg:px-2 lg:py-1.5 lg:text-[13px] lg:leading-snug lg:hover:bg-accent/40 lg:hover:no-underline"
               >
                 {item.text}
               </button>

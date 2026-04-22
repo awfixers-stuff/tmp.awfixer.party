@@ -1,4 +1,5 @@
 import createMDX from "@next/mdx"
+import remarkGfm from "remark-gfm"
 import defaultComponents from "./app/mdx-components"
 
 const components = {
@@ -20,7 +21,7 @@ const nextConfig = {
 
 const withMDX = createMDX({
   options: {
-    remarkPlugins: [],
+    remarkPlugins: [remarkGfm],
     rehypePlugins: [],
   },
   components,
