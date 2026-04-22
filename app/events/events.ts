@@ -1,5 +1,3 @@
-"use client"
-
 import LaunchParty from "./launch-party.mdx"
 import TownHallJanuary from "./town-hall-january.mdx"
 import PolicyWorkshop from "./policy-workshop.mdx"
