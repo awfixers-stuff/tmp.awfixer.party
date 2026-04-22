@@ -16,6 +16,12 @@ const fontMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "AWFixer Political Party",
   description: "Official temporary site for the AWFixer Political Party.",
+  openGraph: {
+    images: ["/2.webp"],
+  },
+  icons: {
+    icon: "/1.webp",
+  },
 }
 
 export default function RootLayout({

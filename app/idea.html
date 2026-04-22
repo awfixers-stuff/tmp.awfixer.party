@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AWFixer Party — Who We Are</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #0a0a0a;
+      --white: #f4f1eb;
+      --red: #c8272d;
+      --red-dark: #8f1a1e;
+      --gold: #c9a84c;
+      --gray: #2a2a2a;
+      --gray-mid: #555;
+      --gray-light: #999;
+    }
+
+    html { font-size: 16px; scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--black);
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── NOISE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 1000;
+      opacity: 0.4;
+    }
+
+    /* ── SECTION WRAPPER ── */
+    .section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 80px 40px;
+    }
+
+    /* ── TOP RULE ── */
+    .rule {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 60px;
+      animation: fadeUp 0.6s ease both;
+    }
+
+    .rule-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--red);
+    }
+
+    .rule-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, var(--red), transparent);
+    }
+
+    /* ── HEADLINE BLOCK ── */
+    .headline-block {
+      margin-bottom: 64px;
+      animation: fadeUp 0.7s 0.1s ease both;
+    }
+
+    .eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3.5rem, 9vw, 7.5rem);
+      line-height: 0.92;
+      letter-spacing: 0.01em;
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+
+    h1 span {
+      color: var(--red);
+      display: block;
+    }
+
+    .sub-headline {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      font-weight: 300;
+      color: var(--gray-light);
+      max-width: 640px;
+      margin-top: 24px;
+      line-height: 1.7;
+      border-left: 2px solid var(--red);
+      padding-left: 20px;
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: var(--gray);
+      margin: 56px 0;
+      animation: fadeUp 0.6s 0.2s ease both;
+    }
+
+    /* ── CORE STATEMENT ── */
+    .core-statement {
+      animation: fadeUp 0.7s 0.25s ease both;
+      margin-bottom: 64px;
+    }
+
+    .core-statement p {
+      font-size: clamp(1.15rem, 2.2vw, 1.4rem);
+      font-weight: 400;
+      line-height: 1.75;
+      color: var(--white);
+      max-width: 820px;
+    }
+
+    .core-statement p + p {
+      margin-top: 24px;
+      color: #bbb;
+      font-weight: 300;
+    }
+
+    .highlight {
+      color: var(--gold);
+      font-weight: 500;
+    }
+
+    /* ── PILLAR GRID ── */
+    .pillars-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gray-light);
+      margin-bottom: 28px;
+      animation: fadeUp 0.6s 0.3s ease both;
+      display: block;
+    }
+
+    .pillar-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 2px;
+      margin-bottom: 64px;
+      animation: fadeUp 0.7s 0.35s ease both;
+    }
+
+    .pillar-item {
+      background: var(--gray);
+      padding: 24px;
+      position: relative;
+      transition: background 0.2s ease;
+      cursor: default;
+    }
+
+    .pillar-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 3px;
+      height: 0;
+      background: var(--red);
+      transition: height 0.3s ease;
+    }
+
+    .pillar-item:hover {
+      background: #1f1f1f;
+    }
+
+    .pillar-item:hover::before {
+      height: 100%;
+    }
+
+    .pillar-number {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      color: var(--red);
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .pillar-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.25rem;
+      letter-spacing: 0.05em;
+      color: var(--white);
+      line-height: 1.2;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .pillar-desc {
+      font-size: 0.78rem;
+      color: var(--gray-light);
+      line-height: 1.5;
+      font-weight: 300;
+    }
+
+    /* ── PULL QUOTE ── */
+    .pull-quote {
+      border-top: 1px solid var(--gray);
+      border-bottom: 1px solid var(--gray);
+      padding: 48px 0;
+      margin: 64px 0;
+      animation: fadeUp 0.7s 0.4s ease both;
+    }
+
+    .pull-quote blockquote {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      line-height: 1.15;
+      letter-spacing: 0.03em;
+      color: var(--white);
+      max-width: 880px;
+    }
+
+    .pull-quote blockquote em {
+      color: var(--red);
+      font-style: normal;
+    }
+
+    /* ── CTA ROW ── */
+    .cta-row {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+      animation: fadeUp 0.7s 0.5s ease both;
+    }
+
+    .cta-primary {
+      display: inline-block;
+      background: var(--red);
+      color: var(--white);
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 16px 36px;
+      text-decoration: none;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .cta-primary:hover {
+      background: var(--red-dark);
+      transform: translateY(-2px);
+    }
+
+    .cta-secondary {
+      display: inline-block;
+      color: var(--gray-light);
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--gray-mid);
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .cta-secondary:hover {
+      color: var(--white);
+      border-color: var(--white);
+    }
+
+    /* ── BOTTOM BAR ── */
+    .bottom-bar {
+      border-top: 1px solid var(--gray);
+      padding: 20px 40px;
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      animation: fadeUp 0.6s 0.6s ease both;
+    }
+
+    .bottom-bar span {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gray-mid);
+    }
+
+    .bottom-bar .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--red);
+      display: inline-block;
+      animation: pulse 2s infinite;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.3; }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .section { padding: 48px 20px; }
+      .pillar-grid { grid-template-columns: 1fr; }
+      .cta-row { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <section class="section">
+
+    <div class="rule">
+      <span class="rule-label">AWFixer Political Party</span>
+      <div class="rule-line"></div>
+    </div>
+
+    <div class="headline-block">
+      <span class="eyebrow">A New American Politics</span>
+      <h1>Fix the<span>System.</span></h1>
+      <p class="sub-headline">
+        Not the left. Not the right. The AWFixer Party exists because the existing political establishment has had thirty years to fix America's foundational problems and has instead made most of them worse.
+      </p>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="core-statement">
+      <p>
+        We are not a protest vote. We are not a single-issue movement. We are a <span class="highlight">comprehensive political platform</span> built on one premise: that American governance has failed not because of bad people but because of bad incentive structures — and that fixing those structures, honestly and without partisan cover, is the only path forward.
+      </p>
+      <p>
+        We believe in accountability without cruelty, competition without monopoly, transparency without naivety, and consequences without waste. We believe the American people are capable of handling the truth about what is broken and what it will take to repair it. We intend to tell them.
+      </p>
+    </div>
+
+    <span class="pillars-label">Our Platform — Ten Pillars</span>
+
+    <div class="pillar-grid">
+      <div class="pillar-item">
+        <span class="pillar-number">01</span>
+        <span class="pillar-name">Competition & Markets</span>
+        <span class="pillar-desc">Real deregulation means breaking monopolies, not protecting them.</span>
+      </div>
+      <div class="pillar-item">
+        <span class="pillar-number">02</span>
+        <span class="pillar-name">Foreign Policy</span>
+        <span class="pillar-desc">Diplomacy first. Military force reserved for direct, unmistakable threats to Americans.</span>
+      </div>
+      <div class="pillar-item">
+        <span class="pillar-number">03</span>
+        <span class="pillar-name">Labor & Immigration</span>
+        <span class="pillar-desc">Fix the incentive to exploit foreign labor. The behavior follows.</span>
+      </div>
+      <div class="pillar-item">
+        <span class="pillar-number">04</span>
+        <span class="pillar-name">Energy & Nuclear</span>
+        <span class="pillar-desc">Nuclear is the only honest large-scale clean energy answer we actually have.</span>
+      </div>
+      <div class="pillar-item">
+        <span class="pillar-number">05</span>
+        <span class="pillar-name">Fiscal Transparency</span>
+        <span class="pillar-desc">Every federal dollar on a public ledger. Permanently. No exceptions.</span>
+      </div>
+      <div class="pillar-item">
+        <span class="pillar-number">06</span>
+        <span class="pillar-name">Criminal Justice</span>
+        <span class="pillar-desc">Real consequences. Real rehabilitation. A 77% recidivism rate is not tough — it's failure.</span>
+      </div>
+      <div class="pillar-item">
+        <span class="pillar-number">07</span>
+        <span class="pillar-name">Anti-Corruption</span>
+        <span class="pillar-desc">Every branch. Every level. Every uniform. No carve-outs.</span>
+      </div>
+      <div class="pillar-item">
+        <span class="pillar-number">08</span>
+        <span class="pillar-name">Technology & AI</span>
+        <span class="pillar-desc">Open source in public life. Curiosity is not a crime — it should be rewarded.</span>
+      </div>
+      <div class="pillar-item">
+        <span class="pillar-number">09</span>
+        <span class="pillar-name">Tax & Business</span>
+        <span class="pillar-desc">Pro-business means building a tax base that actually works. Not loopholes.</span>
+      </div>
+      <div class="pillar-item">
+        <span class="pillar-number">10</span>
+        <span class="pillar-name">Civil Standard of Living</span>
+        <span class="pillar-desc">Replace the minimum wage with a real, regional measure of dignified existence.</span>
+      </div>
+    </div>
+
+    <div class="pull-quote">
+      <blockquote>
+        "The problem is never just <em>what</em> is broken.<br>
+        It is always <em>who benefits</em> from it staying that way."
+      </blockquote>
+    </div>
+
+    <div class="cta-row">
+      <a href="/philosophy" class="cta-primary">Read Our Philosophy</a>
+      <a href="/platform" class="cta-secondary">Explore the Full Platform →</a>
+    </div>
+
+  </section>
+
+  <div class="bottom-bar">
+    <span>AWFixer Political Party — Est. 2025</span>
+    <span><span class="dot"></span></span>
+    <span>Fix the Incentive. Change the Outcome.</span>
+  </div>
+
+</body>
+</html>
