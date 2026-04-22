@@ -181,10 +181,52 @@ export function EventCard({ name, description, icon }: EventCardProps) {
   )
 }
 
+interface ScheduleEvent {
+  date: string
+  event: string
+  location: string
+  status: "upcoming" | "open" | "full"
+}
+
+interface ScheduleGridProps {
+  events: ScheduleEvent[]
+}
+
+export function ScheduleGrid({ events }: ScheduleGridProps) {
+  return (
+    <div className="my-6 overflow-hidden rounded-xl border border-purple-600/20">
+      <div className="grid grid-cols-4 gap-4 bg-purple-600/10 p-4 text-sm font-bold">
+        <div>Date</div>
+        <div>Event</div>
+        <div>Location</div>
+        <div>Status</div>
+      </div>
+      {events.map((item, i) => (
+        <div key={i} className="grid grid-cols-4 gap-4 border-t border-purple-600/10 p-4 text-sm">
+          <div className="font-medium">{item.date}</div>
+          <div>{item.event}</div>
+          <div>{item.location}</div>
+          <div>
+            <span className={`rounded-full px-2 py-0.5 text-xs ${
+              item.status === "open" ? "bg-green-500/20 text-green-600" :
+              item.status === "full" ? "bg-red-500/20 text-red-600" :
+              "bg-gray-500/20 text-gray-600"
+            }`}>
+              {item.status === "open" ? "Open" : item.status === "full" ? "Full" : "Upcoming"}
+            </span>
+          </div>
+        </div>
+      ))}
+    </div>
+  )
+}
+
 interface HeroImageProps {
   src: string
   alt: string
 }
+
+export { ScheduleGrid }
 
 export function HeroImage({ src, alt }: HeroImageProps) {
   return (

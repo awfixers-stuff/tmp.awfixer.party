@@ -10,6 +10,7 @@ import {
   CalloutBox,
   EventCard,
   HeroImage,
+  ScheduleGrid,
 } from "./gladiator-components"
 
 const components = {
@@ -21,6 +22,7 @@ const components = {
   CalloutBox,
   EventCard,
   HeroImage,
+  ScheduleGrid,
   img: (props: React.ComponentProps<"img">) => (
     <InlineImage src={String(props.src) || ""} alt={props.alt || ""} />
   ),

@@ -1,14 +1,12 @@
 ## The Vision
 
-<HeroImage src="/images/gladiator/arena-hero.jpg" alt="American Gladiator Games Arena" />
+<HeroImage src="./images/aeral-view-colo.webp" alt="American Gladiator Games Arena" />
 
 America was built on competition. From frontier wrestling matches to backyard mud runs, Americans have always had an innate competitive spirit that, when properly channeled, builds community and discipline.
 
 <QuoteBox>
-"The American spirit isn't soft — it's waiting to be challenged. Give it a worthy arena and watch what happens."
+The American spirit isn't soft — it's waiting to be challenged. Give it a worthy arena and watch what happens.
 </QuoteBox>
-
-<InlineImage src="/images/gladiator/competition.jpg" alt="Gladiator Competition Event" caption="Traditional grappling events bring crowds to their feet" />
 
 ## The Problem
 
@@ -32,7 +30,7 @@ All events are professionally supervised with medical staff on-site. Safety gear
 <GladiatorEvent
   name="Alligator Wrestling"
   description="Face off against trained American alligators in waist-deep water. Rules are simple: immobilize, not harm. Points for control techniques."
-  image="/images/gladiator/alligator.jpg"
+  image="./images/gator.webp"
   imageAlt="Alligator wrestling event"
   dangerLevel={4}
   participants="Solo"
@@ -90,7 +88,13 @@ We need volunteers for event setup, medical support, and crowd control. Contact 
 
 ## Schedule
 
-<InlineImage src="/images/gladiator/schedule.jpg" alt="Event Schedule" caption="Upcoming events at select locations" />
+<ScheduleGrid events={[
+  { date: "May 15", event: "Alligator Wrestling", location: "Austin, TX", status: "open" },
+  { date: "May 22", event: "Axe Throwing Championship", location: "Nashville, TN", status: "open" },
+  { date: "June 1", event: "Hog Hunting", location: "Dallas, TX", status: "full" },
+  { date: "June 8", event: "Log Splitting Relay", location: "Denver, CO", status: "open" },
+  { date: "June 15", event: "Cabbage Punching", location: "Phoenix, AZ", status: "open" },
+]} />
 
 Visit our Discord for the latest schedule and to sign up for events in your area.
 
