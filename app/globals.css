@@ -126,9 +126,15 @@
   body {
     @apply bg-background text-foreground;
     }
-  html {
+html {
     @apply font-sans;
-    }
+    scroll-padding-top: 8rem;
+  }
+
+  /* Override prose heading scroll margin */
+  .prose h2, .prose h3 {
+    scroll-margin-top: 8rem;
+  }
 }
 
 @layer components {
