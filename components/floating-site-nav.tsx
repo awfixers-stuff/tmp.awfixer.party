@@ -8,6 +8,9 @@ import { Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 
+import { upcomingEventsMeta } from "@/app/events/events-meta"
+import { plansMeta } from "@/app/plans/plans-meta"
+
 const policyItems = [
   { href: "/policy/competition", label: "Competition" },
   { href: "/policy/tax", label: "Tax & Fiscal" },
@@ -36,15 +39,24 @@ export function FloatingSiteNav() {
   const pathname = usePathname()
   const [mobileOpen, setMobileOpen] = useState(false)
   const [policyOpen, setPolicyOpen] = useState(false)
+  const [eventsOpen, setEventsOpen] = useState(false)
+  const [plansOpen, setPlansOpen] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
+  const eventsDropdownRef = useRef<HTMLDivElement>(null)
+  const plansDropdownRef = useRef<HTMLDivElement>(null)
 
   const isPhilosophy = pathname === "/philosophy"
   const isPlatform = pathname === "/platform"
   const isPolicyPage = pathname.startsWith("/policy/")
+  const isEventsPage = pathname.startsWith("/events")
+  const isGladiatorPage = pathname === "/gladiator"
+  const isPlansPage = pathname.startsWith("/plans")
 
   useEffect(() => {
     setMobileOpen(false)
     setPolicyOpen(false)
+    setEventsOpen(false)
+    setPlansOpen(false)
   }, [pathname])
 
   useEffect(() => {
@@ -54,6 +66,18 @@ export function FloatingSiteNav() {
         !dropdownRef.current.contains(event.target as Node)
       ) {
         setPolicyOpen(false)
+      }
+      if (
+        eventsDropdownRef.current &&
+        !eventsDropdownRef.current.contains(event.target as Node)
+      ) {
+        setEventsOpen(false)
+      }
+      if (
+        plansDropdownRef.current &&
+        !plansDropdownRef.current.contains(event.target as Node)
+      ) {
+        setPlansOpen(false)
       }
     }
     document.addEventListener("mousedown", handleClickOutside)
@@ -137,7 +161,7 @@ export function FloatingSiteNav() {
               </Button>
               <div
                 className={cn(
-                  "absolute top-full right-0 z-50 mt-2 w-72 overflow-hidden rounded-2xl border border-border bg-background/95 shadow-2xl shadow-black/20 backdrop-blur-xl",
+                  "absolute top-full right-0 z-50 mt-2 w-72 max-h-[70vh] overflow-y-auto rounded-2xl border border-border bg-background/95 shadow-2xl shadow-black/20 backdrop-blur-xl",
                   "translate-y-[-0.5rem] opacity-0 transition-all duration-200",
                   policyOpen && "translate-y-0 opacity-100"
                 )}
@@ -146,7 +170,7 @@ export function FloatingSiteNav() {
                 <div className="flex flex-col p-2">
                   {policySections.map((section) => (
                     <div key={section.label} className="mb-2 last:mb-0">
-                      <p className="mb-1 px-2 text-[10px] font-semibold tracking-widest text-purple-500 uppercase">
+                      <p className="mb-1 px-2 text-[10px] font-semibold tracking-widest text-purple-600 uppercase">
                         {section.label}
                       </p>
                       {section.items.map((item) => (
@@ -182,6 +206,143 @@ export function FloatingSiteNav() {
                 Philosophy
               </Link>
             </Button>
+            <div ref={eventsDropdownRef} className="relative">
+              <Button
+                size="sm"
+                variant={isEventsPage ? "secondary" : "outline"}
+                className="rounded-full"
+                onClick={() => setEventsOpen(!eventsOpen)}
+                aria-expanded={eventsOpen}
+                aria-haspopup="true"
+              >
+                Events
+                <svg
+                  className={cn(
+                    "ml-1 h-3 w-3 transition-transform duration-200",
+                    eventsOpen && "rotate-180"
+                  )}
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 9l-7 7-7-7"
+                  />
+                </svg>
+              </Button>
+              <div
+                className={cn(
+                  "absolute top-full right-0 z-50 mt-2 w-56 max-h-[70vh] overflow-y-auto rounded-2xl border border-border bg-background/95 shadow-2xl shadow-black/20 backdrop-blur-xl",
+                  "translate-y-[-0.5rem] opacity-0 transition-all duration-200",
+                  eventsOpen && "translate-y-0 opacity-100"
+                )}
+                style={{ pointerEvents: eventsOpen ? "auto" : "none" }}
+              >
+                <div className="flex flex-col p-2">
+                  <p className="mb-1 px-2 text-[10px] font-semibold tracking-widest text-purple-600 uppercase">
+                    Upcoming Events
+                  </p>
+                  {upcomingEventsMeta.map((event) => (
+                    <Link
+                      key={event.slug}
+                      href={`/events/${event.slug}`}
+                      className={cn(
+                        "rounded-xl px-3 py-2 text-sm font-medium transition-colors",
+                        "hover:bg-accent hover:text-foreground focus:bg-accent focus:text-foreground",
+                        pathname === `/events/${event.slug}`
+                          ? "bg-accent text-foreground"
+                          : "text-foreground/70"
+                      )}
+                    >
+                      {event.title}
+                    </Link>
+                  ))}
+                  <div className="my-1 h-px bg-border" />
+                  <Link
+                    href="/events"
+                    className={cn(
+                      "rounded-xl px-3 py-2 text-sm font-medium transition-colors",
+                      "hover:bg-accent hover:text-foreground focus:bg-accent focus:text-foreground",
+                      pathname === "/events"
+                        ? "bg-accent text-foreground"
+                        : "text-purple-600"
+                    )}
+                  >
+                    View All Events
+                  </Link>
+                </div>
+              </div>
+            </div>
+            <div ref={plansDropdownRef} className="relative">
+              <Button
+                size="sm"
+                variant={isPlansPage ? "secondary" : "outline"}
+                className="rounded-full"
+                onClick={() => setPlansOpen(!plansOpen)}
+                aria-expanded={plansOpen}
+                aria-haspopup="true"
+              >
+                Plans
+                <svg
+                  className={cn(
+                    "ml-1 h-3 w-3 transition-transform duration-200",
+                    plansOpen && "rotate-180"
+                  )}
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 9l-7 7-7-7"
+                  />
+                </svg>
+              </Button>
+              <div
+                className={cn(
+                  "absolute top-full right-0 z-50 mt-2 w-48 max-h-[70vh] overflow-y-auto rounded-2xl border border-border bg-background/95 shadow-2xl shadow-black/20 backdrop-blur-xl",
+                  "translate-y-[-0.5rem] opacity-0 transition-all duration-200",
+                  plansOpen && "translate-y-0 opacity-100"
+                )}
+                style={{ pointerEvents: plansOpen ? "auto" : "none" }}
+              >
+                <div className="flex flex-col p-2">
+                  {plansMeta.map((plan) => (
+                    <Link
+                      key={plan.slug}
+                      href={`/plans/${plan.slug}`}
+                      className={cn(
+                        "rounded-xl px-3 py-2 text-sm font-medium transition-colors",
+                        "hover:bg-accent hover:text-foreground focus:bg-accent focus:text-foreground",
+                        pathname === `/plans/${plan.slug}`
+                          ? "bg-accent text-foreground"
+                          : "text-foreground/70"
+                      )}
+                    >
+                      {plan.title}
+                    </Link>
+                  ))}
+                  <div className="my-1 h-px bg-border" />
+                  <Link
+                    href="/plans"
+                    className={cn(
+                      "rounded-xl px-3 py-2 text-sm font-medium transition-colors",
+                      "hover:bg-accent hover:text-foreground focus:bg-accent focus-text-foreground",
+                      pathname === "/plans"
+                        ? "bg-accent text-foreground"
+                        : "text-purple-600"
+                    )}
+                  >
+                    All Plans
+                  </Link>
+                </div>
+              </div>
+            </div>
           </div>
 
           {/* Mobile hamburger */}
@@ -219,7 +380,7 @@ export function FloatingSiteNav() {
           "fixed left-1/2 z-50 -translate-x-1/2 sm:hidden",
           "w-[calc(100%-1.5rem)] max-w-md",
           "top-[4.5rem] bottom-4",
-          "flex flex-col overflow-hidden",
+          "flex flex-col",
           "rounded-3xl border border-border bg-background/95 shadow-2xl shadow-black/30 backdrop-blur-xl",
           "transition-all duration-200 ease-out",
           mobileOpen
@@ -232,9 +393,13 @@ export function FloatingSiteNav() {
             {/* Policy dropdown - collapsible on mobile */}
             <div className="mb-2">
               <button
-                onClick={() => setPolicyOpen(!policyOpen)}
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation()
+                  setPolicyOpen(!policyOpen)
+                }}
                 className={cn(
-                  "flex w-full items-center justify-between rounded-2xl px-3 py-2.5 text-sm font-medium transition-colors",
+                  "flex w-full items-center justify-between rounded-2xl px-3 py-3 text-sm font-medium transition-colors",
                   "hover:bg-accent",
                   isPolicyPage ? "bg-accent text-foreground" : "text-foreground/70"
                 )}
@@ -303,6 +468,148 @@ export function FloatingSiteNav() {
             >
               Philosophy
             </Link>
+
+            {/* Events dropdown - collapsible on mobile */}
+            <div className="mb-2">
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation()
+                  setEventsOpen(!eventsOpen)
+                }}
+                className={cn(
+                  "flex w-full items-center justify-between rounded-2xl px-3 py-3 text-sm font-medium transition-colors",
+                  "hover:bg-accent",
+                  isEventsPage ? "bg-accent text-foreground" : "text-foreground/70"
+                )}
+              >
+                <span>Events</span>
+                <svg
+                  className={cn(
+                    "h-4 w-4 transition-transform duration-200",
+                    eventsOpen && "rotate-180"
+                  )}
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              <div
+                className={cn(
+                  "overflow-hidden transition-all duration-200",
+                  eventsOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
+                )}
+              >
+                <div className="mt-1 flex flex-col gap-1 pl-2">
+                  {upcomingEventsMeta.map((event) => (
+                    <Link
+                      key={event.slug}
+                      href={`/events/${event.slug}`}
+                      className={cn(
+                        "block rounded-xl px-3 py-2 text-sm transition-colors",
+                        "hover:bg-accent",
+                        pathname === `/events/${event.slug}`
+                          ? "bg-accent text-foreground"
+                          : "text-foreground/70"
+                      )}
+                    >
+                      {event.title}
+                    </Link>
+                  ))}
+                  <Link
+                    href="/events"
+                    className={cn(
+                      "block rounded-xl px-3 py-2 text-sm transition-colors",
+                      "hover:bg-accent",
+                      pathname === "/events"
+                        ? "bg-accent text-foreground"
+                        : "text-purple-600"
+                    )}
+                  >
+                    View All Events
+                  </Link>
+                </div>
+              </div>
+            </div>
+
+            <Link
+              href="/gladiator"
+              aria-current={isGladiatorPage ? "page" : undefined}
+              className={cn(
+                "block rounded-2xl px-3 py-2.5 text-sm font-medium transition-colors",
+                "hover:bg-accent",
+                isGladiatorPage ? "bg-accent text-foreground" : "text-foreground/70"
+              )}
+            >
+              Gladiator Games
+            </Link>
+
+            {/* Plans dropdown - collapsible on mobile */}
+            <div className="mb-2">
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation()
+                  setPlansOpen(!plansOpen)
+                }}
+                className={cn(
+                  "flex w-full items-center justify-between rounded-2xl px-3 py-3 text-sm font-medium transition-colors",
+                  "hover:bg-accent",
+                  isPlansPage ? "bg-accent text-foreground" : "text-foreground/70"
+                )}
+              >
+                <span>Plans</span>
+                <svg
+                  className={cn(
+                    "h-4 w-4 transition-transform duration-200",
+                    plansOpen && "rotate-180"
+                  )}
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              <div
+                className={cn(
+                  "overflow-hidden transition-all duration-200",
+                  plansOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
+                )}
+              >
+                <div className="mt-1 flex flex-col gap-1 pl-2">
+                  {plansMeta.map((plan) => (
+                    <Link
+                      key={plan.slug}
+                      href={`/plans/${plan.slug}`}
+                      className={cn(
+                        "block rounded-xl px-3 py-2 text-sm transition-colors",
+                        "hover:bg-accent",
+                        pathname === `/plans/${plan.slug}`
+                          ? "bg-accent text-foreground"
+                          : "text-foreground/70"
+                      )}
+                    >
+                      {plan.title}
+                    </Link>
+                  ))}
+                  <Link
+                    href="/plans"
+                    className={cn(
+                      "block rounded-xl px-3 py-2 text-sm transition-colors",
+                      "hover:bg-accent",
+                      pathname === "/plans"
+                        ? "bg-accent text-foreground"
+                        : "text-purple-600"
+                    )}
+                  >
+                    All Plans
+                  </Link>
+                </div>
+              </div>
+            </div>
           </div>
 
         {/* Discord CTA — prominent at the bottom */}
