@@ -502,24 +502,32 @@ export function FloatingSiteNav() {
             <div
               className={cn(
                 "overflow-hidden transition-all duration-200",
-                policyOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
+                policyOpen ? "max-h-[600px] opacity-100" : "max-h-0 opacity-0"
               )}
             >
-              <div className="mt-1 flex flex-col gap-1 pl-2">
-                {policyItems.map((item) => (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className={cn(
-                      "block rounded-xl px-3 py-2 text-sm transition-colors",
-                      "hover:bg-accent",
-                      pathname === item.href
-                        ? "bg-accent text-foreground"
-                        : "text-foreground/70"
-                    )}
-                  >
-                    {item.label}
-                  </Link>
+              <div className="mt-1 flex flex-col">
+                {policySections.map((section, i) => (
+                  <div key={section.label}>
+                    {i > 0 && <div className="my-1.5 h-px bg-border" />}
+                    <p className="mb-1 px-3 pt-1.5 text-[10px] font-semibold tracking-widest text-purple-600 uppercase">
+                      {section.label}
+                    </p>
+                    {section.items.map((item) => (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        className={cn(
+                          "block rounded-xl px-3 py-2 text-sm transition-colors",
+                          "hover:bg-accent",
+                          pathname === item.href
+                            ? "bg-accent text-foreground"
+                            : "text-foreground/70"
+                        )}
+                      >
+                        {item.label}
+                      </Link>
+                    ))}
+                  </div>
                 ))}
               </div>
             </div>
