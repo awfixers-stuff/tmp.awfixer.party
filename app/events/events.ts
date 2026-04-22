@@ -1,5 +1,5 @@
 import LaunchParty from "./launch-party.mdx"
-import TownHallJanuary from "./town-hall-january.mdx"
+import TownHallMay from "./town-hall-may.mdx"
 import PolicyWorkshop from "./policy-workshop.mdx"
 
 export interface Event {
@@ -9,6 +9,7 @@ export interface Event {
   date: string
   time?: string
   location?: string
+  url?: string
   type: "virtual" | "in-person" | "hybrid"
   Component: React.ComponentType
 }
@@ -17,20 +18,22 @@ export const events: Event[] = [
   {
     slug: "launch-party",
     title: "AWFixer Party Launch",
-    description: "Join us for the official launch of the AWFixer Political Party.",
+    description:
+      "Join us for the official launch of the AWFixer Political Party.",
     date: "2025-01-15",
     time: "7:00 PM EST",
     type: "virtual",
     Component: LaunchParty,
   },
   {
-    slug: "town-hall-january",
-    title: "January Town Hall",
-    description: "Monthly town hall to discuss party platform and answer questions.",
+    slug: "town-hall-may",
+    title: "May Town Hall",
+    description:
+      "Monthly town hall to discuss party platform and answer questions.",
     date: "2025-01-20",
     time: "8:00 PM EST",
     type: "virtual",
-    Component: TownHallJanuary,
+    Component: TownHallMay,
   },
   {
     slug: "policy-workshop",
