@@ -33,6 +33,7 @@ export function FloatingSiteNav() {
   const dropdownRef = useRef<HTMLDivElement>(null)
 
   const isPhilosophy = pathname === "/philosophy"
+  const isPlatform = pathname === "/platform"
   const isPolicyPage = pathname.startsWith("/policy/")
 
   useEffect(() => {
@@ -76,7 +77,7 @@ export function FloatingSiteNav() {
           {/* Desktop nav */}
           <div className="hidden sm:flex items-center gap-2">
             <span className="h-5 w-px shrink-0 bg-border" aria-hidden />
-            <Button size="sm" className="rounded-full" asChild>
+<Button size="sm" className="rounded-full" asChild>
               <a
                 href="https://discord.awfixer.party"
                 target="_blank"
@@ -84,6 +85,16 @@ export function FloatingSiteNav() {
               >
                 Discord
               </a>
+            </Button>
+            <Button
+              size="sm"
+              variant={isPlatform ? "secondary" : "outline"}
+              className="rounded-full"
+              asChild
+            >
+              <Link href="/platform" aria-current={isPlatform ? "page" : undefined}>
+                Platform
+              </Link>
             </Button>
             <div ref={dropdownRef} className="relative">
               <Button
@@ -219,6 +230,18 @@ export function FloatingSiteNav() {
           <div className="my-3 h-px bg-border" />
 
           <Link
+            href="/platform"
+            aria-current={isPlatform ? "page" : undefined}
+            className={cn(
+              "block rounded-2xl px-3 py-2.5 text-sm font-medium transition-colors",
+              "hover:bg-accent",
+              isPlatform ? "bg-accent text-foreground" : "text-foreground/70"
+            )}
+          >
+            Platform
+          </Link>
+
+          <Link
             href="/philosophy"
             aria-current={isPhilosophy ? "page" : undefined}
             className={cn(
@@ -235,7 +258,7 @@ export function FloatingSiteNav() {
         <div className="p-3">
           <Button size="lg" className="w-full rounded-2xl text-base font-semibold" asChild>
             <a
-              href="https://discord.awfixer.party"
+              href="https://mee6.gg/awfixerpolitics"
               target="_blank"
               rel="noopener noreferrer"
             >
