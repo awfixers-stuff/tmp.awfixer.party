@@ -21,25 +21,25 @@ interface RawEvent extends EventMetadata {
 }
 
 function parseEventMeta(content: string): EventMetadata {
-  const match = content.match(/<EventMeta[^>]*>([\s\S]*?)<\/EventMeta>/)
+  const match = content.match(/<EventMeta([^>]*)\/?>/)
   if (!match) return {}
 
-  const props = match[1]
+  const attrs = match[1]
   const result: EventMetadata = {}
 
-  const dateMatch = props.match(/date:\s*"([^"]+)"/)
+  const dateMatch = attrs.match(/date="([^"]+)"/)
   if (dateMatch) result.date = dateMatch[1]
 
-  const timeMatch = props.match(/time:\s*"([^"]+)"/)
+  const timeMatch = attrs.match(/time="([^"]+)"/)
   if (timeMatch) result.time = timeMatch[1]
 
-  const locationMatch = props.match(/location:\s*"([^"]+)"/)
+  const locationMatch = attrs.match(/location="([^"]+)"/)
   if (locationMatch) result.location = locationMatch[1]
 
-  const urlMatch = props.match(/url:\s*"([^"]+)"/)
+  const urlMatch = attrs.match(/url="([^"]+)"/)
   if (urlMatch) result.url = urlMatch[1]
 
-  const typeMatch = props.match(/type:\s*"([^"]+)"/)
+  const typeMatch = attrs.match(/type="([^"]+)"/)
   if (typeMatch) result.type = typeMatch[1]
 
   return result
