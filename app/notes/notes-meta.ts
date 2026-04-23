@@ -11,8 +11,8 @@ export const notesMeta: NoteMeta[] = [
     slug: "american-pride",
     title: "American Pride",
     description: "Note description.",
-    date: "",
-    category: "",
+    date: "2026-04-22",
+    category: "Foundation",
   },
   {
     slug: "economic-incentives-analysis",

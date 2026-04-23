@@ -17,8 +17,8 @@ export const notes: Note[] = [
     slug: "american-pride",
     title: "American Pride",
     description: "Note description.",
-    date: "",
-    category: "",
+    date: "2026-04-22",
+    category: "Foundation",
     Component: americanPride,
   },
   {
