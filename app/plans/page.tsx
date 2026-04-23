@@ -3,7 +3,11 @@ import type { Metadata } from "next"
 import { Separator } from "@/components/ui/separator"
 
 import Content from "./content.mdx"
-import { plansMeta } from "./plans-meta"
+import { plansCategories } from "./plans-categories"
+import {
+  PlanAccordion,
+  PlanAccordionItem,
+} from "./plan-accordion"
 import { PlansTOC } from "./plans-toc"
 
 export const metadata: Metadata = {
@@ -36,20 +40,24 @@ export default function PlansPage() {
 
         <Separator className="bg-border/60" />
 
-        <div className="grid gap-4 sm:grid-cols-2">
-          {plansMeta.map((plan) => (
-            <a
-              key={plan.slug}
-              href={`/plans/${plan.slug}`}
-              className="block rounded-lg border bg-card p-5 transition-colors hover:bg-accent"
+        <div className="space-y-4">
+          {plansCategories.map((category) => (
+            <PlanAccordion
+              key={category.slug}
+              title={category.title}
+              description={category.description}
             >
-              <h3 className="font-heading text-lg font-semibold">
-                {plan.title}
-              </h3>
-              <p className="mt-1 text-sm text-muted-foreground">
-                {plan.description}
-              </p>
-            </a>
+              <div className="space-y-2">
+                {category.items.map((item) => (
+                  <PlanAccordionItem
+                    key={item.slug}
+                    slug={item.slug}
+                    title={item.title}
+                    description={item.description}
+                  />
+                ))}
+              </div>
+            </PlanAccordion>
           ))}
         </div>
       </main>
