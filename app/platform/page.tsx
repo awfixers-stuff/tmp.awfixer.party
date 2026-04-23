@@ -80,8 +80,6 @@ export default function PlatformPage() {
 
         <Separator className="bg-border/60" />
 
-        <PlatformTOC />
-
         <div className="grid gap-4 sm:grid-cols-2">
           {policyItems.map((item) => (
             <a
