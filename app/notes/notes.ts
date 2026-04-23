@@ -16,7 +16,7 @@ export const notes: Note[] = [
   {
     slug: "american-pride",
     title: "American Pride",
-    description: "Note description.",
+    description: "Why American pride is our greatest strength and greatest weakness.",
     date: "2026-04-22",
     category: "Foundation",
     Component: americanPride,
@@ -24,7 +24,7 @@ export const notes: Note[] = [
   {
     slug: "economic-incentives-analysis",
     title: "Economic Incentives Analysis",
-    description: "Focus: How many people are coming? How to stop them? - Policy: Border walls, raids, deportations",
+    description: "How economic incentives drive behavior in American politics.",
     date: "2025-01-15",
     category: "Economics",
     Component: economicIncentivesAnalysis,
@@ -32,7 +32,7 @@ export const notes: Note[] = [
   {
     slug: "healthcare-market-failures",
     title: "Healthcare Market Failures",
-    description: "You don't choose when you need care - You can't easily compare prices",
+    description: "The structural failures in American healthcare markets explained.",
     date: "2025-02-01",
     category: "Healthcare",
     Component: healthcareMarketFailures,
@@ -40,7 +40,7 @@ export const notes: Note[] = [
   {
     slug: "introduction-to-our-approach",
     title: "Introduction To Our Approach",
-    description: "Minimum wage laws don't raise wages — market dynamics do - Antitrust laws don't create competition — profitable opportunities do",
+    description: "How incentive structures shape policy outcomes.",
     date: "2025-01-01",
     category: "Foundation",
     Component: introductionToOurApproach,

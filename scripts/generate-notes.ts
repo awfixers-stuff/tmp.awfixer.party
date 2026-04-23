@@ -10,6 +10,7 @@ const META_OUTPUT_FILE = join(__dirname, "../app/notes/notes-meta.ts")
 interface NoteMetadata {
   date?: string
   category?: string
+  description?: string
 }
 
 interface RawNote extends NoteMetadata {
@@ -31,6 +32,9 @@ function parseFrontmatter(content: string): NoteMetadata {
   const categoryMatch = props.match(/category:\s*"([^"]+)"/)
   if (categoryMatch) result.category = categoryMatch[1]
 
+  const descriptionMatch = props.match(/description:\s*"([^"]+)"/)
+  if (descriptionMatch) result.description = descriptionMatch[1]
+
   return result
 }
 
@@ -40,7 +44,7 @@ function parseTitle(content: string, slug: string) {
   return slug.split("-").map(s => s.charAt(0).toUpperCase() + s.slice(1)).join(" ")
 }
 
-function parseDescription(content: string) {
+function parseDescription(content: string, slug: string) {
   const lines = content.replace(/^---[\s\S]*?---\n*/, "").split("\n").filter(l => l.startsWith("- ")).slice(0, 2)
   return lines.map(l => l.replace(/^- /, "")).join(" - ").trim() || "Note description."
 }
@@ -54,12 +58,12 @@ function main() {
     .filter(f => f.endsWith(".mdx"))
     .sort()
 
-  const notes: RawNote[] = mdxFiles.map((file: string) => {
+const notes: RawNote[] = mdxFiles.map((file: string) => {
     const slug = file.replace(".mdx", "")
     const content = readFileSync(join(NOTES_DIR, file), "utf-8")
     const meta = parseFrontmatter(content)
     const title = parseTitle(content, slug)
-    const description = parseDescription(content)
+    const description = meta.description || parseDescription(content, slug)
 
     return { slug, title, description, ...meta }
   })
