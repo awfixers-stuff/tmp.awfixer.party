@@ -1,6 +1,6 @@
 import type { ReactNode } from "react"
 import { AnimatedSection } from "@/app/components/animated-section"
-import { StaticImage, Gif, Figure } from "@/app/components/mdx-images"
+import { StaticImage, Gif, Figure, Youtube } from "@/app/components/mdx-images"
 
 type CalloutVariant = "default" | "pillar" | "warning" | "insight"
 
@@ -235,6 +235,7 @@ const components = {
   StaticImage,
   Gif,
   Figure,
+  Youtube,
   table: (props: React.HTMLAttributes<HTMLTableElement>) => (
     <div className="my-6 w-full overflow-x-auto">
       <table className="w-full text-sm" {...props} />

@@ -67,12 +67,29 @@ export function Gif({ src, alt, className }: GifProps) {
   return <img src={src} alt={alt} className={className} loading="lazy" />
 }
 
-interface FigureProps {
-  src: AllowedImagePath | AllowedGifPath
-  alt: string
-  caption?: string
-  isGif?: boolean
-  className?: string
+interface YoutubeProps {
+  src: string
+  title?: string
+}
+
+export function Youtube({ src, title = "YouTube video" }: YoutubeProps) {
+  const videoId = src.includes("youtu.be")
+    ? src.split("youtu.be/")[1]?.split("?")[0]
+    : src.split("v=")[1]?.split("&")[0]
+
+  if (!videoId) return null
+
+  return (
+    <div className="my-6 aspect-video w-full overflow-hidden rounded-lg">
+      <iframe
+        src={`https://www.youtube.com/embed/${videoId}`}
+        title={title}
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+        className="h-full w-full"
+      />
+    </div>
+  )
 }
 
 export function Figure({
