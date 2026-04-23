@@ -22,7 +22,8 @@
   },
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build --webpack",
+    "generate-events": "bun run scripts/generate-events.ts",
+    "build": "bun run generate-events && next build --webpack",
     "start": "next start",
     "lint": "eslint",
     "format": "prettier --write \"**/*.{ts,tsx}\"",
