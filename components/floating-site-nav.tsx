@@ -2,40 +2,13 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { useState, useRef, useEffect } from "react"
+import { useState, useRef, useEffect, useMemo } from "react"
 import { Menu, X } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 
-import { upcomingEventsMeta } from "@/app/events/events-meta"
-import { plansMeta } from "@/app/plans/plans-meta"
-import { notesMeta } from "@/app/notes/notes-meta"
-import { ideasMeta } from "@/app/ideas/ideas-meta"
-
-const policyItems = [
-  { href: "/policy/competition", label: "Competition" },
-  { href: "/policy/tax", label: "Tax & Fiscal" },
-  { href: "/policy/energy", label: "Energy" },
-  { href: "/policy/fiscal-transparency", label: "Fiscal Transparency" },
-  { href: "/policy/foreign-policy", label: "Foreign Policy" },
-  { href: "/policy/labor", label: "Labor" },
-  { href: "/policy/healthcare", label: "Healthcare" },
-  { href: "/policy/infrastructure", label: "Infrastructure" },
-  { href: "/policy/governance", label: "Governance" },
-  { href: "/policy/criminal-justice", label: "Criminal Justice" },
-  { href: "/policy/anti-corruption", label: "Anti-Corruption" },
-  { href: "/policy/immigration", label: "Immigration" },
-  { href: "/policy/education", label: "Education" },
-  { href: "/policy/technology", label: "Technology & AI" },
-  { href: "/policy/civil-standard", label: "Civil Standard of Living" },
-]
-
-const policySections = [
-  { label: "Core Policies", items: policyItems.slice(0, 5) },
-  { label: "Social Policies", items: policyItems.slice(5, 10) },
-  { label: "Additional", items: policyItems.slice(10) },
-]
+import { policy, plans, ideas, notes, events, NavItem } from "@/lib/nav"
 
 const ChevronDown = ({ className }: { className?: string }) => (
   <svg
@@ -69,15 +42,41 @@ export function FloatingSiteNav() {
   const isPlatform = pathname === "/platform"
   const isPolicyPage = pathname.startsWith("/policy/")
   const isEventsPage = pathname.startsWith("/events")
-  const isGladiatorPage = pathname.startsWith("/ideas")
+  const isIdeasPage = pathname.startsWith("/ideas")
   const isPlansPage = pathname.startsWith("/plans")
   const isNotesPage = pathname.startsWith("/notes")
+
+  // Group policies by category
+  const policySections = useMemo(() => {
+    const sections: Record<string, NavItem[]> = {}
+    policy.forEach((item) => {
+      const cat = item.category || "General"
+      if (!sections[cat]) sections[cat] = []
+      sections[cat].push(item)
+    })
+    
+    // Maintain a specific order if possible
+    const order = ["Core Policies", "Social Policies", "Additional"]
+    return order.map(label => ({
+      label,
+      items: sections[label] || []
+    })).filter(s => s.items.length > 0)
+  }, [])
+
+  // Filter upcoming events
+  const upcomingEvents = useMemo(() => {
+    return events
+      .filter((e) => e.date && new Date(e.date) >= new Date())
+      .sort((a, b) => new Date(a!.date!).getTime() - new Date(b!.date!).getTime())
+      .slice(0, 5)
+  }, [])
 
   useEffect(() => {
     setMobileOpen(false)
     setPolicyOpen(false)
     setEventsOpen(false)
     setPlansOpen(false)
+    setIdeasOpen(false)
   }, [pathname])
 
   useEffect(() => {
@@ -274,19 +273,19 @@ export function FloatingSiteNav() {
                     <p className="mb-1 px-3 pt-1.5 text-[10px] font-semibold tracking-widest text-purple-600 uppercase">
                       Upcoming Events
                     </p>
-                    {upcomingEventsMeta.map((event) => (
+                    {upcomingEvents.map((event) => (
                       <Link
                         key={event.slug}
-                        href={`/events/${event.slug}`}
+                        href={event.href}
                         className={cn(
                           "block rounded-xl px-3 py-2 text-sm font-medium transition-colors",
                           "hover:bg-accent hover:text-foreground focus:bg-accent focus:text-foreground",
-                          pathname === `/events/${event.slug}`
+                          pathname === event.href
                             ? "bg-accent text-foreground"
                             : "text-foreground/70"
                         )}
                       >
-                        {event.title}
+                        {event.label}
                       </Link>
                     ))}
                     <div className="my-1.5 h-px bg-border" />
@@ -335,19 +334,19 @@ export function FloatingSiteNav() {
                     <p className="mb-1 px-3 pt-1.5 text-[10px] font-semibold tracking-widest text-purple-600 uppercase">
                       Our Plans
                     </p>
-                    {plansMeta.map((plan) => (
+                    {plans.map((plan) => (
                       <Link
                         key={plan.slug}
-                        href={`/plans/${plan.slug}`}
+                        href={plan.href}
                         className={cn(
                           "block rounded-xl px-3 py-2 text-sm font-medium transition-colors",
                           "hover:bg-accent hover:text-foreground focus:bg-accent focus:text-foreground",
-                          pathname === `/plans/${plan.slug}`
+                          pathname === plan.href
                             ? "bg-accent text-foreground"
                             : "text-foreground/70"
                         )}
                       >
-                        {plan.title}
+                        {plan.label}
                       </Link>
                     ))}
                     <div className="my-1.5 h-px bg-border" />
@@ -370,7 +369,7 @@ export function FloatingSiteNav() {
               <div ref={ideasDropdownRef} className="relative">
                 <Button
                   size="sm"
-                  variant={isGladiatorPage ? "secondary" : "ghost"}
+                  variant={isIdeasPage ? "secondary" : "ghost"}
                   className="rounded-full"
                   onClick={() => setIdeasOpen(!ideasOpen)}
                   aria-expanded={ideasOpen}
@@ -396,19 +395,19 @@ export function FloatingSiteNav() {
                     <p className="mb-1 px-3 pt-1.5 text-[10px] font-semibold tracking-widest text-purple-600 uppercase">
                       Concepts
                     </p>
-                    {ideasMeta.map((idea) => (
+                    {ideas.map((idea) => (
                       <Link
                         key={idea.slug}
-                        href={`/ideas/${idea.slug}`}
+                        href={idea.href}
                         className={cn(
                           "block rounded-xl px-3 py-2 text-sm font-medium transition-colors",
                           "hover:bg-accent hover:text-foreground focus:bg-accent focus:text-foreground",
-                          pathname === `/ideas/${idea.slug}`
+                          pathname === idea.href
                             ? "bg-accent text-foreground"
                             : "text-foreground/70"
                         )}
                       >
-                        {idea.title}
+                        {idea.label}
                       </Link>
                     ))}
                   </div>
@@ -502,7 +501,7 @@ export function FloatingSiteNav() {
             <div
               className={cn(
                 "overflow-hidden transition-all duration-200",
-                policyOpen ? "max-h-[600px] opacity-100" : "max-h-0 opacity-0"
+                policyOpen ? "max-h-[800px] opacity-100" : "max-h-0 opacity-0"
               )}
             >
               <div className="mt-1 flex flex-col">
@@ -604,19 +603,19 @@ export function FloatingSiteNav() {
               )}
             >
               <div className="mt-1 flex flex-col gap-1 pl-2">
-                {upcomingEventsMeta.map((event) => (
+                {upcomingEvents.map((event) => (
                   <Link
                     key={event.slug}
-                    href={`/events/${event.slug}`}
+                    href={event.href}
                     className={cn(
                       "block rounded-xl px-3 py-2 text-sm transition-colors",
                       "hover:bg-accent",
-                      pathname === `/events/${event.slug}`
+                      pathname === event.href
                         ? "bg-accent text-foreground"
                         : "text-foreground/70"
                     )}
                   >
-                    {event.title}
+                    {event.label}
                   </Link>
                 ))}
                 <Link
@@ -646,7 +645,7 @@ export function FloatingSiteNav() {
               className={cn(
                 "flex w-full items-center justify-between rounded-2xl px-3 py-3 text-sm font-medium transition-colors",
                 "hover:bg-accent",
-                isGladiatorPage
+                isIdeasPage
                   ? "bg-accent text-foreground"
                   : "text-foreground/70"
               )}
@@ -666,19 +665,19 @@ export function FloatingSiteNav() {
               )}
             >
               <div className="mt-1 flex flex-col gap-1 pl-2">
-                {ideasMeta.map((idea) => (
+                {ideas.map((idea) => (
                   <Link
                     key={idea.slug}
-                    href={`/ideas/${idea.slug}`}
+                    href={idea.href}
                     className={cn(
                       "block rounded-xl px-3 py-2 text-sm transition-colors",
                       "hover:bg-accent",
-                      pathname === `/ideas/${idea.slug}`
+                      pathname === idea.href
                         ? "bg-accent text-foreground"
                         : "text-foreground/70"
                     )}
                   >
-                    {idea.title}
+                    {idea.label}
                   </Link>
                 ))}
               </div>
@@ -714,19 +713,19 @@ export function FloatingSiteNav() {
               )}
             >
               <div className="mt-1 flex flex-col gap-1 pl-2">
-                {plansMeta.map((plan) => (
+                {plans.map((plan) => (
                   <Link
                     key={plan.slug}
-                    href={`/plans/${plan.slug}`}
+                    href={plan.href}
                     className={cn(
                       "block rounded-xl px-3 py-2 text-sm transition-colors",
                       "hover:bg-accent",
-                      pathname === `/plans/${plan.slug}`
+                      pathname === plan.href
                         ? "bg-accent text-foreground"
                         : "text-foreground/70"
                     )}
                   >
-                    {plan.title}
+                    {plan.label}
                   </Link>
                 ))}
                 <Link

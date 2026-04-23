@@ -1,0 +1,26 @@
+[
+  {
+    "href": "/plans/china",
+    "slug": "china",
+    "label": "China",
+    "description": ""
+  },
+  {
+    "href": "/plans/russia",
+    "slug": "russia",
+    "label": "Russia",
+    "description": ""
+  },
+  {
+    "href": "/plans/middle-east",
+    "slug": "middle-east",
+    "label": "Middle East",
+    "description": ""
+  },
+  {
+    "href": "/plans/north-korea",
+    "slug": "north-korea",
+    "label": "North Korea",
+    "description": ""
+  }
+]

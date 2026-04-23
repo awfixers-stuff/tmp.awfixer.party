@@ -1,0 +1,107 @@
+[
+  {
+    "href": "/policy/technology",
+    "slug": "technology",
+    "label": "Technology & AI Policy",
+    "description": "",
+    "category": "Additional"
+  },
+  {
+    "href": "/policy/tax",
+    "slug": "tax",
+    "label": "Tax & Fiscal Policy",
+    "description": "",
+    "category": "Core Policies"
+  },
+  {
+    "href": "/policy/energy",
+    "slug": "energy",
+    "label": "Energy Policy — Nuclear Deregulation and the Honest Environmental Argument",
+    "description": "",
+    "category": "Core Policies"
+  },
+  {
+    "href": "/policy/criminal-justice",
+    "slug": "criminal-justice",
+    "label": "Criminal Justice — Accountability, Reform, and the Value of Useful Work",
+    "description": "",
+    "category": "Social Policies"
+  },
+  {
+    "href": "/policy/governance",
+    "slug": "governance",
+    "label": "Intellectual and Moral Honesty in Governance",
+    "description": "",
+    "category": "Social Policies"
+  },
+  {
+    "href": "/policy/healthcare",
+    "slug": "healthcare",
+    "label": "Healthcare Policy",
+    "description": "",
+    "category": "Social Policies"
+  },
+  {
+    "href": "/policy/labor",
+    "slug": "labor",
+    "label": "Labor & Immigration — Fix the Incentives, Not the People",
+    "description": "",
+    "category": "Social Policies"
+  },
+  {
+    "href": "/policy/foreign-policy",
+    "slug": "foreign-policy",
+    "label": "Foreign Policy — Principled Engagement Over Perpetual Intervention",
+    "description": "",
+    "category": "Core Policies"
+  },
+  {
+    "href": "/policy/fiscal-transparency",
+    "slug": "fiscal-transparency",
+    "label": "The Public Ledger — Radical Transparency in Federal Spending",
+    "description": "",
+    "category": "Core Policies"
+  },
+  {
+    "href": "/policy/civil-standard",
+    "slug": "civil-standard",
+    "label": "Civil Standard of Living",
+    "description": "",
+    "category": "Additional"
+  },
+  {
+    "href": "/policy/infrastructure",
+    "slug": "infrastructure",
+    "label": "Infrastructure Policy",
+    "description": "",
+    "category": "Social Policies"
+  },
+  {
+    "href": "/policy/competition",
+    "slug": "competition",
+    "label": "Competition & Antitrust Policy",
+    "description": "",
+    "category": "Core Policies"
+  },
+  {
+    "href": "/policy/education",
+    "slug": "education",
+    "label": "Education Policy",
+    "description": "",
+    "category": "Additional"
+  },
+  {
+    "href": "/policy/anti-corruption",
+    "slug": "anti-corruption",
+    "label": "Government Corruption — A Comprehensive Reckoning",
+    "description": "",
+    "category": "Additional"
+  },
+  {
+    "href": "/policy/immigration",
+    "slug": "immigration",
+    "label": "Immigration Policy",
+    "description": "",
+    "category": "Additional"
+  }
+]

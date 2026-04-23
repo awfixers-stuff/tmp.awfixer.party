@@ -1,0 +1,20 @@
+[
+  {
+    "href": "/events/town-hall-may",
+    "slug": "town-hall-may",
+    "label": "Town Hall May",
+    "date": "2026-05-20"
+  },
+  {
+    "href": "/events/policy-workshop",
+    "slug": "policy-workshop",
+    "label": "Policy Workshop",
+    "date": "2025-02-01"
+  },
+  {
+    "href": "/events/launch-party",
+    "slug": "launch-party",
+    "label": "Launch Party",
+    "date": "2025-01-15"
+  }
+]
