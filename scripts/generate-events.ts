@@ -6,12 +6,26 @@ const __dirname = dirname(fileURLToPath(import.meta.url))
 const EVENTS_DIR = join(__dirname, "../app/events/events")
 const OUTPUT_FILE = join(__dirname, "../app/events/events.ts")
 
-function parseEventMeta(content: string) {
+interface EventMetadata {
+  date?: string
+  time?: string
+  location?: string
+  url?: string
+  type?: string
+}
+
+interface RawEvent extends EventMetadata {
+  slug: string
+  title: string
+  description: string
+}
+
+function parseEventMeta(content: string): EventMetadata {
   const match = content.match(/<EventMeta[^>]*>([\s\S]*?)<\/EventMeta>/)
   if (!match) return {}
 
   const props = match[1]
-  const result: Record<string, string> = {}
+  const result: EventMetadata = {}
 
   const dateMatch = props.match(/date:\s*"([^"]+)"/)
   if (dateMatch) result.date = dateMatch[1]
@@ -51,7 +65,7 @@ function main() {
     .filter(f => f.endsWith(".mdx"))
     .sort()
 
-  const events = mdxFiles.map((file: string) => {
+  const events: RawEvent[] = mdxFiles.map((file: string) => {
     const slug = file.replace(".mdx", "")
     const content = readFileSync(join(EVENTS_DIR, file), "utf-8")
     const meta = parseEventMeta(content)
@@ -74,8 +88,8 @@ function main() {
     slug: "${e.slug}",
     title: "${e.title}",
     description: "${e.description}",
-    date: "${e.date}",${extras ? "\n" + extras : ""}
-    type: "${(e as any).type || "virtual"}",
+    date: "${e.date || ""}",${extras ? "\n" + extras : ""}
+    type: "${e.type || "virtual"}",
     Component: ${name},
   }`
   }).join(",\n")
