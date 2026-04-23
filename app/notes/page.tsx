@@ -11,12 +11,23 @@ export const metadata: Metadata = {
 
 function CategoryBadge({ category }: { category: string }) {
   const colors: Record<string, string> = {
-    Foundation: "bg-blue-600/10 text-blue-600",
-    Economics: "bg-green-600/10 text-green-600",
-    Healthcare: "bg-red-600/10 text-red-600",
-    Energy: "bg-yellow-600/10 text-yellow-600",
-    Foreign: "bg-purple-600/10 text-purple-600",
-    Governance: "bg-orange-600/10 text-orange-600",
+    "From AWFixer": "bg-purple-600/20 text-purple-400 ring-1 ring-purple-600/40",
+    Foundation: "bg-blue-600/10 text-blue-400",
+    Economics: "bg-green-600/10 text-green-400",
+    Healthcare: "bg-red-600/10 text-red-400",
+    Energy: "bg-yellow-600/10 text-yellow-400",
+    Foreign: "bg-cyan-600/10 text-cyan-400",
+    Governance: "bg-orange-600/10 text-orange-400",
+    Education: "bg-sky-600/10 text-sky-400",
+    Immigration: "bg-teal-600/10 text-teal-400",
+    Environment: "bg-emerald-600/10 text-emerald-400",
+    Technology: "bg-indigo-600/10 text-indigo-400",
+    Defense: "bg-slate-600/10 text-slate-400",
+    "Civil Rights": "bg-pink-600/10 text-pink-400",
+    Housing: "bg-amber-600/10 text-amber-400",
+    "Criminal Justice": "bg-rose-600/10 text-rose-400",
+    Analysis: "bg-violet-600/10 text-violet-400",
+    Opinion: "bg-fuchsia-600/10 text-fuchsia-400",
   }
 
   return (
