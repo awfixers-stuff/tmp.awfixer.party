@@ -13,13 +13,15 @@ export default function Page() {
 
   return (
     <>
-      <section className="relative flex h-screen flex-col items-center justify-center overflow-hidden px-4 sm:px-6">
-        {/* Flag gif — scrolls away with the section, invisible on other pages */}
+      <section className="relative flex h-screen flex-col items-center justify-center px-4 sm:px-6">
+        {/* Flag gif — bleeds above (behind nav) and ~3 inches below the hero */}
         <div
-          className="absolute inset-0 animate-flag-fade-in bg-[url('/flag.gif')] bg-cover bg-center bg-no-repeat"
+          className="absolute -top-24 sm:-top-28 -bottom-72 left-0 right-0 animate-flag-fade-in bg-[url('/flag.gif')] bg-cover bg-center bg-no-repeat"
           aria-hidden="true"
         />
-        <div className="absolute inset-0 animate-flag-fade-in bg-black/45" aria-hidden="true" />
+        <div className="absolute -top-24 sm:-top-28 -bottom-72 left-0 right-0 animate-flag-fade-in bg-black/45" aria-hidden="true" />
+        {/* Fade bottom of flag into site background */}
+        <div className="absolute bottom-[-18rem] left-0 right-0 h-32 animate-flag-fade-in bg-gradient-to-b from-transparent to-background" aria-hidden="true" />
         <div className="relative z-10 flex flex-col items-center gap-8">
           <div className="max-w-2xl text-center">
             <p className="font-mono text-xs uppercase tracking-widest text-purple-600 animate-fade-up">
