@@ -22,6 +22,7 @@ interface NavItemProps {
   onOpen: (id: string, direction?: "left" | "right" | "auto") => void
   onClose: () => void
   onNavigate?: (item: NavItemType) => void
+  setRef?: (el: HTMLElement | null) => void
 }
 
 export function NavItem({
@@ -35,6 +36,7 @@ export function NavItem({
   onOpen,
   onClose,
   onNavigate,
+  setRef,
 }: NavItemProps) {
   const hasChildren = item.children && item.children.length > 0
   const isActive = item.id === activeId
@@ -91,6 +93,7 @@ export function NavItem({
       onMouseLeave={handleMouseLeave}
     >
       <div
+        ref={depth === 0 ? setRef : undefined}
         role={hasChildren ? "menuitem" : "menuitem"}
         tabIndex={0}
         aria-expanded={isMobile ? isExpanded : undefined}
@@ -105,8 +108,7 @@ export function NavItem({
           isMobile
             ? cn(
                 "px-4 py-3",
-                depth === 0 && "border-b border-border/50",
-                depth > 0 && `pl-[${8 + depth * 20}px]`
+                depth === 0 && "border-b border-border/50"
               )
             : "px-4 py-2",
           isActive
@@ -162,15 +164,18 @@ export function NavItem({
                 isOpen={openId === child.id}
                 openId={openId}
                 popoutDirection={
-                  child.popoutDirection === "left"
+                  depth >= 1
                     ? "left"
-                    : child.popoutDirection === "right"
-                      ? "right"
-                      : "right"
+                    : child.popoutDirection === "left"
+                      ? "left"
+                      : child.popoutDirection === "right"
+                        ? "right"
+                        : "right"
                 }
                 onOpen={onOpen}
                 onClose={onClose}
                 onNavigate={onNavigate}
+                setRef={undefined}
               />
             ))}
           </div>
@@ -199,6 +204,7 @@ export function NavItem({
                 onOpen={onOpen}
                 onClose={onClose}
                 onNavigate={onNavigate}
+                setRef={undefined}
               />
             ))}
           </div>

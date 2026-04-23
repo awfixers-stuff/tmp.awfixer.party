@@ -99,6 +99,7 @@ export function BylawsNav({
                 onOpen={open}
                 onClose={close}
                 onNavigate={handleNavigate}
+                setRef={setRef}
               />
             ))}
           </div>
