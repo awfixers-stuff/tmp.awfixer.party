@@ -1,28 +1,12 @@
-import { ScrollTOC } from "@/components/toc"
+"use client"
 
-export const toc = [
-  {
-    "id": "intellectual-and-moral-honesty-in-governance",
-    "text": "Intellectual and Moral Honesty in Governance",
-    "level": 2
-  },
-  {
-    "id": "the-awfixer-core-argument",
-    "text": "The AWFixer Core Argument",
-    "level": 3
-  },
-  {
-    "id": "principles-in-practice",
-    "text": "Principles in Practice",
-    "level": 3
-  },
-  {
-    "id": "the-philosophical-consistency",
-    "text": "The Philosophical Consistency",
-    "level": 3
-  }
-]
+import { DesktopTOC } from "@/components/toc"
+import { MobileTOC } from "@/components/mobile-toc"
+import { useMobile } from "@/hooks/use-mobile"
+import { toc } from "./toc-content"
 
 export function TableOfContents() {
-  return <ScrollTOC items={toc} />
+  const isMobile = useMobile()
+  if (isMobile === undefined) return null
+  return isMobile ? <MobileTOC items={[...toc]} /> : <DesktopTOC items={[...toc]} />
 }

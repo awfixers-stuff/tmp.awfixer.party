@@ -28,23 +28,38 @@ function extractHeadings(content: string): TocItem[] {
   return headings
 }
 
-function generateTocFile(mdxPath: string) {
+function generateTocFiles(mdxPath: string) {
   const content = fs.readFileSync(mdxPath, "utf-8")
   const headings = extractHeadings(content)
 
   const dir = path.dirname(mdxPath)
+
+  // toc-content.ts — data only, no JSX
+  const tocContentPath = path.join(dir, "toc-content.ts")
+  const tocContentFile = headings.length > 0
+    ? `export const toc = ${JSON.stringify(headings, null, 2)} as const\n`
+    : `export const toc: { id: string; text: string; level: number }[] = []\n`
+
+  fs.writeFileSync(tocContentPath, tocContentFile)
+  console.log(`Generated: ${tocContentPath}`)
+
+  // toc.tsx — switcher component, imports data + both TOC components
   const tocPath = path.join(dir, "toc.tsx")
+  const tocFile = `"use client"
 
-  const tocContent = `import { ScrollTOC } from "@/components/toc"
-
-${headings.length > 0 ? `export const toc = ${JSON.stringify(headings, null, 2)}` : "export const toc: { id: string; text: string; level: number }[] = []"}
+import { DesktopTOC } from "@/components/toc"
+import { MobileTOC } from "@/components/mobile-toc"
+import { useMobile } from "@/hooks/use-mobile"
+import { toc } from "./toc-content"
 
 export function TableOfContents() {
-  return <ScrollTOC items={toc} />
+  const isMobile = useMobile()
+  if (isMobile === undefined) return null
+  return isMobile ? <MobileTOC items={[...toc]} /> : <DesktopTOC items={[...toc]} />
 }
 `
 
-  fs.writeFileSync(tocPath, tocContent)
+  fs.writeFileSync(tocPath, tocFile)
   console.log(`Generated: ${tocPath}`)
 }
 
@@ -57,7 +72,7 @@ function walkDir(dir: string) {
     if (entry.isDirectory()) {
       walkDir(fullPath)
     } else if (entry.name.endsWith(".mdx")) {
-      generateTocFile(fullPath)
+      generateTocFiles(fullPath)
     }
   }
 }

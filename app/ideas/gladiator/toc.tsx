@@ -1,33 +1,12 @@
-import { ScrollTOC } from "@/components/toc"
+"use client"
 
-export const toc = [
-  {
-    "id": "the-vision",
-    "text": "The Vision",
-    "level": 2
-  },
-  {
-    "id": "the-problem",
-    "text": "The Problem",
-    "level": 2
-  },
-  {
-    "id": "events",
-    "text": "Events",
-    "level": 2
-  },
-  {
-    "id": "how-it-works",
-    "text": "How It Works",
-    "level": 2
-  },
-  {
-    "id": "schedule",
-    "text": "Schedule",
-    "level": 2
-  }
-]
+import { DesktopTOC } from "@/components/toc"
+import { MobileTOC } from "@/components/mobile-toc"
+import { useMobile } from "@/hooks/use-mobile"
+import { toc } from "./toc-content"
 
 export function TableOfContents() {
-  return <ScrollTOC items={toc} />
+  const isMobile = useMobile()
+  if (isMobile === undefined) return null
+  return isMobile ? <MobileTOC items={[...toc]} /> : <DesktopTOC items={[...toc]} />
 }
