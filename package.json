@@ -22,6 +22,7 @@
   },
   "scripts": {
     "dev": "next dev --turbopack",
+    "generate-notes": "bun run scripts/generate-notes.ts",
     "generate-toc": "bun run scripts/generate-toc.ts",
     "generate-events": "bun run scripts/generate-events.ts",
     "build": "bun run generate-toc && bun run generate-events && bun run generate-notes && next build --webpack",
