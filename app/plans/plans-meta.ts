@@ -6,22 +6,22 @@ export interface PlanMeta {
 
 export const plansMeta: PlanMeta[] = [
   {
-    slug: "china",
+    slug: "foreign-policy/china",
     title: "China",
     description: "Strategic approach to US-China relations",
   },
   {
-    slug: "russia",
+    slug: "foreign-policy/russia",
     title: "Russia",
     description: "Policy toward Russia and Eastern Europe",
   },
   {
-    slug: "north-korea",
+    slug: "foreign-policy/north-korea",
     title: "North Korea",
     description: "Engagement and deterrence strategy",
   },
   {
-    slug: "middle-east",
+    slug: "foreign-policy/middle-east",
     title: "Middle East",
     description: "Regional approach and alliances",
   },

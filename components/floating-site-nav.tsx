@@ -8,7 +8,15 @@ import { Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 
-import { policy, plans, ideas, notes, events, governance, NavItem } from "@/lib/nav"
+import {
+  policy,
+  plans,
+  ideas,
+  notes,
+  events,
+  governance,
+  NavItem,
+} from "@/lib/nav"
 
 const ChevronDown = ({ className }: { className?: string }) => (
   <svg
@@ -60,10 +68,12 @@ export function FloatingSiteNav() {
       sections[cat].push(item)
     })
     const order = ["Core Policies", "Social Policies", "Additional"]
-    return order.map(label => ({
-      label,
-      items: sections[label] || []
-    })).filter(s => s.items.length > 0)
+    return order
+      .map((label) => ({
+        label,
+        items: sections[label] || [],
+      }))
+      .filter((s) => s.items.length > 0)
   }, [])
 
   const governanceSections = useMemo(() => {
@@ -74,16 +84,41 @@ export function FloatingSiteNav() {
       sections[cat].push(item)
     })
     const order = ["Overview", "Leadership", "Members"]
-    return order.map(label => ({
-      label,
-      items: sections[label] || []
-    })).filter(s => s.items.length > 0)
+    return order
+      .map((label) => ({
+        label,
+        items: sections[label] || [],
+      }))
+      .filter((s) => s.items.length > 0)
+  }, [])
+
+  const plansSections = useMemo(() => {
+    const sections: Record<string, NavItem[]> = {}
+    plans.forEach((item) => {
+      const cat = item.category || "General"
+      if (!sections[cat]) sections[cat] = []
+      sections[cat].push(item)
+    })
+    const order = [
+      "Domestic Policy",
+      "Local Issues",
+      "International Relations",
+      "Party Positions",
+    ]
+    return order
+      .map((label) => ({
+        label,
+        items: sections[label] || [],
+      }))
+      .filter((s) => s.items.length > 0)
   }, [])
 
   const upcomingEvents = useMemo(() => {
     return events
       .filter((e) => e.date && new Date(e.date) >= new Date())
-      .sort((a, b) => new Date(a!.date!).getTime() - new Date(b!.date!).getTime())
+      .sort(
+        (a, b) => new Date(a!.date!).getTime() - new Date(b!.date!).getTime()
+      )
       .slice(0, 5)
   }, [])
 
@@ -207,7 +242,8 @@ export function FloatingSiteNav() {
                       className={cn(
                         "block rounded-xl px-3 py-2 text-sm font-medium transition-colors",
                         "hover:bg-accent hover:text-foreground focus:bg-accent focus:text-foreground",
-                        pathname === item.href || (item.href === "/notes" && isNotesPage)
+                        pathname === item.href ||
+                          (item.href === "/notes" && isNotesPage)
                           ? "bg-accent text-foreground"
                           : "text-foreground/70"
                       )}
@@ -243,7 +279,9 @@ export function FloatingSiteNav() {
                 className={cn(
                   "absolute top-full left-1/2 z-50 mt-3 w-[640px] -translate-x-1/2 rounded-2xl border border-border bg-background/95 shadow-2xl shadow-black/20 backdrop-blur-xl",
                   "translate-y-[-0.5rem] opacity-0 transition-all duration-200",
-                  policyOpen ? "translate-y-0 opacity-100" : "pointer-events-none"
+                  policyOpen
+                    ? "translate-y-0 opacity-100"
+                    : "pointer-events-none"
                 )}
               >
                 <div className="grid grid-cols-3 gap-2 p-3">
@@ -299,7 +337,9 @@ export function FloatingSiteNav() {
                 className={cn(
                   "absolute top-full left-1/2 z-50 mt-3 w-56 -translate-x-1/2 rounded-2xl border border-border bg-background/95 shadow-2xl shadow-black/20 backdrop-blur-xl",
                   "translate-y-[-0.5rem] opacity-0 transition-all duration-200",
-                  governanceOpen ? "translate-y-0 opacity-100" : "pointer-events-none"
+                  governanceOpen
+                    ? "translate-y-0 opacity-100"
+                    : "pointer-events-none"
                 )}
               >
                 <div className="flex flex-col p-2">
@@ -414,44 +454,37 @@ export function FloatingSiteNav() {
                 </Button>
                 <div
                   className={cn(
-                    "absolute top-full left-0 z-50 mt-3 w-52 rounded-2xl border border-border bg-background/95 shadow-2xl shadow-black/20 backdrop-blur-xl",
+                    "absolute top-full left-1/2 z-50 mt-3 w-[640px] -translate-x-1/2 rounded-2xl border border-border bg-background/95 shadow-2xl shadow-black/20 backdrop-blur-xl",
                     "translate-y-[-0.5rem] opacity-0 transition-all duration-200",
                     plansOpen && "translate-y-0 opacity-100"
                   )}
                   style={{ pointerEvents: plansOpen ? "auto" : "none" }}
                 >
-                  <div className="flex flex-col p-2">
-                    <p className="mb-1 px-3 pt-1.5 text-[10px] font-semibold tracking-widest text-purple-600 uppercase">
-                      Our Plans
-                    </p>
-                    {plans.map((plan) => (
-                      <Link
-                        key={plan.slug}
-                        href={plan.href}
-                        className={cn(
-                          "block rounded-xl px-3 py-2 text-sm font-medium transition-colors",
-                          "hover:bg-accent hover:text-foreground focus:bg-accent focus:text-foreground",
-                          pathname === plan.href
-                            ? "bg-accent text-foreground"
-                            : "text-foreground/70"
-                        )}
-                      >
-                        {plan.label}
-                      </Link>
+                  <div className="grid grid-cols-2 gap-2 p-3">
+                    {plansSections.map((section) => (
+                      <div key={section.label} className="flex flex-col">
+                        <p className="mb-2 px-3 pt-1 text-[10px] font-semibold tracking-widest text-purple-600 uppercase">
+                          {section.label}
+                        </p>
+                        <div className="flex flex-col gap-0.5">
+                          {section.items.map((item) => (
+                            <Link
+                              key={item.href}
+                              href={item.href}
+                              className={cn(
+                                "block rounded-xl px-3 py-1.5 text-sm font-medium transition-colors",
+                                "hover:bg-accent hover:text-foreground focus:bg-accent focus:text-foreground",
+                                pathname === item.href
+                                  ? "bg-accent text-foreground"
+                                  : "text-foreground/70"
+                              )}
+                            >
+                              {item.label}
+                            </Link>
+                          ))}
+                        </div>
+                      </div>
                     ))}
-                    <div className="my-1.5 h-px bg-border" />
-                    <Link
-                      href="/plans"
-                      className={cn(
-                        "block rounded-xl px-3 py-2 text-sm font-medium transition-colors",
-                        "hover:bg-accent hover:text-foreground focus:bg-accent focus:text-foreground",
-                        pathname === "/plans"
-                          ? "bg-accent text-foreground"
-                          : "text-purple-600"
-                      )}
-                    >
-                      All Plans
-                    </Link>
                   </div>
                 </div>
               </div>
@@ -563,7 +596,6 @@ export function FloatingSiteNav() {
         )}
       >
         <div className="flex-1 overflow-y-auto p-3">
-
           {/* Core dropdown */}
           <div className="mb-2">
             <button
@@ -594,7 +626,11 @@ export function FloatingSiteNav() {
             >
               <div className="mt-1 flex flex-col">
                 {[
-                  { href: "/philosophy", label: "Philosophy", active: isPhilosophy },
+                  {
+                    href: "/philosophy",
+                    label: "Philosophy",
+                    active: isPhilosophy,
+                  },
                   { href: "/platform", label: "Platform", active: isPlatform },
                   { href: "/notes", label: "Notes", active: isNotesPage },
                 ].map((item) => (
@@ -604,7 +640,9 @@ export function FloatingSiteNav() {
                     className={cn(
                       "block rounded-xl px-3 py-2 text-sm transition-colors",
                       "hover:bg-accent",
-                      item.active ? "bg-accent text-foreground" : "text-foreground/70"
+                      item.active
+                        ? "bg-accent text-foreground"
+                        : "text-foreground/70"
                     )}
                   >
                     {item.label}
@@ -703,7 +741,9 @@ export function FloatingSiteNav() {
             <div
               className={cn(
                 "overflow-hidden transition-all duration-300 ease-in-out",
-                governanceOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
+                governanceOpen
+                  ? "max-h-[500px] opacity-100"
+                  : "max-h-0 opacity-0"
               )}
             >
               <div className="mt-1 flex flex-col">
@@ -809,9 +849,7 @@ export function FloatingSiteNav() {
               className={cn(
                 "flex w-full items-center justify-between rounded-2xl px-3 py-3 text-sm font-medium transition-colors",
                 "hover:bg-accent",
-                isIdeasPage
-                  ? "bg-accent text-foreground"
-                  : "text-foreground/70"
+                isIdeasPage ? "bg-accent text-foreground" : "text-foreground/70"
               )}
             >
               <span>Ideas</span>
