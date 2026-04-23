@@ -13,5 +13,10 @@ export const toc = [
     "id": "limitations",
     "text": "Limitations",
     "level": 3
+  },
+  {
+    "id": "related-bylaws",
+    "text": "Related Bylaws",
+    "level": 3
   }
 ] as const

@@ -26,7 +26,7 @@ export function BylawsNav({
   const router = useRouter()
   const [mobileOpen, setMobileOpen] = useState(false)
   const isMobile = useBreakpoint({ breakpoint: mobileBreakpoint })
-  const { openId, popoutDirection, open, close, cancelClose } = usePopout({
+  const { openId, popoutDirection, open, close, cancelClose, setRef } = usePopout({
     delay: 150,
     edgeThreshold: 200,
   })
