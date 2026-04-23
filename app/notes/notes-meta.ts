@@ -12,7 +12,7 @@ export const notesMeta: NoteMeta[] = [
     title: "American Pride",
     description: "Why American pride is our greatest strength and greatest weakness.",
     date: "2026-04-22",
-    category: "Foundation",
+    category: "From AWFixer",
   },
   {
     slug: "economic-incentives-analysis",

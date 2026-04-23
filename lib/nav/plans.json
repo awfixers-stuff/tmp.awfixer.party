@@ -1,26 +1,58 @@
 [
   {
-    "href": "/plans/china",
+    "href": "/plans/criminal-justice",
+    "slug": "criminal-justice",
+    "label": "Criminal Justice",
+    "description": "",
+    "category": "Domestic Policy"
+  },
+  {
+    "href": "/plans/the-backyard",
+    "slug": "the-backyard",
+    "label": "The Backyard",
+    "description": "",
+    "category": "Local Issues"
+  },
+  {
+    "href": "/plans/foreign-policy",
+    "slug": "foreign-policy",
+    "label": "Foreign Policy",
+    "description": "",
+    "category": "International Relations"
+  },
+  {
+    "href": "/plans/foreign-policy/china",
     "slug": "china",
     "label": "China",
-    "description": ""
+    "description": "",
+    "category": "International Relations"
   },
   {
-    "href": "/plans/russia",
+    "href": "/plans/foreign-policy/russia",
     "slug": "russia",
     "label": "Russia",
-    "description": ""
+    "description": "",
+    "category": "International Relations"
   },
   {
-    "href": "/plans/middle-east",
+    "href": "/plans/foreign-policy/middle-east",
     "slug": "middle-east",
     "label": "Middle East",
-    "description": ""
+    "description": "",
+    "category": "International Relations"
   },
   {
-    "href": "/plans/north-korea",
+    "href": "/plans/foreign-policy/north-korea",
     "slug": "north-korea",
     "label": "North Korea",
-    "description": ""
+    "description": "",
+    "category": "International Relations"
+  },
+  {
+    "href": "/plans/prime-ministership",
+    "slug": "prime-ministership",
+    "label": "Prime Ministership",
+    "description": "",
+    "category": "Party Positions"
   }
 ]

@@ -18,5 +18,10 @@ export const toc = [
     "id": "contact",
     "text": "Contact",
     "level": 2
+  },
+  {
+    "id": "interviews",
+    "text": "Interviews",
+    "level": 2
   }
 ] as const

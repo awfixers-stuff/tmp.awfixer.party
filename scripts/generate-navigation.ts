@@ -15,27 +15,36 @@ interface NavItem {
 }
 
 const POLICY_CATEGORIES: Record<string, string> = {
-  "competition": "Core Policies",
-  "tax": "Core Policies",
-  "energy": "Core Policies",
+  competition: "Core Policies",
+  tax: "Core Policies",
+  energy: "Core Policies",
   "fiscal-transparency": "Core Policies",
   "foreign-policy": "Core Policies",
-  "labor": "Social Policies",
-  "healthcare": "Social Policies",
-  "infrastructure": "Social Policies",
-  "governance": "Social Policies",
+  labor: "Social Policies",
+  healthcare: "Social Policies",
+  infrastructure: "Social Policies",
+  governance: "Social Policies",
   "criminal-justice": "Social Policies",
   "anti-corruption": "Additional",
-  "immigration": "Additional",
-  "education": "Additional",
-  "technology": "Additional",
+  immigration: "Additional",
+  education: "Additional",
+  technology: "Additional",
   "civil-standard": "Additional",
-};
+}
+
+const PLANS_CATEGORIES: Record<string, string> = {
+  "foreign-policy": "International Relations",
+  "criminal-justice": "Domestic Policy",
+  "the-backyard": "Local Issues",
+  "prime-ministership": "Party Positions",
+}
 
 function extractMetadataFromPage(filePath: string) {
   if (!fs.existsSync(filePath)) return null
   const content = fs.readFileSync(filePath, "utf-8")
-  const metadataMatch = content.match(/export const metadata: Metadata = ({[\s\S]*?});/)
+  const metadataMatch = content.match(
+    /export const metadata: Metadata = ({[\s\S]*?});/
+  )
   if (!metadataMatch) return null
 
   const metaStr = metadataMatch[1]
@@ -51,7 +60,10 @@ function extractMetadataFromPage(filePath: string) {
 }
 
 function formatSlug(slug: string) {
-  return slug.split("-").map(s => s.charAt(0).toUpperCase() + s.slice(1)).join(" ")
+  return slug
+    .split("-")
+    .map((s) => s.charAt(0).toUpperCase() + s.slice(1))
+    .join(" ")
 }
 
 function extractMetadataFromMDX(filePath: string) {
@@ -79,7 +91,7 @@ function extractMetadataFromMDX(filePath: string) {
 
   // Fallback to first # or ## heading if title not in frontmatter
   if (!result.title) {
-    const lines = content.split("\n");
+    const lines = content.split("\n")
     const skipTitles = [
       "this is a concept",
       "event overview",
@@ -95,18 +107,23 @@ function extractMetadataFromMDX(filePath: string) {
       "gallery",
       "after the event",
       "coming soon",
-      "the pattern"
-    ];
+      "the pattern",
+    ]
 
     for (const line of lines) {
-      const titleMatch = line.match(/^#{1,2}\s+(.+)$/);
+      const titleMatch = line.match(/^#{1,2}\s+(.+)$/)
       if (titleMatch) {
-        const potentialTitle = titleMatch[1].replace(/\*\*/g, "").replace(/\*/g, "").trim();
-        if (skipTitles.some(skip => potentialTitle.toLowerCase().includes(skip))) {
-          continue;
+        const potentialTitle = titleMatch[1]
+          .replace(/\*\*/g, "")
+          .replace(/\*/g, "")
+          .trim()
+        if (
+          skipTitles.some((skip) => potentialTitle.toLowerCase().includes(skip))
+        ) {
+          continue
         }
-        result.title = potentialTitle;
-        break;
+        result.title = potentialTitle
+        break
       }
     }
   }
@@ -114,12 +131,20 @@ function extractMetadataFromMDX(filePath: string) {
   return result
 }
 
-function getItemsFromDirectories(categoryDir: string, baseUrl: string, mdxNamePattern?: (slug: string) => string) {
+function getItemsFromDirectories(
+  categoryDir: string,
+  baseUrl: string,
+  mdxNamePattern?: (slug: string) => string
+) {
   const items: NavItem[] = []
   if (!fs.existsSync(categoryDir)) return items
 
-  const dirs = fs.readdirSync(categoryDir, { withFileTypes: true })
-    .filter(d => d.isDirectory() && !d.name.startsWith("[") && !d.name.startsWith("."))
+  const dirs = fs
+    .readdirSync(categoryDir, { withFileTypes: true })
+    .filter(
+      (d) =>
+        d.isDirectory() && !d.name.startsWith("[") && !d.name.startsWith(".")
+    )
 
   for (const dir of dirs) {
     const slug = dir.name
@@ -152,7 +177,7 @@ function getItemsFromDirectories(categoryDir: string, baseUrl: string, mdxNamePa
       slug,
       label: title,
       description,
-      category: POLICY_CATEGORIES[slug] || undefined
+      category: POLICY_CATEGORIES[slug] || undefined,
     })
   }
 
@@ -163,8 +188,9 @@ function getItemsFromMDXFiles(mdxDir: string, baseUrl: string) {
   const items: NavItem[] = []
   if (!fs.existsSync(mdxDir)) return items
 
-  const files = fs.readdirSync(mdxDir)
-    .filter(f => f.endsWith(".mdx") && !f.startsWith("toc"))
+  const files = fs
+    .readdirSync(mdxDir)
+    .filter((f) => f.endsWith(".mdx") && !f.startsWith("toc"))
 
   for (const file of files) {
     const slug = file.replace(".mdx", "")
@@ -182,8 +208,72 @@ function getItemsFromMDXFiles(mdxDir: string, baseUrl: string) {
       label: title,
       description: meta?.description,
       category: meta?.category,
-      date: meta?.date
+      date: meta?.date,
     })
+  }
+
+  return items
+}
+
+function getItemsFromDirectoriesRecursive(
+  categoryDir: string,
+  baseUrl: string,
+  mdxNamePattern?: (slug: string) => string,
+  parentCategory?: string
+) {
+  const items: NavItem[] = []
+  if (!fs.existsSync(categoryDir)) return items
+
+  const dirs = fs
+    .readdirSync(categoryDir, { withFileTypes: true })
+    .filter(
+      (d) =>
+        d.isDirectory() && !d.name.startsWith("[") && !d.name.startsWith(".")
+    )
+
+  for (const dir of dirs) {
+    const slug = dir.name
+    const dirPath = path.join(categoryDir, slug)
+    const pagePath = path.join(dirPath, "page.tsx")
+    const mdxName = mdxNamePattern ? mdxNamePattern(slug) : `${slug}.mdx`
+    const mdxPath = path.join(dirPath, mdxName)
+
+    let title = ""
+    let description = ""
+
+    const pageMeta = extractMetadataFromPage(pagePath)
+    if (pageMeta) {
+      title = pageMeta.title
+      description = pageMeta.description
+    }
+
+    const mdxMeta = extractMetadataFromMDX(mdxPath)
+    if (mdxMeta) {
+      title = mdxMeta.title || title
+      description = mdxMeta.description || description
+    }
+
+    if (!title) {
+      title = formatSlug(slug)
+    }
+
+    const itemCategory = PLANS_CATEGORIES[slug] || parentCategory || undefined
+
+    items.push({
+      href: `${baseUrl}/${slug}`,
+      slug,
+      label: title,
+      description,
+      category: itemCategory,
+    })
+
+    const nestedItems = getItemsFromDirectoriesRecursive(
+      path.join(categoryDir, slug),
+      `${baseUrl}/${slug}`,
+      mdxNamePattern,
+      itemCategory
+    )
+    items.push(...nestedItems)
   }
 
   return items
@@ -193,24 +283,46 @@ function main() {
   const navData: Record<string, any> = {}
 
   // Policy
-  navData.policy = getItemsFromDirectories(path.join(ROOT_DIR, "app/policy"), "/policy")
+  navData.policy = getItemsFromDirectories(
+    path.join(ROOT_DIR, "app/policy"),
+    "/policy"
+  )
 
   // Plans
-  navData.plans = getItemsFromDirectories(path.join(ROOT_DIR, "app/plans"), "/plans")
+  navData.plans = getItemsFromDirectoriesRecursive(
+    path.join(ROOT_DIR, "app/plans"),
+    "/plans"
+  )
 
   // Ideas
-  navData.ideas = getItemsFromDirectories(path.join(ROOT_DIR, "app/ideas"), "/ideas", () => "content.mdx")
+  navData.ideas = getItemsFromDirectories(
+    path.join(ROOT_DIR, "app/ideas"),
+    "/ideas",
+    () => "content.mdx"
+  )
 
   // Notes
-  navData.notes = getItemsFromMDXFiles(path.join(ROOT_DIR, "app/notes/notes"), "/notes")
+  navData.notes = getItemsFromMDXFiles(
+    path.join(ROOT_DIR, "app/notes/notes"),
+    "/notes"
+  )
 
   // Events
-  navData.events = getItemsFromMDXFiles(path.join(ROOT_DIR, "app/events/events"), "/events")
+  navData.events = getItemsFromMDXFiles(
+    path.join(ROOT_DIR, "app/events/events"),
+    "/events"
+  )
 
   // Governance — main page + members listing + individual member profiles
-  const govPageMeta = extractMetadataFromPage(path.join(ROOT_DIR, "app/governance/page.tsx"))
-  const govMdxMeta = extractMetadataFromMDX(path.join(ROOT_DIR, "app/governance/governance.mdx"))
-  const membersMeta = extractMetadataFromPage(path.join(ROOT_DIR, "app/governance/members/page.tsx"))
+  const govPageMeta = extractMetadataFromPage(
+    path.join(ROOT_DIR, "app/governance/page.tsx")
+  )
+  const govMdxMeta = extractMetadataFromMDX(
+    path.join(ROOT_DIR, "app/governance/governance.mdx")
+  )
+  const membersMeta = extractMetadataFromPage(
+    path.join(ROOT_DIR, "app/governance/members/page.tsx")
+  )
 
   const governanceItems: NavItem[] = [
     {
@@ -218,21 +330,23 @@ function main() {
       slug: "governance",
       label: govPageMeta?.title || govMdxMeta?.title || "Party Governance",
       description: govPageMeta?.description || govMdxMeta?.description || "",
-      category: "Overview"
+      category: "Overview",
     },
     {
       href: "/governance/members",
       slug: "members",
       label: membersMeta?.title || "Party Leadership",
-      description: membersMeta?.description || "Meet the leadership of the AWFixer Political Party.",
-      category: "Leadership"
-    }
+      description:
+        membersMeta?.description ||
+        "Meet the leadership of the AWFixer Political Party.",
+      category: "Leadership",
+    },
   ]
 
   const memberProfiles = getItemsFromDirectories(
     path.join(ROOT_DIR, "app/governance/members"),
     "/governance/members"
-  ).map(item => ({ ...item, category: "Leadership" }))
+  ).map((item) => ({ ...item, category: "Leadership" }))
 
   navData.governance = [...governanceItems, ...memberProfiles]
 
@@ -244,7 +358,10 @@ function main() {
 
   // Write individual JSON files
   for (const [key, data] of Object.entries(navData)) {
-    fs.writeFileSync(path.join(outputDir, `${key}.json`), JSON.stringify(data, null, 2))
+    fs.writeFileSync(
+      path.join(outputDir, `${key}.json`),
+      JSON.stringify(data, null, 2)
+    )
   }
 
   // Write index.ts for easy importing
