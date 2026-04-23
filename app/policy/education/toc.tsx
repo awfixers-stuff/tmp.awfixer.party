@@ -13,7 +13,7 @@ export const toc = [
   },
   {
     "id": "vocational-pathways",
-    "text": "vocational Pathways",
+    "text": "Vocational Pathways",
     "level": 3
   },
   {

@@ -30,6 +30,11 @@ export const toc = [
     "id": "principle-five-north-korea",
     "text": "PRINCIPLE FIVE: North Korea",
     "level": 3
+  },
+  {
+    "id": "principle-six-the-american-backyard",
+    "text": "PRINCIPLE SIX: The American Backyard",
+    "level": 3
   }
 ]
 

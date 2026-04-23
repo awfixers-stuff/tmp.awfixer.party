@@ -61,10 +61,10 @@ export function ScrollTOC({ items }: ScrollTOCProps) {
           "border border-border bg-background shadow-2xl shadow-black/20",
           "transform transition-transform duration-200",
           isOpen ? "translate-x-0" : "translate-x-[calc(100%+0.75rem)]",
-          /* Desktop: glass-box sidebar */
-          "lg:static lg:w-full lg:max-h-[calc(100vh-10rem)] lg:translate-x-0 lg:transform-none lg:overflow-y-auto",
-          "lg:rounded-3xl lg:border lg:border-border/50 lg:bg-card/30 lg:p-6 lg:shadow-sm lg:backdrop-blur-md",
-          "lg:ml-12 lg:mr-4"
+          /* Desktop: anchored sidebar with enforced gap via internal padding */
+          "lg:static lg:max-h-[calc(100vh-10rem)] lg:w-full lg:translate-x-0 lg:transform-none lg:overflow-y-auto",
+          "lg:rounded-3xl lg:border lg:border-border/50 lg:bg-card/30 lg:p-4 lg:shadow-sm lg:backdrop-blur-md",
+          "lg:mr-4"
         )}
       >
         {/* Mobile header */}
@@ -80,11 +80,13 @@ export function ScrollTOC({ items }: ScrollTOCProps) {
         </div>
 
         <div className="hidden lg:block">
-          <h4 className="mb-4 text-sm font-semibold uppercase tracking-wider text-purple-600/80">On this page</h4>
+          <h4 className="mb-4 text-sm font-semibold tracking-wider text-purple-600/80 uppercase">
+            On this page
+          </h4>
         </div>
 
         {/* Scrollable list — ensures all items are reachable */}
-        <ul className="flex-1 overflow-y-auto px-4 pb-4 space-y-1 text-sm lg:px-0 lg:pb-0">
+        <ul className="flex-1 space-y-1 overflow-y-auto px-4 pb-4 text-sm lg:px-0 lg:pb-0">
           {items.map((item) => (
             <li
               key={item.id}
