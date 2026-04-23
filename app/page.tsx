@@ -13,8 +13,14 @@ export default function Page() {
 
   return (
     <>
-      <section className="flex h-[70vh] min-h-[500px] flex-col items-center justify-center px-4 sm:px-6">
-        <div className="flex flex-col items-center gap-8">
+      <section className="relative flex h-screen flex-col items-center justify-center overflow-hidden px-4 sm:px-6">
+        {/* Flag gif — scrolls away with the section, invisible on other pages */}
+        <div
+          className="absolute inset-0 animate-flag-fade-in bg-[url('/flag.gif')] bg-cover bg-center bg-no-repeat"
+          aria-hidden="true"
+        />
+        <div className="absolute inset-0 animate-flag-fade-in bg-black/45" aria-hidden="true" />
+        <div className="relative z-10 flex flex-col items-center gap-8">
           <div className="max-w-2xl text-center">
             <p className="font-mono text-xs uppercase tracking-widest text-purple-600 animate-fade-up">
               AWFixer Political Party

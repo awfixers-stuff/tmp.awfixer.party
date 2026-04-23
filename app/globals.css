@@ -149,6 +149,17 @@ html {
     display: inline;
   }
 
+  /* Flag background fade-in */
+  @keyframes flagFadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  .animate-flag-fade-in {
+    animation: flagFadeIn 1.8s ease forwards;
+    opacity: 0;
+  }
+
   /* Page content animations */
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(24px); }
