@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 
 import { Separator } from "@/components/ui/separator"
 
-import { PlansContent } from "./plans-content"
+import Content from "./content.mdx"
 import { plansMeta } from "./plans-meta"
 import { PlansTOC } from "./plans-toc"
 
@@ -31,7 +31,7 @@ export default function PlansPage() {
         <Separator className="bg-border/60" />
 
         <div className="prose max-w-none text-[0.9375rem] leading-relaxed text-foreground/90 prose-neutral dark:prose-invert prose-headings:scroll-mt-24 prose-h1:mt-0 prose-h1:mb-8 prose-h2:mt-12 prose-h2:mb-5 prose-p:mt-0 prose-p:mb-6 prose-ol:my-6 prose-ul:my-6 prose-li:my-2">
-          <PlansContent />
+          <Content />
         </div>
 
         <Separator className="bg-border/60" />

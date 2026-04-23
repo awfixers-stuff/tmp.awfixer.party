@@ -1,7 +1,7 @@
-import americanPride from "./notes/american-pride.mdx"
-import economicIncentivesAnalysis from "./notes/economic-incentives-analysis.mdx"
-import healthcareMarketFailures from "./notes/healthcare-market-failures.mdx"
-import introductionToOurApproach from "./notes/introduction-to-our-approach.mdx"
+import americanPride from "./american-pride/content.mdx"
+import economicIncentivesAnalysis from "./economic-incentives-analysis/content.mdx"
+import introductionToOurApproach from "./introduction-to-our-approach/content.mdx"
+import healthcareMarketFailures from "./healthcare-market-failures/content.mdx"
 
 export interface Note {
   slug: string
@@ -13,7 +13,7 @@ export interface Note {
 }
 
 export const notes: Note[] = [
-  {
+{
     slug: "american-pride",
     title: "American Pride",
     description: "Why American pride is our greatest strength and greatest weakness.",
@@ -21,7 +21,7 @@ export const notes: Note[] = [
     category: "From AWFixer",
     Component: americanPride,
   },
-  {
+{
     slug: "economic-incentives-analysis",
     title: "Economic Incentives Analysis",
     description: "How economic incentives drive behavior in American politics.",
@@ -29,21 +29,21 @@ export const notes: Note[] = [
     category: "Economics",
     Component: economicIncentivesAnalysis,
   },
-  {
-    slug: "healthcare-market-failures",
-    title: "Healthcare Market Failures",
-    description: "The structural failures in American healthcare markets explained.",
-    date: "2025-02-01",
-    category: "Healthcare",
-    Component: healthcareMarketFailures,
-  },
-  {
+{
     slug: "introduction-to-our-approach",
     title: "Introduction To Our Approach",
     description: "How incentive structures shape policy outcomes.",
     date: "2025-01-01",
     category: "Foundation",
     Component: introductionToOurApproach,
+  },
+{
+    slug: "healthcare-market-failures",
+    title: "Healthcare Market Failures",
+    description: "The structural failures in American healthcare markets explained.",
+    date: "2025-02-01",
+    category: "Healthcare",
+    Component: healthcareMarketFailures,
   }
 ]
 

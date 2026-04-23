@@ -150,7 +150,7 @@ function getItemsFromDirectories(
     const slug = dir.name
     const dirPath = path.join(categoryDir, slug)
     const pagePath = path.join(dirPath, "page.tsx")
-    const mdxName = mdxNamePattern ? mdxNamePattern(slug) : `${slug}.mdx`
+    const mdxName = mdxNamePattern ? mdxNamePattern(slug) : "content.mdx"
     const mdxPath = path.join(dirPath, mdxName)
 
     let title = ""
@@ -178,6 +178,7 @@ function getItemsFromDirectories(
       label: title,
       description,
       category: POLICY_CATEGORIES[slug] || undefined,
+      date: mdxMeta?.date,
     })
   }
 
@@ -188,9 +189,7 @@ function getItemsFromMDXFiles(mdxDir: string, baseUrl: string) {
   const items: NavItem[] = []
   if (!fs.existsSync(mdxDir)) return items
 
-  const files = fs
-    .readdirSync(mdxDir)
-    .filter((f) => f.endsWith(".mdx") && !f.startsWith("toc"))
+  const files = fs.readdirSync(mdxDir).filter((f) => f === "content.mdx")
 
   for (const file of files) {
     const slug = file.replace(".mdx", "")
@@ -235,7 +234,7 @@ function getItemsFromDirectoriesRecursive(
     const slug = dir.name
     const dirPath = path.join(categoryDir, slug)
     const pagePath = path.join(dirPath, "page.tsx")
-    const mdxName = mdxNamePattern ? mdxNamePattern(slug) : `${slug}.mdx`
+    const mdxName = mdxNamePattern ? mdxNamePattern(slug) : "content.mdx"
     const mdxPath = path.join(dirPath, mdxName)
 
     let title = ""
@@ -302,14 +301,14 @@ function main() {
   )
 
   // Notes
-  navData.notes = getItemsFromMDXFiles(
-    path.join(ROOT_DIR, "app/notes/notes"),
+  navData.notes = getItemsFromDirectories(
+    path.join(ROOT_DIR, "app/notes"),
     "/notes"
   )
 
   // Events
-  navData.events = getItemsFromMDXFiles(
-    path.join(ROOT_DIR, "app/events/events"),
+  navData.events = getItemsFromDirectories(
+    path.join(ROOT_DIR, "app/events"),
     "/events"
   )
 
@@ -318,7 +317,7 @@ function main() {
     path.join(ROOT_DIR, "app/governance/page.tsx")
   )
   const govMdxMeta = extractMetadataFromMDX(
-    path.join(ROOT_DIR, "app/governance/governance.mdx")
+    path.join(ROOT_DIR, "app/governance/content.mdx")
   )
   const membersMeta = extractMetadataFromPage(
     path.join(ROOT_DIR, "app/governance/members/page.tsx")

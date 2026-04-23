@@ -1,6 +1,6 @@
-import launchParty from "./events/launch-party.mdx"
-import policyWorkshop from "./events/policy-workshop.mdx"
-import townHallMay from "./events/town-hall-may.mdx"
+import launchParty from "./launch-party/content.mdx"
+import townHallMay from "./town-hall-may/content.mdx"
+import policyWorkshop from "./policy-workshop/content.mdx"
 
 export interface Event {
   slug: string
@@ -15,7 +15,7 @@ export interface Event {
 }
 
 export const events: Event[] = [
-  {
+{
     slug: "launch-party",
     title: "Launch Party",
     description: "Introduction to the AWFixer Party platform - Q&A with founding members",
@@ -24,16 +24,7 @@ export const events: Event[] = [
     type: "virtual",
     Component: launchParty,
   },
-  {
-    slug: "policy-workshop",
-    title: "Policy Workshop",
-    description: "Government AI mandate (open source, auditable) - Private AI accountability framework",
-    date: "2025-02-01",
-    time: "6:00 PM EST",
-    type: "virtual",
-    Component: policyWorkshop,
-  },
-  {
+{
     slug: "town-hall-may",
     title: "Town Hall May",
     description: "Review of initial policy proposals - Discussion: Fixing the incentive in healthcare",
@@ -42,6 +33,15 @@ export const events: Event[] = [
     url: "https://discord.com/events",
     type: "virtual",
     Component: townHallMay,
+  },
+{
+    slug: "policy-workshop",
+    title: "Policy Workshop",
+    description: "Government AI mandate (open source, auditable) - Private AI accountability framework",
+    date: "2025-02-01",
+    time: "6:00 PM EST",
+    type: "virtual",
+    Component: policyWorkshop,
   }
 ]
 

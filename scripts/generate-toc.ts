@@ -36,9 +36,10 @@ function generateTocFiles(mdxPath: string) {
 
   // toc-content.ts — data only, no JSX
   const tocContentPath = path.join(dir, "toc-content.ts")
-  const tocContentFile = headings.length > 0
-    ? `export const toc = ${JSON.stringify(headings, null, 2)} as const\n`
-    : `export const toc: { id: string; text: string; level: number }[] = []\n`
+  const tocContentFile =
+    headings.length > 0
+      ? `export const toc = ${JSON.stringify(headings, null, 2)} as const\n`
+      : `export const toc: { id: string; text: string; level: number }[] = []\n`
 
   fs.writeFileSync(tocContentPath, tocContentFile)
   console.log(`Generated: ${tocContentPath}`)
@@ -71,7 +72,7 @@ function walkDir(dir: string) {
 
     if (entry.isDirectory()) {
       walkDir(fullPath)
-    } else if (entry.name.endsWith(".mdx")) {
+    } else if (entry.name === "content.mdx") {
       generateTocFiles(fullPath)
     }
   }

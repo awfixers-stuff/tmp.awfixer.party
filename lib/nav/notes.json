@@ -1,34 +1,30 @@
 [
   {
-    "href": "/notes/introduction-to-our-approach",
-    "slug": "introduction-to-our-approach",
-    "label": "Introduction to Our Approach",
-    "description": "How incentive structures shape policy outcomes.",
-    "category": "Foundation",
-    "date": "2025-01-01"
-  },
-  {
     "href": "/notes/american-pride",
     "slug": "american-pride",
     "label": "American Pride",
     "description": "Why American pride is our greatest strength and greatest weakness.",
-    "category": "From AWFixer",
     "date": "2026-04-22"
-  },
-  {
-    "href": "/notes/healthcare-market-failures",
-    "slug": "healthcare-market-failures",
-    "label": "Healthcare Market Failures",
-    "description": "The structural failures in American healthcare markets explained.",
-    "category": "Healthcare",
-    "date": "2025-02-01"
   },
   {
     "href": "/notes/economic-incentives-analysis",
     "slug": "economic-incentives-analysis",
     "label": "Economic Incentives Analysis",
     "description": "How economic incentives drive behavior in American politics.",
-    "category": "Economics",
     "date": "2025-01-15"
+  },
+  {
+    "href": "/notes/introduction-to-our-approach",
+    "slug": "introduction-to-our-approach",
+    "label": "Introduction to Our Approach",
+    "description": "How incentive structures shape policy outcomes.",
+    "date": "2025-01-01"
+  },
+  {
+    "href": "/notes/healthcare-market-failures",
+    "slug": "healthcare-market-failures",
+    "label": "Healthcare Market Failures",
+    "description": "The structural failures in American healthcare markets explained.",
+    "date": "2025-02-01"
   }
 ]

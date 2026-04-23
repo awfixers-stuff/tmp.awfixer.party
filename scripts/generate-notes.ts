@@ -1,9 +1,15 @@
-import { readFileSync, writeFileSync, readdirSync } from "node:fs"
+import {
+  readFileSync,
+  writeFileSync,
+  readdirSync,
+  existsSync,
+  statSync,
+} from "node:fs"
 import { join, dirname } from "node:path"
 import { fileURLToPath } from "node:url"
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
-const NOTES_DIR = join(__dirname, "../app/notes/notes")
+const NOTES_ROOT = join(__dirname, "../app/notes")
 const OUTPUT_FILE = join(__dirname, "../app/notes/notes.ts")
 const META_OUTPUT_FILE = join(__dirname, "../app/notes/notes-meta.ts")
 
@@ -11,12 +17,6 @@ interface NoteMetadata {
   date?: string
   category?: string
   description?: string
-}
-
-interface RawNote extends NoteMetadata {
-  slug: string
-  title: string
-  description: string
 }
 
 function parseFrontmatter(content: string): NoteMetadata {
@@ -41,38 +41,83 @@ function parseFrontmatter(content: string): NoteMetadata {
 function parseTitle(content: string, slug: string) {
   const match = content.replace(/^---[\s\S]*?---\n*/, "").match(/^#\s+(.+)$/m)
   if (match) return match[1].trim()
-  return slug.split("-").map(s => s.charAt(0).toUpperCase() + s.slice(1)).join(" ")
+  return slug
+    .split("-")
+    .map((s) => s.charAt(0).toUpperCase() + s.slice(1))
+    .join(" ")
 }
 
-function parseDescription(content: string, slug: string) {
-  const lines = content.replace(/^---[\s\S]*?---\n*/, "").split("\n").filter(l => l.startsWith("- ")).slice(0, 2)
-  return lines.map(l => l.replace(/^- /, "")).join(" - ").trim() || "Note description."
+function parseDescription(content: string) {
+  const lines = content
+    .replace(/^---[\s\S]*?---\n*/, "")
+    .split("\n")
+    .filter((l) => l.startsWith("- "))
+    .slice(0, 2)
+  return (
+    lines
+      .map((l) => l.replace(/^- /, ""))
+      .join(" - ")
+      .trim() || "Note description."
+  )
 }
 
 function toComponentName(slug: string) {
-  return slug.split("-").map((s, i) => i === 0 ? s : s.charAt(0).toUpperCase() + s.slice(1)).join("")
+  return slug
+    .split("-")
+    .map((s, i) => (i === 0 ? s : s.charAt(0).toUpperCase() + s.slice(1)))
+    .join("")
 }
 
 function main() {
-  const mdxFiles = readdirSync(NOTES_DIR)
-    .filter(f => f.endsWith(".mdx"))
-    .sort()
+  if (!existsSync(NOTES_ROOT)) {
+    console.log("Notes directory not found, skipping generate-notes")
+    return
+  }
 
-const notes: RawNote[] = mdxFiles.map((file: string) => {
-    const slug = file.replace(".mdx", "")
-    const content = readFileSync(join(NOTES_DIR, file), "utf-8")
-    const meta = parseFrontmatter(content)
-    const title = parseTitle(content, slug)
-    const description = meta.description || parseDescription(content, slug)
-
-    return { slug, title, description, ...meta }
+  const noteDirs = readdirSync(NOTES_ROOT).filter((dirName) => {
+    const fullPath = join(NOTES_ROOT, dirName)
+    try {
+      return (
+        statSync(fullPath).isDirectory() &&
+        !dirName.startsWith("[") &&
+        !dirName.startsWith(".")
+      )
+    } catch {
+      return false
+    }
   })
 
-  const imports = notes.map(n => `import ${toComponentName(n.slug)} from "./notes/${n.slug}.mdx"`).join("\n")
+  if (noteDirs.length === 0) {
+    console.log("No note directories found, skipping generate-notes")
+    return
+  }
 
-  const noteEntries = notes.map(n => {
-    const name = toComponentName(n.slug)
-    return `  {
+  const notesData = noteDirs
+    .map((slug) => {
+      const contentPath = join(NOTES_ROOT, slug, "content.mdx")
+      if (!existsSync(contentPath)) return null
+
+      const content = readFileSync(contentPath, "utf-8")
+      const meta = parseFrontmatter(content)
+      const title = parseTitle(content, slug)
+      const description = meta.description || parseDescription(content)
+
+      return { slug, title, description, ...meta }
+    })
+    .filter(Boolean)
+
+  const imports = noteDirs
+    .map((slug) => {
+      const name = toComponentName(slug)
+      return `import ${name} from "./${slug}/content.mdx"`
+    })
+    .join("\n")
+
+  const noteEntries = notesData
+    .filter((n): n is NonNullable<typeof n> => n !== null)
+    .map((n) => {
+      const name = toComponentName(n.slug)
+      return `{
     slug: "${n.slug}",
     title: "${n.title}",
     description: "${n.description}",
@@ -80,7 +125,8 @@ const notes: RawNote[] = mdxFiles.map((file: string) => {
     category: "${n.category || ""}",
     Component: ${name},
   }`
-  }).join(",\n")
+    })
+    .join(",\n")
 
   const generated = `${imports}
 
@@ -102,15 +148,18 @@ export function getNote(slug: string): Note | undefined {
 }
 `
 
-  const metaEntries = notes.map(n => {
-    return `  {
+  const metaEntries = notesData
+    .filter((n): n is NonNullable<typeof n> => n !== null)
+    .map((n) => {
+      return `{
     slug: "${n.slug}",
     title: "${n.title}",
     description: "${n.description}",
     date: "${n.date || ""}",
     category: "${n.category || ""}",
   }`
-  }).join(",\n")
+    })
+    .join(",\n")
 
   const metaGenerated = `export interface NoteMeta {
   slug: string
@@ -127,7 +176,9 @@ ${metaEntries}
 
   writeFileSync(OUTPUT_FILE, generated)
   writeFileSync(META_OUTPUT_FILE, metaGenerated)
-  console.log(`Generated notes.ts and notes-meta.ts with ${notes.length} notes`)
+  console.log(
+    `Generated notes.ts and notes-meta.ts with ${noteDirs.length} notes`
+  )
 }
 
 main()

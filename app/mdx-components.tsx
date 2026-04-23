@@ -1,8 +1,206 @@
 import type { ReactNode } from "react"
-import { AnimatedSection } from "@/app/components/animated-section"
-import { StaticImage, Gif, Figure, Youtube } from "@/app/components/mdx-images"
+import { AnimatedSection } from "@/components/animated-section"
+import { StaticImage, Gif, Figure, Youtube } from "@/components/mdx-images"
 
 type CalloutVariant = "default" | "pillar" | "warning" | "insight"
+
+interface HeroImageProps {
+  src: string
+  alt: string
+}
+
+export function HeroImage({ src, alt }: HeroImageProps) {
+  return (
+    <figure className="my-8 overflow-hidden rounded-xl shadow-lg">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src={src} alt={alt} className="w-full object-cover" loading="lazy" />
+      {alt && (
+        <figcaption className="mt-2 text-center text-sm text-muted-foreground">
+          {alt}
+        </figcaption>
+      )}
+    </figure>
+  )
+}
+
+interface QuoteBoxProps {
+  children: ReactNode
+}
+
+export function QuoteBox({ children }: QuoteBoxProps) {
+  return (
+    <blockquote className="my-6 border-l-4 border-purple-600 bg-purple-600/5 py-2 pl-4 italic">
+      {children}
+    </blockquote>
+  )
+}
+
+type CalloutBoxVariant = "default" | "highlight"
+
+interface CalloutBoxProps {
+  children: ReactNode
+  title?: string
+  variant?: CalloutBoxVariant
+}
+
+export function CalloutBox({
+  children,
+  title,
+  variant = "default",
+}: CalloutBoxProps) {
+  const variantClasses: Record<CalloutBoxVariant, string> = {
+    default: "border-l-purple-600",
+    highlight: "border-l-purple-600 bg-purple-600/10",
+  }
+
+  return (
+    <div
+      className={`my-6 rounded-lg border border-l-4 bg-card p-4 ${variantClasses[variant]}`}
+    >
+      {title && <h4 className="font-heading text-lg font-bold">{title}</h4>}
+      <div className="[&>p]:mt-2 [&>p]:text-sm [&>p]:text-muted-foreground">
+        {children}
+      </div>
+    </div>
+  )
+}
+
+interface ArenaSectionProps {
+  children: ReactNode
+  title: string
+}
+
+export function ArenaSection({ children, title }: ArenaSectionProps) {
+  return (
+    <section className="my-8 rounded-xl border bg-card p-6">
+      <h3 className="font-heading text-xl font-semibold">{title}</h3>
+      <div className="mt-4">{children}</div>
+    </section>
+  )
+}
+
+interface GladiatorEventProps {
+  name: string
+  description: string
+  image?: string
+  imageAlt?: string
+  dangerLevel: number
+  participants: string
+}
+
+export function GladiatorEvent({
+  name,
+  description,
+  image,
+  imageAlt,
+  dangerLevel,
+  participants,
+}: GladiatorEventProps) {
+  return (
+    <div className="my-4 rounded-lg border bg-card p-4">
+      {image && (
+        /* eslint-disable-next-line @next/next/no-img-element */
+        <img src={image} alt={imageAlt} className="mb-4 w-full rounded-lg" />
+      )}
+      <h4 className="font-heading text-lg font-semibold">{name}</h4>
+      <p className="mt-2 text-sm text-muted-foreground">{description}</p>
+      <div className="mt-4 flex flex-wrap gap-4 text-sm">
+        <span className="rounded-full bg-red-600/10 px-2 py-1 text-red-600">
+          Danger: {"🔥".repeat(dangerLevel)}
+        </span>
+        <span className="rounded-full bg-purple-600/10 px-2 py-1 text-purple-600">
+          {participants}
+        </span>
+      </div>
+    </div>
+  )
+}
+
+interface EventCardProps {
+  name: string
+  description: string
+  icon?: string
+}
+
+export function EventCard({ name, description, icon }: EventCardProps) {
+  return (
+    <div className="my-4 rounded-lg border bg-card p-4">
+      <span className="text-2xl">{icon}</span>
+      <h4 className="mt-2 font-heading text-lg font-semibold">{name}</h4>
+      <p className="mt-2 text-sm text-muted-foreground">{description}</p>
+    </div>
+  )
+}
+
+interface StatBoxProps {
+  value: string
+  label: string
+}
+
+export function StatBox({ value, label }: StatBoxProps) {
+  return (
+    <div className="my-6 rounded-lg bg-purple-600 p-6 text-white">
+      <div className="font-heading text-4xl font-bold">{value}</div>
+      <div className="mt-1 text-sm text-white/80">{label}</div>
+    </div>
+  )
+}
+
+interface ScheduleEvent {
+  date: string
+  event: string
+  location: string
+  status: string
+}
+
+interface ScheduleGridProps {
+  events: ScheduleEvent[]
+}
+
+export function ScheduleGrid({ events }: ScheduleGridProps) {
+  return (
+    <div className="my-6 overflow-x-auto">
+      <table className="w-full text-sm">
+        <thead className="border-b bg-purple-600/5">
+          <tr>
+            <th className="px-4 py-3 text-left font-semibold text-purple-600">
+              Date
+            </th>
+            <th className="px-4 py-3 text-left font-semibold text-purple-600">
+              Event
+            </th>
+            <th className="px-4 py-3 text-left font-semibold text-purple-600">
+              Location
+            </th>
+            <th className="px-4 py-3 text-left font-semibold text-purple-600">
+              Status
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {events.map((evt, i) => (
+            <tr key={i} className="border-b">
+              <td className="px-4 py-3">{evt.date}</td>
+              <td className="px-4 py-3">{evt.event}</td>
+              <td className="px-4 py-3">{evt.location}</td>
+              <td className="px-4 py-3">
+                <span
+                  className={`rounded-full px-2 py-0.5 text-xs font-medium ${
+                    evt.status === "open"
+                      ? "bg-green-500/10 text-green-500"
+                      : "bg-gray-500/10 text-gray-500"
+                  }`}
+                >
+                  {evt.status}
+                </span>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  )
+}
 
 interface CalloutProps {
   children: ReactNode
@@ -236,6 +434,14 @@ const components = {
   Gif,
   Figure,
   Youtube,
+  HeroImage,
+  QuoteBox,
+  CalloutBox,
+  ArenaSection,
+  GladiatorEvent,
+  EventCard,
+  StatBox,
+  ScheduleGrid,
   table: (props: React.HTMLAttributes<HTMLTableElement>) => (
     <div className="my-6 w-full overflow-x-auto">
       <table className="w-full text-sm" {...props} />
