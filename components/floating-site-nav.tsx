@@ -8,7 +8,7 @@ import { Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 
-import { policy, plans, ideas, notes, events, NavItem } from "@/lib/nav"
+import { policy, plans, ideas, notes, events, governance, NavItem } from "@/lib/nav"
 
 const ChevronDown = ({ className }: { className?: string }) => (
   <svg
@@ -29,24 +29,29 @@ const ChevronDown = ({ className }: { className?: string }) => (
 export function FloatingSiteNav() {
   const pathname = usePathname()
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [coreOpen, setCoreOpen] = useState(false)
   const [policyOpen, setPolicyOpen] = useState(false)
+  const [governanceOpen, setGovernanceOpen] = useState(false)
   const [eventsOpen, setEventsOpen] = useState(false)
   const [plansOpen, setPlansOpen] = useState(false)
   const [ideasOpen, setIdeasOpen] = useState(false)
+  const coreDropdownRef = useRef<HTMLDivElement>(null)
   const dropdownRef = useRef<HTMLDivElement>(null)
+  const governanceDropdownRef = useRef<HTMLDivElement>(null)
   const eventsDropdownRef = useRef<HTMLDivElement>(null)
   const plansDropdownRef = useRef<HTMLDivElement>(null)
   const ideasDropdownRef = useRef<HTMLDivElement>(null)
 
   const isPhilosophy = pathname === "/philosophy"
   const isPlatform = pathname === "/platform"
+  const isNotesPage = pathname.startsWith("/notes")
+  const isCorePage = isPhilosophy || isPlatform || isNotesPage
   const isPolicyPage = pathname.startsWith("/policy/")
+  const isGovernancePage = pathname.startsWith("/governance")
   const isEventsPage = pathname.startsWith("/events")
   const isIdeasPage = pathname.startsWith("/ideas")
   const isPlansPage = pathname.startsWith("/plans")
-  const isNotesPage = pathname.startsWith("/notes")
 
-  // Group policies by category
   const policySections = useMemo(() => {
     const sections: Record<string, NavItem[]> = {}
     policy.forEach((item) => {
@@ -54,8 +59,6 @@ export function FloatingSiteNav() {
       if (!sections[cat]) sections[cat] = []
       sections[cat].push(item)
     })
-    
-    // Maintain a specific order if possible
     const order = ["Core Policies", "Social Policies", "Additional"]
     return order.map(label => ({
       label,
@@ -63,7 +66,20 @@ export function FloatingSiteNav() {
     })).filter(s => s.items.length > 0)
   }, [])
 
-  // Filter upcoming events
+  const governanceSections = useMemo(() => {
+    const sections: Record<string, NavItem[]> = {}
+    governance.forEach((item) => {
+      const cat = item.category || "General"
+      if (!sections[cat]) sections[cat] = []
+      sections[cat].push(item)
+    })
+    const order = ["Overview", "Leadership", "Members"]
+    return order.map(label => ({
+      label,
+      items: sections[label] || []
+    })).filter(s => s.items.length > 0)
+  }, [])
+
   const upcomingEvents = useMemo(() => {
     return events
       .filter((e) => e.date && new Date(e.date) >= new Date())
@@ -73,7 +89,9 @@ export function FloatingSiteNav() {
 
   useEffect(() => {
     setMobileOpen(false)
+    setCoreOpen(false)
     setPolicyOpen(false)
+    setGovernanceOpen(false)
     setEventsOpen(false)
     setPlansOpen(false)
     setIdeasOpen(false)
@@ -82,10 +100,22 @@ export function FloatingSiteNav() {
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (
+        coreDropdownRef.current &&
+        !coreDropdownRef.current.contains(event.target as Node)
+      ) {
+        setCoreOpen(false)
+      }
+      if (
         dropdownRef.current &&
         !dropdownRef.current.contains(event.target as Node)
       ) {
         setPolicyOpen(false)
+      }
+      if (
+        governanceDropdownRef.current &&
+        !governanceDropdownRef.current.contains(event.target as Node)
+      ) {
+        setGovernanceOpen(false)
       }
       if (
         eventsDropdownRef.current &&
@@ -137,56 +167,61 @@ export function FloatingSiteNav() {
           <div className="hidden items-center sm:flex">
             <span className="mx-2 h-5 w-px shrink-0 bg-border" aria-hidden />
 
-            {/* Group 1: Philosophy & Platform */}
-            <div className="flex items-center gap-1">
+            {/* Core dropdown: Philosophy, Platform, Notes */}
+            <div ref={coreDropdownRef} className="relative">
               <Button
                 size="sm"
-                variant={isPhilosophy ? "secondary" : "ghost"}
+                variant={isCorePage ? "secondary" : "ghost"}
                 className="rounded-full"
-                asChild
+                onClick={() => setCoreOpen(!coreOpen)}
+                aria-expanded={coreOpen}
+                aria-haspopup="true"
               >
-                <Link
-                  href="/philosophy"
-                  aria-current={isPhilosophy ? "page" : undefined}
-                >
-                  Philosophy
-                </Link>
+                Core
+                <ChevronDown
+                  className={cn(
+                    "ml-1 h-3 w-3 transition-transform duration-200",
+                    coreOpen && "rotate-180"
+                  )}
+                />
               </Button>
-              <Button
-                size="sm"
-                variant={isPlatform ? "secondary" : "ghost"}
-                className="rounded-full"
-                asChild
+              <div
+                className={cn(
+                  "absolute top-full left-1/2 z-50 mt-3 w-48 -translate-x-1/2 rounded-2xl border border-border bg-background/95 shadow-2xl shadow-black/20 backdrop-blur-xl",
+                  "translate-y-[-0.5rem] opacity-0 transition-all duration-200",
+                  coreOpen ? "translate-y-0 opacity-100" : "pointer-events-none"
+                )}
               >
-                <Link
-                  href="/platform"
-                  aria-current={isPlatform ? "page" : undefined}
-                >
-                  Platform
-                </Link>
-              </Button>
+                <div className="flex flex-col p-2">
+                  <p className="mb-1 px-3 pt-1.5 text-[10px] font-semibold tracking-widest text-purple-600 uppercase">
+                    Core
+                  </p>
+                  {[
+                    { href: "/philosophy", label: "Philosophy" },
+                    { href: "/platform", label: "Platform" },
+                    { href: "/notes", label: "Notes" },
+                  ].map((item) => (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className={cn(
+                        "block rounded-xl px-3 py-2 text-sm font-medium transition-colors",
+                        "hover:bg-accent hover:text-foreground focus:bg-accent focus:text-foreground",
+                        pathname === item.href || (item.href === "/notes" && isNotesPage)
+                          ? "bg-accent text-foreground"
+                          : "text-foreground/70"
+                      )}
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
+                </div>
+              </div>
             </div>
 
             <span className="mx-2 h-5 w-px shrink-0 bg-border" aria-hidden />
 
-            {/* Group 1.5: Notes */}
-            <Button
-              size="sm"
-              variant={isNotesPage ? "secondary" : "ghost"}
-              className="rounded-full"
-              asChild
-            >
-              <Link
-                href="/notes"
-                aria-current={isNotesPage ? "page" : undefined}
-              >
-                Notes
-              </Link>
-            </Button>
-
-            <span className="mx-2 h-5 w-px shrink-0 bg-border" aria-hidden />
-
-            {/* Group 2: Policy dropdown */}
+            {/* Policy dropdown */}
             <div ref={dropdownRef} className="relative">
               <Button
                 size="sm"
@@ -242,7 +277,62 @@ export function FloatingSiteNav() {
 
             <span className="mx-2 h-5 w-px shrink-0 bg-border" aria-hidden />
 
-            {/* Group 3: Events, Plans, Ideas */}
+            {/* Governance dropdown */}
+            <div ref={governanceDropdownRef} className="relative">
+              <Button
+                size="sm"
+                variant={isGovernancePage ? "secondary" : "ghost"}
+                className="rounded-full"
+                onClick={() => setGovernanceOpen(!governanceOpen)}
+                aria-expanded={governanceOpen}
+                aria-haspopup="true"
+              >
+                Governance
+                <ChevronDown
+                  className={cn(
+                    "ml-1 h-3 w-3 transition-transform duration-200",
+                    governanceOpen && "rotate-180"
+                  )}
+                />
+              </Button>
+              <div
+                className={cn(
+                  "absolute top-full left-1/2 z-50 mt-3 w-56 -translate-x-1/2 rounded-2xl border border-border bg-background/95 shadow-2xl shadow-black/20 backdrop-blur-xl",
+                  "translate-y-[-0.5rem] opacity-0 transition-all duration-200",
+                  governanceOpen ? "translate-y-0 opacity-100" : "pointer-events-none"
+                )}
+              >
+                <div className="flex flex-col p-2">
+                  {governanceSections.map((section, i) => (
+                    <div key={section.label}>
+                      {i > 0 && <div className="my-1.5 h-px bg-border" />}
+                      <p className="mb-1 px-3 pt-1.5 text-[10px] font-semibold tracking-widest text-purple-600 uppercase">
+                        {section.label}
+                      </p>
+                      {section.items.map((item) => (
+                        <Link
+                          key={item.href}
+                          href={item.href}
+                          className={cn(
+                            "block rounded-xl px-3 py-2 text-sm font-medium transition-colors",
+                            "hover:bg-accent hover:text-foreground focus:bg-accent focus:text-foreground",
+                            pathname === item.href
+                              ? "bg-accent text-foreground"
+                              : "text-foreground/70"
+                          )}
+                        >
+                          {item.label}
+                        </Link>
+                      ))}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <span className="mx-2 h-5 w-px shrink-0 bg-border" aria-hidden />
+
+            {/* Events, Plans, Ideas */}
             <div className="flex items-center gap-1">
               <div ref={eventsDropdownRef} className="relative">
                 <Button
@@ -458,7 +548,7 @@ export function FloatingSiteNav() {
         aria-hidden
       />
 
-      {/* Mobile sheet — anchored below nav bar, stops bottom-4 from bottom */}
+      {/* Mobile sheet */}
       <div
         className={cn(
           "fixed left-1/2 z-50 -translate-x-1/2 sm:hidden",
@@ -472,9 +562,61 @@ export function FloatingSiteNav() {
             : "pointer-events-none -translate-y-3 opacity-0"
         )}
       >
-        {/* Scrollable nav items */}
         <div className="flex-1 overflow-y-auto p-3">
-          {/* Policy dropdown - collapsible on mobile */}
+
+          {/* Core dropdown */}
+          <div className="mb-2">
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation()
+                setCoreOpen(!coreOpen)
+              }}
+              className={cn(
+                "flex w-full items-center justify-between rounded-2xl px-3 py-3 text-sm font-medium transition-colors",
+                "hover:bg-accent",
+                isCorePage ? "bg-accent text-foreground" : "text-foreground/70"
+              )}
+            >
+              <span>Core</span>
+              <ChevronDown
+                className={cn(
+                  "h-4 w-4 transition-transform duration-200",
+                  coreOpen && "rotate-180"
+                )}
+              />
+            </button>
+            <div
+              className={cn(
+                "overflow-hidden transition-all duration-300 ease-in-out",
+                coreOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
+              )}
+            >
+              <div className="mt-1 flex flex-col">
+                {[
+                  { href: "/philosophy", label: "Philosophy", active: isPhilosophy },
+                  { href: "/platform", label: "Platform", active: isPlatform },
+                  { href: "/notes", label: "Notes", active: isNotesPage },
+                ].map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className={cn(
+                      "block rounded-xl px-3 py-2 text-sm transition-colors",
+                      "hover:bg-accent",
+                      item.active ? "bg-accent text-foreground" : "text-foreground/70"
+                    )}
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="my-2 h-px bg-border" />
+
+          {/* Policy dropdown */}
           <div className="mb-2">
             <button
               type="button"
@@ -534,45 +676,67 @@ export function FloatingSiteNav() {
 
           <div className="my-2 h-px bg-border" />
 
-          <Link
-            href="/platform"
-            aria-current={isPlatform ? "page" : undefined}
-            className={cn(
-              "block rounded-2xl px-3 py-2.5 text-sm font-medium transition-colors",
-              "hover:bg-accent",
-              isPlatform ? "bg-accent text-foreground" : "text-foreground/70"
-            )}
-          >
-            Platform
-          </Link>
-
-          <Link
-            href="/philosophy"
-            aria-current={isPhilosophy ? "page" : undefined}
-            className={cn(
-              "block rounded-2xl px-3 py-2.5 text-sm font-medium transition-colors",
-              "hover:bg-accent",
-              isPhilosophy ? "bg-accent text-foreground" : "text-foreground/70"
-            )}
-          >
-            Philosophy
-          </Link>
-
-          <Link
-            href="/notes"
-            aria-current={isNotesPage ? "page" : undefined}
-            className={cn(
-              "block rounded-2xl px-3 py-2.5 text-sm font-medium transition-colors",
-              "hover:bg-accent",
-              isNotesPage ? "bg-accent text-foreground" : "text-foreground/70"
-            )}
-          >
-            Notes
-          </Link>
+          {/* Governance dropdown */}
+          <div className="mb-2">
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation()
+                setGovernanceOpen(!governanceOpen)
+              }}
+              className={cn(
+                "flex w-full items-center justify-between rounded-2xl px-3 py-3 text-sm font-medium transition-colors",
+                "hover:bg-accent",
+                isGovernancePage
+                  ? "bg-accent text-foreground"
+                  : "text-foreground/70"
+              )}
+            >
+              <span>Governance</span>
+              <ChevronDown
+                className={cn(
+                  "h-4 w-4 transition-transform duration-200",
+                  governanceOpen && "rotate-180"
+                )}
+              />
+            </button>
+            <div
+              className={cn(
+                "overflow-hidden transition-all duration-300 ease-in-out",
+                governanceOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
+              )}
+            >
+              <div className="mt-1 flex flex-col">
+                {governanceSections.map((section, i) => (
+                  <div key={section.label}>
+                    {i > 0 && <div className="my-1.5 h-px bg-border" />}
+                    <p className="mb-1 px-3 pt-1.5 text-[10px] font-semibold tracking-widest text-purple-600 uppercase">
+                      {section.label}
+                    </p>
+                    {section.items.map((item) => (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        className={cn(
+                          "block rounded-xl px-3 py-2 text-sm transition-colors",
+                          "hover:bg-accent",
+                          pathname === item.href
+                            ? "bg-accent text-foreground"
+                            : "text-foreground/70"
+                        )}
+                      >
+                        {item.label}
+                      </Link>
+                    ))}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
 
           <div className="my-2 h-px bg-border" />
 
-          {/* Events dropdown - collapsible on mobile */}
+          {/* Events dropdown */}
           <div className="mb-2">
             <button
               type="button"
@@ -634,7 +798,7 @@ export function FloatingSiteNav() {
             </div>
           </div>
 
-          {/* Ideas dropdown - collapsible on mobile */}
+          {/* Ideas dropdown */}
           <div className="mb-2">
             <button
               type="button"
@@ -684,7 +848,7 @@ export function FloatingSiteNav() {
             </div>
           </div>
 
-          {/* Plans dropdown - collapsible on mobile */}
+          {/* Plans dropdown */}
           <div className="mb-2">
             <button
               type="button"
@@ -745,7 +909,7 @@ export function FloatingSiteNav() {
           </div>
         </div>
 
-        {/* Discord CTA — prominent at the bottom */}
+        {/* Discord CTA */}
         <div className="p-3">
           <Button
             size="lg"

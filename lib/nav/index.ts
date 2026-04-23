@@ -4,6 +4,7 @@ import plans from "./plans.json"
 import ideas from "./ideas.json"
 import notes from "./notes.json"
 import events from "./events.json"
+import governance from "./governance.json"
 
 export interface NavItem {
   href: string
@@ -14,12 +15,13 @@ export interface NavItem {
   date?: string
 }
 
-export { policy, plans, ideas, notes, events }
+export { policy, plans, ideas, notes, events, governance }
 
 export const navigationData = {
   policy: policy as NavItem[],
   plans: plans as NavItem[],
   ideas: ideas as NavItem[],
   notes: notes as NavItem[],
-  events: events as NavItem[]
+  events: events as NavItem[],
+  governance: governance as NavItem[]
 }

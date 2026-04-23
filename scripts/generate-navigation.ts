@@ -207,6 +207,35 @@ function main() {
   // Events
   navData.events = getItemsFromMDXFiles(path.join(ROOT_DIR, "app/events/events"), "/events")
 
+  // Governance — main page + members listing + individual member profiles
+  const govPageMeta = extractMetadataFromPage(path.join(ROOT_DIR, "app/governance/page.tsx"))
+  const govMdxMeta = extractMetadataFromMDX(path.join(ROOT_DIR, "app/governance/governance.mdx"))
+  const membersMeta = extractMetadataFromPage(path.join(ROOT_DIR, "app/governance/members/page.tsx"))
+
+  const governanceItems: NavItem[] = [
+    {
+      href: "/governance",
+      slug: "governance",
+      label: govPageMeta?.title || govMdxMeta?.title || "Party Governance",
+      description: govPageMeta?.description || govMdxMeta?.description || "",
+      category: "Overview"
+    },
+    {
+      href: "/governance/members",
+      slug: "members",
+      label: membersMeta?.title || "Party Leadership",
+      description: membersMeta?.description || "Meet the leadership of the AWFixer Political Party.",
+      category: "Leadership"
+    }
+  ]
+
+  const memberProfiles = getItemsFromDirectories(
+    path.join(ROOT_DIR, "app/governance/members"),
+    "/governance/members"
+  ).map(item => ({ ...item, category: "Leadership" }))
+
+  navData.governance = [...governanceItems, ...memberProfiles]
+
   // Ensure lib/nav exists
   const outputDir = path.join(ROOT_DIR, "lib/nav")
   if (!fs.existsSync(outputDir)) {
@@ -225,6 +254,7 @@ import plans from "./plans.json"
 import ideas from "./ideas.json"
 import notes from "./notes.json"
 import events from "./events.json"
+import governance from "./governance.json"
 
 export interface NavItem {
   href: string
@@ -235,14 +265,15 @@ export interface NavItem {
   date?: string
 }
 
-export { policy, plans, ideas, notes, events }
+export { policy, plans, ideas, notes, events, governance }
 
 export const navigationData = {
   policy: policy as NavItem[],
   plans: plans as NavItem[],
   ideas: ideas as NavItem[],
   notes: notes as NavItem[],
-  events: events as NavItem[]
+  events: events as NavItem[],
+  governance: governance as NavItem[]
 }
 `
   fs.writeFileSync(path.join(outputDir, "index.ts"), indexContent)

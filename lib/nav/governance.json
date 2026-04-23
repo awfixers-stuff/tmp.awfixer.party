@@ -1,0 +1,23 @@
+[
+  {
+    "href": "/governance",
+    "slug": "governance",
+    "label": "Party Governance",
+    "description": "",
+    "category": "Overview"
+  },
+  {
+    "href": "/governance/members",
+    "slug": "members",
+    "label": "Party Leadership",
+    "description": "Meet the leadership of the AWFixer Political Party.",
+    "category": "Leadership"
+  },
+  {
+    "href": "/governance/members/awfixer",
+    "slug": "awfixer",
+    "label": "AWFixer",
+    "description": "",
+    "category": "Leadership"
+  }
+]
