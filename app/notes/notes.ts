@@ -1,11 +1,11 @@
 import americanPride from "./american-pride/content.mdx"
-import economicIncentivesAnalysis from "./economic-incentives-analysis/content.mdx"
-import introductionToOurApproach from "./introduction-to-our-approach/content.mdx"
-import healthcareMarketFailures from "./healthcare-market-failures/content.mdx"
+import successAndFailuresOfFederalism from "./success-and-failures-of-federalism/content.mdx"
 import theAbsoluteRuleOfOligarchy from "./the-absolute-rule-of-oligarchy/content.mdx"
 import theRoleOfDecentralizationInDemocracy from "./the-role-of-decentralization-in-democracy/content.mdx"
-import successAndFailuresOfFederalism from "./success-and-failures-of-federalism/content.mdx"
+import economicIncentivesAnalysis from "./economic-incentives-analysis/content.mdx"
 import theWoesOfInterpositioning from "./the-woes-of-interpositioning/content.mdx"
+import introductionToOurApproach from "./introduction-to-our-approach/content.mdx"
+import healthcareMarketFailures from "./healthcare-market-failures/content.mdx"
 
 export interface Note {
   slug: string
@@ -26,12 +26,44 @@ export const notes: Note[] = [
     Component: americanPride,
   },
 {
+    slug: "success-and-failures-of-federalism",
+    title: "Success And Failures Of Federalism",
+    description: "Analyzing federalism's track record in American governance.",
+    date: "2026-04-23",
+    category: "Political Theory",
+    Component: successAndFailuresOfFederalism,
+  },
+{
+    slug: "the-absolute-rule-of-oligarchy",
+    title: "The Absolute Rule Of Oligarchy",
+    description: "Exploring the tendency of power to concentrate in the hands of the few.",
+    date: "2026-04-23",
+    category: "Political Theory",
+    Component: theAbsoluteRuleOfOligarchy,
+  },
+{
+    slug: "the-role-of-decentralization-in-democracy",
+    title: "The Role Of Decentralization In Democracy",
+    description: "Examining how decentralization enables democratic participation.",
+    date: "2026-04-23",
+    category: "Political Theory",
+    Component: theRoleOfDecentralizationInDemocracy,
+  },
+{
     slug: "economic-incentives-analysis",
     title: "Economic Incentives Analysis",
     description: "How economic incentives drive behavior in American politics.",
     date: "2025-01-15",
     category: "Economics",
     Component: economicIncentivesAnalysis,
+  },
+{
+    slug: "the-woes-of-interpositioning",
+    title: "The Woes Of Interpositioning",
+    description: "Examining the doctrine of interposition and its problems.",
+    date: "2026-04-23",
+    category: "Political Theory",
+    Component: theWoesOfInterpositioning,
   },
 {
     slug: "introduction-to-our-approach",
@@ -48,38 +80,6 @@ export const notes: Note[] = [
     date: "2025-02-01",
     category: "Healthcare",
     Component: healthcareMarketFailures,
-  },
-  {
-    slug: "the-absolute-rule-of-oligarchy",
-    title: "The Absolute Rule of Oligarchy",
-    description: "Exploring the tendency of power to concentrate in the hands of the few.",
-    date: "2026-04-23",
-    category: "Political Theory",
-    Component: theAbsoluteRuleOfOligarchy,
-  },
-  {
-    slug: "the-role-of-decentralization-in-democracy",
-    title: "The Role of Decentralization in Democracy",
-    description: "Examining how decentralization enables democratic participation.",
-    date: "2026-04-23",
-    category: "Political Theory",
-    Component: theRoleOfDecentralizationInDemocracy,
-  },
-  {
-    slug: "success-and-failures-of-federalism",
-    title: "Success and Failures of Federalism",
-    description: "Analyzing federalism's track record in American governance.",
-    date: "2026-04-23",
-    category: "Political Theory",
-    Component: successAndFailuresOfFederalism,
-  },
-  {
-    slug: "the-woes-of-interpositioning",
-    title: "The Woes of Interpositioning",
-    description: "Examining the doctrine of interposition and its problems.",
-    date: "2026-04-23",
-    category: "Political Theory",
-    Component: theWoesOfInterpositioning,
   }
 ]
 

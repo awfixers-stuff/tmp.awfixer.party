@@ -21,10 +21,66 @@
     "category": "International Relations"
   },
   {
+    "href": "/plans/foreign-policy/china",
+    "slug": "china",
+    "label": "China",
+    "description": "",
+    "category": "International Relations"
+  },
+  {
+    "href": "/plans/foreign-policy/russia",
+    "slug": "russia",
+    "label": "Russia",
+    "description": "",
+    "category": "International Relations"
+  },
+  {
+    "href": "/plans/foreign-policy/middle-east",
+    "slug": "middle-east",
+    "label": "Middle East",
+    "description": "",
+    "category": "International Relations"
+  },
+  {
+    "href": "/plans/foreign-policy/north-korea",
+    "slug": "north-korea",
+    "label": "North Korea",
+    "description": "",
+    "category": "International Relations"
+  },
+  {
     "href": "/plans/prime-ministership",
     "slug": "prime-ministership",
     "label": "Prime Ministership",
     "description": "",
+    "category": "Party Positions"
+  },
+  {
+    "href": "/plans/prime-ministership/plans",
+    "slug": "plans",
+    "label": "Plans | AWFixer Political Party",
+    "description": "AWFixer Political Party prime ministership plans.",
+    "category": "Party Positions"
+  },
+  {
+    "href": "/plans/prime-ministership/reasoning",
+    "slug": "reasoning",
+    "label": "Reasoning | AWFixer Political Party",
+    "description": "AWFixer Political Party prime ministership reasoning.",
+    "category": "Party Positions"
+  },
+  {
+    "href": "/plans/prime-ministership/use",
+    "slug": "use",
+    "label": "Use | AWFixer Political Party",
+    "description": "AWFixer Political Party prime ministership use.",
+    "category": "Party Positions"
+  },
+  {
+    "href": "/plans/prime-ministership/background",
+    "slug": "background",
+    "label": "Background | AWFixer Political Party",
+    "description": "AWFixer Political Party prime ministership background.",
     "category": "Party Positions"
   }
 ]
