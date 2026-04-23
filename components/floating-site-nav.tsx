@@ -206,34 +206,34 @@ export function FloatingSiteNav() {
               </Button>
               <div
                 className={cn(
-                  "absolute top-full left-0 z-50 mt-3 w-72 rounded-2xl border border-border bg-background/95 shadow-2xl shadow-black/20 backdrop-blur-xl",
+                  "absolute top-full left-1/2 z-50 mt-3 w-[640px] -translate-x-1/2 rounded-2xl border border-border bg-background/95 shadow-2xl shadow-black/20 backdrop-blur-xl",
                   "translate-y-[-0.5rem] opacity-0 transition-all duration-200",
-                  policyOpen && "translate-y-0 opacity-100"
+                  policyOpen ? "translate-y-0 opacity-100" : "pointer-events-none"
                 )}
-                style={{ pointerEvents: policyOpen ? "auto" : "none" }}
               >
-                <div className="flex flex-col p-2">
-                  {policySections.map((section, i) => (
-                    <div key={section.label}>
-                      {i > 0 && <div className="my-1.5 h-px bg-border" />}
-                      <p className="mb-1 px-3 pt-1.5 text-[10px] font-semibold tracking-widest text-purple-600 uppercase">
+                <div className="grid grid-cols-3 gap-2 p-3">
+                  {policySections.map((section) => (
+                    <div key={section.label} className="flex flex-col">
+                      <p className="mb-2 px-3 pt-1 text-[10px] font-semibold tracking-widest text-purple-600 uppercase">
                         {section.label}
                       </p>
-                      {section.items.map((item) => (
-                        <Link
-                          key={item.href}
-                          href={item.href}
-                          className={cn(
-                            "block rounded-xl px-3 py-2 text-sm font-medium transition-colors",
-                            "hover:bg-accent hover:text-foreground focus:bg-accent focus:text-foreground",
-                            pathname === item.href
-                              ? "bg-accent text-foreground"
-                              : "text-foreground/70"
-                          )}
-                        >
-                          {item.label}
-                        </Link>
-                      ))}
+                      <div className="flex flex-col gap-0.5">
+                        {section.items.map((item) => (
+                          <Link
+                            key={item.href}
+                            href={item.href}
+                            className={cn(
+                              "block rounded-xl px-3 py-1.5 text-sm font-medium transition-colors",
+                              "hover:bg-accent hover:text-foreground focus:bg-accent focus:text-foreground",
+                              pathname === item.href
+                                ? "bg-accent text-foreground"
+                                : "text-foreground/70"
+                            )}
+                          >
+                            {item.label}
+                          </Link>
+                        ))}
+                      </div>
                     </div>
                   ))}
                 </div>
@@ -500,8 +500,8 @@ export function FloatingSiteNav() {
             </button>
             <div
               className={cn(
-                "overflow-hidden transition-all duration-200",
-                policyOpen ? "max-h-[800px] opacity-100" : "max-h-0 opacity-0"
+                "overflow-hidden transition-all duration-300 ease-in-out",
+                policyOpen ? "max-h-[1000px] opacity-100" : "max-h-0 opacity-0"
               )}
             >
               <div className="mt-1 flex flex-col">
