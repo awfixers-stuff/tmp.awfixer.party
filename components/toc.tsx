@@ -1,5 +1,7 @@
 "use client"
 
+import { useEffect, useState } from "react"
+
 import { cn } from "@/lib/utils"
 
 export interface TocItem {
@@ -13,6 +15,28 @@ interface DesktopTOCProps {
 }
 
 export function DesktopTOC({ items }: DesktopTOCProps) {
+  const [activeId, setActiveId] = useState<string>("")
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            setActiveId(entry.target.id)
+          }
+        }
+      },
+      { rootMargin: "-80px 0px -70% 0px" }
+    )
+
+    items.forEach(({ id }) => {
+      const el = document.getElementById(id)
+      if (el) observer.observe(el)
+    })
+
+    return () => observer.disconnect()
+  }, [items])
+
   if (items.length === 0) return null
 
   const handleClick = (id: string) => {
@@ -39,7 +63,12 @@ export function DesktopTOC({ items }: DesktopTOCProps) {
           >
             <button
               onClick={() => handleClick(item.id)}
-              className="w-full rounded-lg px-2 py-1.5 text-left text-[13px] leading-snug text-foreground/70 transition-colors hover:bg-accent/40 hover:text-foreground"
+              className={cn(
+                "w-full rounded-lg px-2 py-1.5 text-left text-[13px] leading-snug transition-colors",
+                activeId === item.id
+                  ? "bg-accent/60 font-medium text-purple-600"
+                  : "text-foreground/70 hover:bg-accent/40 hover:text-foreground"
+              )}
             >
               {item.text}
             </button>

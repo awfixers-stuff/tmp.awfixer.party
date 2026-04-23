@@ -1,6 +1,9 @@
 import type { ReactNode } from "react"
 import { AnimatedSection } from "@/components/animated-section"
 import { StaticImage, Gif, Figure, Youtube } from "@/components/mdx-images"
+import { XAccount } from "@/components/x-account"
+import { XPosts } from "@/components/x-posts"
+import { DiscordWidget } from "@/components/discord-widget"
 
 type CalloutVariant = "default" | "pillar" | "warning" | "insight"
 
@@ -442,6 +445,9 @@ const components = {
   EventCard,
   StatBox,
   ScheduleGrid,
+  XAccount,
+  XPosts,
+  DiscordWidget,
   table: (props: React.HTMLAttributes<HTMLTableElement>) => (
     <div className="my-6 w-full overflow-x-auto">
       <table className="w-full text-sm" {...props} />

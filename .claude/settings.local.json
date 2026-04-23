@@ -4,7 +4,8 @@
       "Bash(bun add *)",
       "Bash(bun run *)",
       "Bash(./node_modules/.bin/next build *)",
-      "Bash(grep -o '.\\\\{0,200\\\\}useMDXComponents.\\\\{0,200\\\\}' /home/awfixer/tmpparty/.next/server/chunks/550.js)"
+      "Bash(grep -o '.\\\\{0,200\\\\}useMDXComponents.\\\\{0,200\\\\}' /home/awfixer/tmpparty/.next/server/chunks/550.js)",
+      "Bash(grep -E \"\\\\.\\(tsx?|jsx?\\)$\")"
     ]
   }
 }

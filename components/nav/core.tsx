@@ -40,6 +40,7 @@ export function CoreDropdown({
   const isPhilosophy = pathname === "/philosophy"
   const isPlatform = pathname === "/platform"
   const isNotesPage = pathname.startsWith("/notes")
+  const isSocials = pathname === "/socials"
 
   return (
     <div ref={dropdownRef} className="relative">
@@ -74,6 +75,7 @@ export function CoreDropdown({
             { href: "/philosophy", label: "Philosophy" },
             { href: "/platform", label: "Platform" },
             { href: "/notes", label: "Notes" },
+            { href: "/socials", label: "Socials" },
           ].map((item) => (
             <Link
               key={item.href}
@@ -111,6 +113,7 @@ export function CoreDropdownMobile({
   const isPhilosophy = pathname === "/philosophy"
   const isPlatform = pathname === "/platform"
   const isNotesPage = pathname.startsWith("/notes")
+  const isSocials = pathname === "/socials"
 
   return (
     <div className="mb-2">
@@ -145,6 +148,7 @@ export function CoreDropdownMobile({
             { href: "/philosophy", label: "Philosophy", active: isPhilosophy },
             { href: "/platform", label: "Platform", active: isPlatform },
             { href: "/notes", label: "Notes", active: isNotesPage },
+            { href: "/socials", label: "Socials", active: isSocials },
           ].map((item) => (
             <Link
               key={item.href}
