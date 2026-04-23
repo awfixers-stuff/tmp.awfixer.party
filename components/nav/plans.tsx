@@ -67,36 +67,27 @@ export function PlansDropdown({
       </Button>
       <div
         className={cn(
-          "absolute top-full left-1/2 z-50 mt-3 w-[640px] -translate-x-1/2 rounded-2xl border border-border bg-background/95 shadow-2xl shadow-black/20 backdrop-blur-xl",
+          "absolute top-full left-1/2 z-50 mt-3 w-52 -translate-x-1/2 rounded-2xl border border-border bg-background/95 shadow-2xl shadow-black/20 backdrop-blur-xl",
           "translate-y-[-0.5rem] opacity-0 transition-all duration-200",
           isOpen && "translate-y-0 opacity-100"
         )}
         style={{ pointerEvents: isOpen ? "auto" : "none" }}
       >
-        <div className="grid grid-cols-2 gap-2 p-3">
+        <div className="flex flex-col p-2">
           {plansSections.map((section) => (
-            <div key={section.label} className="flex flex-col">
-              <p className="mb-2 px-3 pt-1 text-[10px] font-semibold tracking-widest text-purple-600 uppercase">
-                {section.label}
-              </p>
-              <div className="flex flex-col gap-0.5">
-                {section.items.map((item) => (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className={cn(
-                      "block rounded-xl px-3 py-1.5 text-sm font-medium transition-colors",
-                      "focus-text-foreground hover:bg-accent hover:text-foreground focus:bg-accent",
-                      pathname === item.href
-                        ? "bg-accent text-foreground"
-                        : "text-foreground/70"
-                    )}
-                  >
-                    {item.label}
-                  </Link>
-                ))}
-              </div>
-            </div>
+            <Link
+              key={section.label}
+              href={section.items[0]?.href ?? "/plans"}
+              className={cn(
+                "block rounded-xl px-3 py-2 text-sm font-medium transition-colors",
+                "hover:bg-accent hover:text-foreground focus:bg-accent focus:outline-none",
+                section.items.some((i) => pathname === i.href)
+                  ? "bg-accent text-foreground"
+                  : "text-foreground/70"
+              )}
+            >
+              {section.label}
+            </Link>
           ))}
         </div>
       </div>
@@ -116,6 +107,24 @@ export function PlansDropdownMobile({
   isActive,
 }: PlansDropdownMobileProps) {
   const pathname = usePathname()
+
+  const plansSections = useMemo(() => {
+    const sections: Record<string, NavItem[]> = {}
+    plans.forEach((item) => {
+      const cat = item.category || "General"
+      if (!sections[cat]) sections[cat] = []
+      sections[cat].push(item)
+    })
+    const order = [
+      "Domestic Policy",
+      "Local Issues",
+      "International Relations",
+      "Party Positions",
+    ]
+    return order
+      .map((label) => ({ label, items: sections[label] || [] }))
+      .filter((s) => s.items.length > 0)
+  }, [])
 
   return (
     <div className="mb-2">
@@ -146,33 +155,21 @@ export function PlansDropdownMobile({
         )}
       >
         <div className="mt-1 flex flex-col gap-1 pl-2">
-          {plans.map((plan) => (
+          {plansSections.map((section) => (
             <Link
-              key={plan.slug}
-              href={plan.href}
+              key={section.label}
+              href={section.items[0]?.href ?? "/plans"}
               className={cn(
-                "block rounded-xl px-3 py-2 text-sm transition-colors",
+                "block rounded-xl px-3 py-2 text-sm font-medium transition-colors",
                 "hover:bg-accent",
-                pathname === plan.href
+                section.items.some((i) => pathname === i.href)
                   ? "bg-accent text-foreground"
                   : "text-foreground/70"
               )}
             >
-              {plan.label}
+              {section.label}
             </Link>
           ))}
-          <Link
-            href="/plans"
-            className={cn(
-              "block rounded-xl px-3 py-2 text-sm transition-colors",
-              "hover:bg-accent",
-              pathname === "/plans"
-                ? "bg-accent text-foreground"
-                : "text-purple-600"
-            )}
-          >
-            All Plans
-          </Link>
         </div>
       </div>
     </div>
