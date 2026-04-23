@@ -1,4 +1,8 @@
-import { ScrollTOC } from "@/components/toc"
+"use client"
+
+import { DesktopTOC } from "@/components/toc"
+import { MobileTOC } from "@/components/mobile-toc"
+import { useMobile } from "@/hooks/use-mobile"
 
 export const toc = [
   {
@@ -39,5 +43,7 @@ export const toc = [
 ]
 
 export function TableOfContents() {
-  return <ScrollTOC items={toc} />
+  const isMobile = useMobile()
+  if (isMobile === undefined) return null
+  return isMobile ? <MobileTOC items={toc} /> : <DesktopTOC items={toc} />
 }

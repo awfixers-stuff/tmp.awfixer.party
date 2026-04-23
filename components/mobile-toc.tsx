@@ -1,6 +1,7 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { createPortal } from "react-dom"
 import { ChevronDown, Menu } from "lucide-react"
 
 import { cn } from "@/lib/utils"
@@ -13,15 +14,20 @@ interface MobileTOCProps {
 
 export function MobileTOC({ items }: MobileTOCProps) {
   const [isOpen, setIsOpen] = useState(false)
+  const [mounted, setMounted] = useState(false)
 
-  if (items.length === 0) return null
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  if (!mounted || items.length === 0) return null
 
   const handleClick = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" })
     setIsOpen(false)
   }
 
-  return (
+  return createPortal(
     <>
       {/* Backdrop */}
       {isOpen && (
@@ -43,7 +49,6 @@ export function MobileTOC({ items }: MobileTOCProps) {
         )}
         style={{ maxHeight: "60dvh" }}
       >
-        {/* Panel header */}
         <div className="flex items-center justify-between px-5 py-4">
           <span className="text-sm font-semibold">On this page</span>
           <button
@@ -81,6 +86,7 @@ export function MobileTOC({ items }: MobileTOCProps) {
         <Menu className="h-4 w-4" />
         <span>On this page</span>
       </button>
-    </>
+    </>,
+    document.body
   )
 }

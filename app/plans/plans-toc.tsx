@@ -3,14 +3,15 @@
 import { DesktopTOC } from "@/components/toc"
 import { MobileTOC } from "@/components/mobile-toc"
 import { useMobile } from "@/hooks/use-mobile"
+import { plansMeta } from "./plans-meta"
 
-const toc = [
-  { id: "fix-the-system", text: "Fix the System", level: 2 },
-  { id: "our-core-statement", text: "Our Core Statement", level: 2 },
-  { id: "our-platform-ten-pillars", text: "Our Platform — Ten Pillars", level: 2 },
-]
+const toc = plansMeta.map((plan) => ({
+  id: plan.slug,
+  text: plan.title,
+  level: 2 as const,
+}))
 
-export function HomeTOC() {
+export function PlansTOC() {
   const isMobile = useMobile()
   if (isMobile === undefined) return null
   return isMobile ? <MobileTOC items={toc} /> : <DesktopTOC items={toc} />

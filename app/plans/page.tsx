@@ -2,20 +2,14 @@ import type { Metadata } from "next"
 
 import { Separator } from "@/components/ui/separator"
 
-import { ScrollTOC } from "@/components/toc"
 import { PlansContent } from "./plans-content"
 import { plansMeta } from "./plans-meta"
+import { PlansTOC } from "./plans-toc"
 
 export const metadata: Metadata = {
   title: "Plans | AWFixer Political Party",
   description: "AWFixer Political Party international relations plans.",
 }
-
-const toc = plansMeta.map((plan) => ({
-  id: plan.slug,
-  text: plan.title,
-  level: 2,
-}))
 
 export default function PlansPage() {
   return (
@@ -61,7 +55,7 @@ export default function PlansPage() {
       </main>
       <aside className="hidden lg:block lg:w-80 lg:shrink-0">
         <div className="sticky top-20">
-          <ScrollTOC items={toc} />
+          <PlansTOC />
         </div>
       </aside>
     </div>
