@@ -1,6 +1,7 @@
-import IntroductionToOurApproach from "./introduction-to-our-approach.mdx"
-import EconomicIncentivesAnalysis from "./economic-incentives-analysis.mdx"
-import HealthcareMarketFailures from "./healthcare-market-failures.mdx"
+import americanPride from "./notes/american-pride.mdx"
+import economicIncentivesAnalysis from "./notes/economic-incentives-analysis.mdx"
+import healthcareMarketFailures from "./notes/healthcare-market-failures.mdx"
+import introductionToOurApproach from "./notes/introduction-to-our-approach.mdx"
 
 export interface Note {
   slug: string
@@ -13,29 +14,37 @@ export interface Note {
 
 export const notes: Note[] = [
   {
-    slug: "introduction-to-our-approach",
-    title: "Introduction to Our Approach",
-    description: "Understanding how incentive structures shape policy outcomes.",
-    date: "2025-01-01",
-    category: "Foundation",
-    Component: IntroductionToOurApproach,
+    slug: "american-pride",
+    title: "American Pride",
+    description: "Note description.",
+    date: "",
+    category: "",
+    Component: americanPride,
   },
   {
     slug: "economic-incentives-analysis",
     title: "Economic Incentives Analysis",
-    description: "Deep dive into how economic incentives drive behavior in American politics.",
+    description: "Focus: How many people are coming? How to stop them? - Policy: Border walls, raids, deportations",
     date: "2025-01-15",
     category: "Economics",
-    Component: EconomicIncentivesAnalysis,
+    Component: economicIncentivesAnalysis,
   },
   {
     slug: "healthcare-market-failures",
     title: "Healthcare Market Failures",
-    description: "Analyzing the structural failures in American healthcare markets.",
+    description: "You don't choose when you need care - You can't easily compare prices",
     date: "2025-02-01",
     category: "Healthcare",
-    Component: HealthcareMarketFailures,
+    Component: healthcareMarketFailures,
   },
+  {
+    slug: "introduction-to-our-approach",
+    title: "Introduction To Our Approach",
+    description: "Minimum wage laws don't raise wages — market dynamics do - Antitrust laws don't create competition — profitable opportunities do",
+    date: "2025-01-01",
+    category: "Foundation",
+    Component: introductionToOurApproach,
+  }
 ]
 
 export function getNote(slug: string): Note | undefined {
