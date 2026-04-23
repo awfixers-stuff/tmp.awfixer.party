@@ -72,6 +72,14 @@ interface YoutubeProps {
   title?: string
 }
 
+interface FigureProps {
+  src: string
+  alt: string
+  caption?: string
+  className?: string
+  isGif?: boolean
+}
+
 export function Youtube({ src, title = "YouTube video" }: YoutubeProps) {
   const videoId = src.includes("youtu.be")
     ? src.split("youtu.be/")[1]?.split("?")[0]
