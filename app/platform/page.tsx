@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import Link from "next/link"
 
 import { Separator } from "@/components/ui/separator"
 
@@ -82,7 +83,7 @@ export default function PlatformPage() {
 
         <div className="grid gap-4 sm:grid-cols-2">
           {policyItems.map((item) => (
-            <a
+            <Link
               key={item.href}
               href={item.href}
               className="block rounded-lg border bg-card p-4 transition-colors hover:bg-accent"
@@ -93,7 +94,7 @@ export default function PlatformPage() {
               <p className="mt-1 text-sm text-muted-foreground">
                 {item.description}
               </p>
-            </a>
+            </Link>
           ))}
         </div>
 
@@ -102,6 +103,8 @@ export default function PlatformPage() {
         <div className="flex flex-col gap-4 sm:flex-row" id="join-the-movement">
           <a
             href="https://mee6.gg/awfixerpolitics"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center justify-center rounded-md bg-purple-600 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-purple-700"
           >
             Join the Movement

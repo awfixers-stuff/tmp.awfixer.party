@@ -1,3 +1,4 @@
+import Link from "next/link"
 import { notFound } from "next/navigation"
 
 import { Separator } from "@/components/ui/separator"
@@ -87,12 +88,12 @@ export default async function NotePage({ params }: Props) {
         <Separator className="bg-border/60" />
 
         <div className="flex flex-col gap-4 sm:flex-row">
-          <a
+          <Link
             href="/notes"
             className="inline-flex items-center justify-center rounded-md border border-border px-6 py-3 text-sm font-medium transition-colors hover:bg-accent"
           >
             All Notes
-          </a>
+          </Link>
         </div>
       </main>
     </div>

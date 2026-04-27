@@ -51,17 +51,17 @@ export function SiteFooter() {
         </p>
         <Separator className="bg-border/60" />
         <p className="text-center text-[0.8125rem] leading-relaxed text-pretty text-muted-foreground">
-          AWFixer Political Party is an independant organization that is not
-          affiliated with any corporation, Political Action Committie or current
+          AWFixer Political Party is an independent organization that is not
+          affiliated with any corporation, Political Action Committee or current
           political party.
         </p>
         <Separator className="bg-border/60" />
         <p className="text-center text-[0.8125rem] leading-relaxed text-pretty text-muted-foreground">
-          Canidates, Staff and Volenteers working for and with the AWFixer
+          Candidates, Staff and Volunteers working for and with the AWFixer
           Political Party are vetted and legally checked before endorsement and
           we do not legally obligate ourselves to the continued endorsement of
-          any canidate or party member who is deemed to be acting in an
-          extralegal or illegal manor.
+          any candidate or party member who is deemed to be acting in an
+          extralegal or illegal manner.
         </p>
         <Separator className="bg-border/60" />
       </div>

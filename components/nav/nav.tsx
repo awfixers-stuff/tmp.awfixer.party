@@ -2,12 +2,12 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { useState, useRef, useEffect, useMemo } from "react"
+import { useState, useRef, useEffect } from "react"
 import { Menu, X } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
-import { events, type NavItem } from "@/lib/nav"
+import type { NavItem } from "@/lib/nav"
 
 import { CoreDropdown, CoreDropdownMobile } from "./core"
 import { PolicyDropdown, PolicyDropdownMobile } from "./policy"
@@ -41,15 +41,6 @@ export function SiteNav() {
   const isEventsPage = pathname.startsWith("/events")
   const isIdeasPage = pathname.startsWith("/ideas")
   const isPlansPage = pathname.startsWith("/plans")
-
-  const upcomingEvents = useMemo(() => {
-    return events
-      .filter((e) => e.date && new Date(e.date) >= new Date())
-      .sort(
-        (a, b) => new Date(a!.date!).getTime() - new Date(b!.date!).getTime()
-      )
-      .slice(0, 5)
-  }, [])
 
   useEffect(() => {
     setMobileOpen(false)

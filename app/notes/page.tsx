@@ -28,6 +28,7 @@ function CategoryBadge({ category }: { category: string }) {
     "Criminal Justice": "bg-rose-600/10 text-rose-400",
     Analysis: "bg-violet-600/10 text-violet-400",
     Opinion: "bg-fuchsia-600/10 text-fuchsia-400",
+    "Political Theory": "bg-purple-600/10 text-purple-400",
   }
 
   return (
@@ -70,7 +71,7 @@ export default function NotesPage() {
                   <div className="flex items-center gap-2">
                     <CategoryBadge category={note.category} />
                   </div>
-                  <h3 className="font-heading text-lg font-semibold group-hover:text-purple-700">
+                  <h3 className="font-heading text-lg font-semibold group-hover:text-purple-400">
                     {note.title}
                   </h3>
                   <p className="text-sm text-muted-foreground">

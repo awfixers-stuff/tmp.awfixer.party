@@ -37,10 +37,7 @@ export function CoreDropdown({
   dropdownRef,
 }: CoreDropdownProps) {
   const pathname = usePathname()
-  const isPhilosophy = pathname === "/philosophy"
-  const isPlatform = pathname === "/platform"
   const isNotesPage = pathname.startsWith("/notes")
-  const isSocials = pathname === "/socials"
 
   return (
     <div ref={dropdownRef} className="relative">

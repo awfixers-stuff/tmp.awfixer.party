@@ -1,16 +1,7 @@
-"use client"
-
-import { useRef } from "react"
-
 import Content from "./content.mdx"
+import { ScrollButton } from "./scroll-button"
 
 export default function Page() {
-  const contentRef = useRef<HTMLElement>(null)
-
-  const scrollToContent = () => {
-    contentRef.current?.scrollIntoView({ behavior: "smooth" })
-  }
-
   return (
     <>
       <section className="relative flex h-screen flex-col items-center justify-center px-4 sm:px-6">
@@ -43,29 +34,11 @@ export default function Page() {
               worse.
             </p>
           </div>
-          <button
-            onClick={scrollToContent}
-            className="animate-fade-up animate-fade-up-delay-3 mt-4 flex flex-col items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
-          >
-            <span>Read More</span>
-            <svg
-              className="h-5 w-5 animate-bounce"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M19 14l-7 7m0 0l-7-7m7 7V3"
-              />
-            </svg>
-          </button>
+          <ScrollButton />
         </div>
       </section>
       <main
-        ref={contentRef}
+        id="content"
         className="mx-auto flex w-full max-w-2xl flex-1 flex-col gap-12 px-4 pt-[40vh] pb-16 sm:gap-14 sm:px-6 sm:pb-20"
       >
         <div className="prose max-w-none text-[0.9375rem] leading-relaxed text-foreground/90 prose-neutral dark:prose-invert prose-headings:scroll-mt-24 prose-h1:mt-0 prose-h1:mb-8 prose-h2:mt-12 prose-h2:mb-5 prose-p:mt-0 prose-p:mb-6 prose-ol:my-6 prose-ul:my-6 prose-li:my-2">

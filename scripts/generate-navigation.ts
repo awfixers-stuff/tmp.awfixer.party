@@ -128,6 +128,10 @@ function extractMetadataFromMDX(filePath: string) {
     }
   }
 
+  if (result.title) {
+    result.title = result.title.split(" | ")[0]
+  }
+
   return result
 }
 

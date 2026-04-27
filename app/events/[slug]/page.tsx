@@ -1,3 +1,4 @@
+import Link from "next/link"
 import { notFound } from "next/navigation"
 
 import { Separator } from "@/components/ui/separator"
@@ -151,16 +152,18 @@ export default async function EventPage({ params }: Props) {
         <div className="flex flex-col gap-4 sm:flex-row">
           <a
             href="https://mee6.gg/awfixerpolitics"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center justify-center rounded-md bg-purple-600 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-purple-700"
           >
             RSVP on Discord
           </a>
-          <a
+          <Link
             href="/events"
             className="inline-flex items-center justify-center rounded-md border border-border px-6 py-3 text-sm font-medium transition-colors hover:bg-accent"
           >
             All Events
-          </a>
+          </Link>
         </div>
       </main>
     </div>

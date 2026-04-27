@@ -181,8 +181,8 @@ export function ScheduleGrid({ events }: ScheduleGridProps) {
           </tr>
         </thead>
         <tbody>
-          {events.map((evt, i) => (
-            <tr key={i} className="border-b">
+          {events.map((evt) => (
+            <tr key={`${evt.date}-${evt.event}`} className="border-b">
               <td className="px-4 py-3">{evt.date}</td>
               <td className="px-4 py-3">{evt.event}</td>
               <td className="px-4 py-3">{evt.location}</td>

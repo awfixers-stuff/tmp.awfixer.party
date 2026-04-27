@@ -1,5 +1,7 @@
 "use client"
 
+import Link from "next/link"
+
 export function PhilosophyContent() {
   return (
     <>
@@ -438,18 +440,18 @@ export function PhilosophyContent() {
       </p>
 
       <div className="animate-fade-up animate-fade-up-delay-5 mt-8 flex flex-col gap-4 sm:flex-row">
-        <a
+        <Link
           href="/platform"
           className="inline-flex items-center justify-center rounded-md bg-purple-600 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-purple-700"
         >
           Explore the Full Platform
-        </a>
-        <a
+        </Link>
+        <Link
           href="/join"
           className="inline-flex items-center justify-center rounded-md border border-border px-6 py-3 text-sm font-medium transition-colors hover:bg-accent"
         >
           Join the Movement
-        </a>
+        </Link>
       </div>
     </>
   )

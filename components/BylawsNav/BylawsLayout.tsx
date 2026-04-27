@@ -45,7 +45,7 @@ export function BylawsLayout({
     <div className={cn("flex min-h-screen", isMobile && "flex-col", className)}>
       {/* Desktop navigation rail */}
       {isMobile === false && (
-        <aside className="fixed top-0 left-0 z-40 h-screen w-64 shrink-0 border-r border-border/50 bg-background">
+        <aside className="fixed top-24 left-0 z-40 h-[calc(100svh-6rem)] w-64 shrink-0 border-r border-border/50 bg-background sm:top-28 sm:h-[calc(100svh-7rem)]">
           <div className="h-full overflow-y-auto">
             <BylawsNav
               navItems={navItems}
@@ -92,7 +92,7 @@ export function BylawsLayout({
           type="button"
           onClick={toggleMobileNav}
           className={cn(
-            "fixed top-4 left-4 z-30",
+            "fixed top-28 left-4 z-30",
             "rounded-md border border-border bg-background p-2",
             "transition-colors hover:bg-muted/50",
             "focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none"

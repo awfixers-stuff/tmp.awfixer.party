@@ -1,10 +1,6 @@
 "use client"
 
 import { useState, useCallback, useRef, useEffect } from "react"
-import { cn } from "@/lib/utils"
-import { Menu, X } from "lucide-react"
-import type { NavItem as NavItemType } from "@/app/bylaws/bylaws"
-
 interface UsePopoutOptions {
   delay?: number
   edgeThreshold?: number
