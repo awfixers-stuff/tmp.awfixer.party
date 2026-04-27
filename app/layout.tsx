@@ -23,13 +23,29 @@ const fontMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://awfixer.party"),
   title: "AWFixer Political Party",
   description: "Official temporary site for the AWFixer Political Party.",
   openGraph: {
-    images: ["/2.webp"],
+    title: "AWFixer Political Party",
+    description: "Official temporary site for the AWFixer Political Party.",
+    url: "/",
+    siteName: "AWFixer Political Party",
+    images: [
+      {
+        url: "/2.webp",
+        width: 1200,
+        height: 630,
+        alt: "AWFixer Political Party",
+      },
+    ],
+    type: "website",
   },
-  icons: {
-    icon: "/1.webp",
+  twitter: {
+    card: "summary_large_image",
+    title: "AWFixer Political Party",
+    description: "Official temporary site for the AWFixer Political Party.",
+    images: ["/2.webp"],
   },
 }
 
