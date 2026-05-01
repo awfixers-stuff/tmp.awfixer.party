@@ -1,6 +1,6 @@
 export const toc = [
   {
-    "id": "competition-antitrust-policy",
+    "id": "competition--antitrust-policy",
     "text": "Competition & Antitrust Policy",
     "level": 2
   }

@@ -1,6 +1,6 @@
 export const toc = [
   {
-    "id": "criminal-justice-accountability-reform-and-the-value-of-useful-work",
+    "id": "criminal-justice--accountability-reform-and-the-value-of-useful-work",
     "text": "Criminal Justice — Accountability, Reform, and the Value of Useful Work",
     "level": 2
   },

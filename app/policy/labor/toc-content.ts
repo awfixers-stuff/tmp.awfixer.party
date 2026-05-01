@@ -1,6 +1,6 @@
 export const toc = [
   {
-    "id": "labor-immigration-fix-the-incentives-not-the-people",
+    "id": "labor--immigration--fix-the-incentives-not-the-people",
     "text": "Labor & Immigration — Fix the Incentives, Not the People",
     "level": 2
   },
@@ -25,7 +25,7 @@ export const toc = [
     "level": 3
   },
   {
-    "id": "labor-immigration-summary",
+    "id": "labor--immigration-summary",
     "text": "LABOR & IMMIGRATION SUMMARY",
     "level": 2
   }

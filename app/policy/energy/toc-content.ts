@@ -1,6 +1,6 @@
 export const toc = [
   {
-    "id": "energy-policy-nuclear-deregulation-and-the-honest-environmental-argument",
+    "id": "energy-policy--nuclear-deregulation-and-the-honest-environmental-argument",
     "text": "Energy Policy — Nuclear Deregulation and the Honest Environmental Argument",
     "level": 2
   },
@@ -10,7 +10,7 @@ export const toc = [
     "level": 3
   },
   {
-    "id": "the-historical-failure-revisiting-project-independence",
+    "id": "the-historical-failure--revisiting-project-independence",
     "text": "The Historical Failure — Revisiting Project Independence",
     "level": 3
   },

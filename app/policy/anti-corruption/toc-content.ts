@@ -1,6 +1,6 @@
 export const toc = [
   {
-    "id": "government-corruption-a-comprehensive-reckoning",
+    "id": "government-corruption--a-comprehensive-reckoning",
     "text": "Government Corruption — A Comprehensive Reckoning",
     "level": 2
   },

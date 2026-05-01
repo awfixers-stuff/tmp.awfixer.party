@@ -1,6 +1,6 @@
 export const toc = [
   {
-    "id": "the-public-ledger-radical-transparency-in-federal-spending",
+    "id": "the-public-ledger--radical-transparency-in-federal-spending",
     "text": "The Public Ledger — Radical Transparency in Federal Spending",
     "level": 2
   },
@@ -10,7 +10,7 @@ export const toc = [
     "level": 3
   },
   {
-    "id": "the-model-blockchain-style-transparency",
+    "id": "the-model--blockchain-style-transparency",
     "text": "The Model — Blockchain-Style Transparency",
     "level": 3
   },
@@ -25,7 +25,7 @@ export const toc = [
     "level": 3
   },
   {
-    "id": "implementation-federal-public-ledger-authority",
+    "id": "implementation--federal-public-ledger-authority",
     "text": "Implementation — Federal Public Ledger Authority",
     "level": 3
   },

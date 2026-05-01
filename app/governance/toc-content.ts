@@ -10,7 +10,7 @@ export const toc = [
     "level": 3
   },
   {
-    "id": "tier-2-platform-policy-positions",
+    "id": "tier-2-platform--policy-positions",
     "text": "Tier 2: Platform & Policy Positions",
     "level": 3
   },
@@ -25,7 +25,7 @@ export const toc = [
     "level": 3
   },
   {
-    "id": "transparency-accountability",
+    "id": "transparency--accountability",
     "text": "Transparency & Accountability",
     "level": 2
   },
@@ -70,7 +70,7 @@ export const toc = [
     "level": 3
   },
   {
-    "id": "amendments-evolution",
+    "id": "amendments--evolution",
     "text": "Amendments & Evolution",
     "level": 2
   }

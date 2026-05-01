@@ -32,27 +32,27 @@ export const bylawSections: BylawSection[] = [
 {
         slug: "governance",
         title: "Governance Bylaws",
-        description: "Five members elected annually - Terms are two years, staggered",
+        description: "Defines the governance structure and leadership roles including Board of Directors, Executive Officers, and Committees.",
         popoutDirection: undefined,
         Component: governance,
       },
 {
         slug: "membership",
         title: "Membership Bylaws",
-        description: "Founding Members: Original organizers - Active Members: Regular participants",
+        description: "Outlines membership requirements, tiers, dues, and member rights.",
         popoutDirection: undefined,
         Component: membership,
       },
 {
         slug: "voting",
         title: "Voting Bylaws",
-        description: "Members must be in good standing - At least 30 days of membership required",
+        description: "Governs all voting procedures including eligibility, methods, and quorum requirements.",
         popoutDirection: undefined,
         Component: voting,
         children: [{
                   slug: "proxy",
                   title: "Proxy Voting",
-                  description: "Member must submit written request - Authorization valid for single election only",
+                  description: "Procedures for proxy voting in organization elections including authorization and limitations.",
                   popoutDirection: undefined,
                   Component: proxy,
                 }]

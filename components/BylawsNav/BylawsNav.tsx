@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation"
 import { cn } from "@/lib/utils"
 import { Menu, X, ChevronRight, ChevronDown } from "lucide-react"
 import { NavItem } from "./NavItem"
-import { usePopout, useBreakpoint } from "./usePopout"
+import { useBreakpoint } from "./usePopout"
 import type { NavItem as NavItemType } from "@/app/bylaws/bylaws"
 
 export interface BylawsNavProps {
@@ -25,11 +25,11 @@ export function BylawsNav({
 }: BylawsNavProps) {
   const router = useRouter()
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [openId, setOpenId] = useState<string | null>(null)
   const isMobile = useBreakpoint({ breakpoint: mobileBreakpoint })
-  const { openId, popoutDirection, open, close, cancelClose, setRef } = usePopout({
-    delay: 150,
-    edgeThreshold: 200,
-  })
+
+  const handleOpen = useCallback((id: string) => setOpenId(id), [])
+  const handleClose = useCallback(() => setOpenId(null), [])
 
   const handleNavigate = useCallback(
     (item: NavItemType) => {
@@ -93,13 +93,10 @@ export function BylawsNav({
                 item={item}
                 activeId={activeId}
                 isMobile={isMobile ?? false}
-                isOpen={openId === item.id}
                 openId={openId}
-                popoutDirection={popoutDirection}
-                onOpen={open}
-                onClose={close}
+                onOpen={handleOpen}
+                onClose={handleClose}
                 onNavigate={handleNavigate}
-                setRef={setRef}
               />
             ))}
           </div>

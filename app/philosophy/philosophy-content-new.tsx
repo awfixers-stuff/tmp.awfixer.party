@@ -6,7 +6,10 @@ export function PhilosophyContent() {
   return (
     <>
       <section className="animate-fade-up rounded-lg border-l-4 border-purple-600 bg-card p-6">
-        <h2 className="font-heading text-2xl font-bold">
+        <h2
+          id="america-does-not-have-a-people-problem-it-has-a-structure-problem"
+          className="font-heading text-2xl font-bold"
+        >
           America does not have a{" "}
           <span className="text-purple-600">people problem.</span>
           <br />
@@ -96,7 +99,10 @@ export function PhilosophyContent() {
         struggles to maintain what already exists.
       </p>
 
-      <h3 className="animate-fade-up animate-fade-up-delay-2 text-xl font-semibold">
+      <h3
+        id="the-pattern-is-always-the-same"
+        className="animate-fade-up animate-fade-up-delay-2 text-xl font-semibold"
+      >
         The Pattern Is Always the Same
       </h3>
       <p className="animate-fade-up animate-fade-up-delay-2">
@@ -305,7 +311,10 @@ export function PhilosophyContent() {
         </div>
       </div>
 
-      <h3 className="animate-fade-up animate-fade-up-delay-4 text-xl font-semibold">
+      <h3
+        id="on-bipartisanship"
+        className="animate-fade-up animate-fade-up-delay-4 text-xl font-semibold"
+      >
         On Bipartisanship
       </h3>
       <p className="animate-fade-up animate-fade-up-delay-4">

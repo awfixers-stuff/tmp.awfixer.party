@@ -1,6 +1,6 @@
 export const toc = [
   {
-    "id": "tax-fiscal-policy",
+    "id": "tax--fiscal-policy",
     "text": "Tax & Fiscal Policy",
     "level": 2
   }

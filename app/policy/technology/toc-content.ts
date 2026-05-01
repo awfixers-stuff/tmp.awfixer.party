@@ -1,6 +1,6 @@
 export const toc = [
   {
-    "id": "technology-ai-policy",
+    "id": "technology--ai-policy",
     "text": "Technology & AI Policy",
     "level": 2
   },

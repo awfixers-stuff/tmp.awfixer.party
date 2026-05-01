@@ -40,7 +40,12 @@ export function DesktopTOC({ items }: DesktopTOCProps) {
   if (items.length === 0) return null
 
   const handleClick = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" })
+    const element = document.getElementById(id)
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth", block: "start" })
+    } else {
+      console.warn(`[TOC] No element found for id: "${id}"`)
+    }
   }
 
   return (

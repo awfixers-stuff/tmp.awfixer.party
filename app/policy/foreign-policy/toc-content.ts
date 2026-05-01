@@ -1,6 +1,6 @@
 export const toc = [
   {
-    "id": "foreign-policy-principled-engagement-over-perpetual-intervention",
+    "id": "foreign-policy--principled-engagement-over-perpetual-intervention",
     "text": "Foreign Policy — Principled Engagement Over Perpetual Intervention",
     "level": 2
   },
@@ -10,7 +10,7 @@ export const toc = [
     "level": 3
   },
   {
-    "id": "principle-two-the-middle-east-strategic-restraint",
+    "id": "principle-two-the-middle-east--strategic-restraint",
     "text": "PRINCIPLE TWO: The Middle East — Strategic Restraint",
     "level": 3
   },

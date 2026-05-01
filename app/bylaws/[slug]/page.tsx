@@ -14,9 +14,8 @@ function findActiveId(
   for (const item of items) {
     if (item.id === slug) return item.id
     if (item.children) {
-      for (const child of item.children) {
-        if (child.id === slug) return child.id
-      }
+      const found = findActiveId(item.children, slug)
+      if (found) return found
     }
   }
   return undefined
