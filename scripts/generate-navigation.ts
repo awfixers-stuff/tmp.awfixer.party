@@ -89,6 +89,13 @@ function extractMetadataFromMDX(filePath: string) {
     result.date = attrs.match(/date="([^"]+)"/)?.[1] || result.date
   }
 
+  const bylawMatch = content.match(/<BylawMeta([^>]*)\/?>/)
+  if (bylawMatch) {
+    const attrs = bylawMatch[1]
+    result.title = attrs.match(/title="([^"]+)"/)?.[1] || result.title
+    result.description = attrs.match(/description="([^"]+)"/)?.[1] || result.description
+  }
+
   // Fallback to first # or ## heading if title not in frontmatter
   if (!result.title) {
     const lines = content.split("\n")
@@ -282,6 +289,47 @@ function getItemsFromDirectoriesRecursive(
   return items
 }
 
+function getBylawsItems() {
+  const bylawsDir = path.join(ROOT_DIR, "app/bylaws/bylaws")
+  const items: NavItem[] = []
+
+  if (!fs.existsSync(bylawsDir)) return items
+
+  function processDirectory(dirPath: string, baseUrl: string) {
+    const dirs = fs
+      .readdirSync(dirPath, { withFileTypes: true })
+      .filter(
+        (d) =>
+          d.isDirectory() && !d.name.startsWith("[") && !d.name.startsWith(".")
+      )
+
+    for (const dir of dirs) {
+      const slug = dir.name
+      const fullPath = path.join(dirPath, slug)
+      const mdxPath = path.join(fullPath, "content.mdx")
+      const href = `${baseUrl}/${slug}`
+
+      const meta = extractMetadataFromMDX(mdxPath)
+      const title = meta?.title || formatSlug(slug)
+      const description = meta?.description || ""
+
+      items.push({
+        href,
+        slug,
+        label: title,
+        description,
+        category: "Bylaws",
+      })
+
+      processDirectory(fullPath, href)
+    }
+  }
+
+  processDirectory(bylawsDir, "/bylaws")
+
+  return items
+}
+
 function main() {
   const navData: Record<string, any> = {}
 
@@ -353,6 +401,8 @@ function main() {
 
   navData.governance = [...governanceItems, ...memberProfiles]
 
+  navData.bylaws = getBylawsItems()
+
   // Ensure lib/nav exists
   const outputDir = path.join(ROOT_DIR, "lib/nav")
   if (!fs.existsSync(outputDir)) {
@@ -375,6 +425,7 @@ import ideas from "./ideas.json"
 import notes from "./notes.json"
 import events from "./events.json"
 import governance from "./governance.json"
+import bylaws from "./bylaws.json"
 
 export interface NavItem {
   href: string
@@ -385,7 +436,7 @@ export interface NavItem {
   date?: string
 }
 
-export { policy, plans, ideas, notes, events, governance }
+export { policy, plans, ideas, notes, events, governance, bylaws }
 
 export const navigationData = {
   policy: policy as NavItem[],
@@ -393,7 +444,8 @@ export const navigationData = {
   ideas: ideas as NavItem[],
   notes: notes as NavItem[],
   events: events as NavItem[],
-  governance: governance as NavItem[]
+  governance: governance as NavItem[],
+  bylaws: bylaws as NavItem[],
 }
 `
   fs.writeFileSync(path.join(outputDir, "index.ts"), indexContent)

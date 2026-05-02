@@ -24,7 +24,7 @@ export function BylawsLayout({
 }: BylawsLayoutProps) {
   const router = useRouter()
   const [mobileNavOpen, setMobileNavOpen] = useState(false)
-  const isMobile = useBreakpoint({ breakpoint: 768 })
+  const isMobile = useBreakpoint({ breakpoint: 1024 })
 
   const handleNavigate = useCallback(
     (item: Parameters<NonNullable<BylawsNavProps["onNavigate"]>>[0]) => {

@@ -1,0 +1,30 @@
+[
+  {
+    "href": "/bylaws/governance",
+    "slug": "governance",
+    "label": "Governance Bylaws",
+    "description": "Defines the governance structure and leadership roles including Board of Directors, Executive Officers, and Committees.",
+    "category": "Bylaws"
+  },
+  {
+    "href": "/bylaws/membership",
+    "slug": "membership",
+    "label": "Membership Bylaws",
+    "description": "Outlines membership requirements, tiers, dues, and member rights.",
+    "category": "Bylaws"
+  },
+  {
+    "href": "/bylaws/voting",
+    "slug": "voting",
+    "label": "Voting Bylaws",
+    "description": "Governs all voting procedures including eligibility, methods, and quorum requirements.",
+    "category": "Bylaws"
+  },
+  {
+    "href": "/bylaws/voting/proxy",
+    "slug": "proxy",
+    "label": "Proxy Voting",
+    "description": "Procedures for proxy voting in organization elections including authorization and limitations.",
+    "category": "Bylaws"
+  }
+]

@@ -19,7 +19,7 @@ export interface BylawsNavProps {
 export function BylawsNav({
   navItems,
   activeId,
-  mobileBreakpoint = 768,
+  mobileBreakpoint = 1024,
   onNavigate,
   className,
 }: BylawsNavProps) {

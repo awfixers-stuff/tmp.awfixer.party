@@ -42,8 +42,7 @@ export default async function EventPage({ params }: Props) {
   const EventContent = event.Component
 
   return (
-    <div className="flex">
-      <main className="mx-auto flex w-full max-w-2xl flex-1 flex-col gap-12 px-4 pb-16 sm:gap-14 sm:px-6 sm:pb-20">
+    <main className="mx-auto flex w-full max-w-2xl flex-1 flex-col gap-12 px-4 pb-16 sm:gap-14 sm:px-6 sm:pb-20">
         <header className="space-y-3">
           <p className="font-mono text-xs tracking-widest text-purple-600 uppercase">
             AWFixer Political Party
@@ -166,6 +165,5 @@ export default async function EventPage({ params }: Props) {
           </Link>
         </div>
       </main>
-    </div>
   )
 }

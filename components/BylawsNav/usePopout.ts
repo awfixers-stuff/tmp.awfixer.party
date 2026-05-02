@@ -7,7 +7,8 @@ interface UseBreakpointOptions {
 }
 
 export function useBreakpoint(options: UseBreakpointOptions = {}) {
-  const { breakpoint = 768 } = options
+  // Breakpoint: 1024px - matches use-mobile hook
+  const { breakpoint = 1024 } = options
   const [isMobile, setIsMobile] = useState<boolean | undefined>(undefined)
 
   useEffect(() => {

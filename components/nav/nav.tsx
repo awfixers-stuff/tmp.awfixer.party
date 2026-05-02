@@ -15,6 +15,7 @@ import { GovernanceDropdown, GovernanceDropdownMobile } from "./governance"
 import { EventsDropdown, EventsDropdownMobile } from "./events"
 import { PlansDropdown, PlansDropdownMobile } from "./plans"
 import { IdeasDropdown, IdeasDropdownMobile } from "./ideas"
+import { BylawsDropdown, BylawsDropdownMobile } from "./bylaws"
 
 export function SiteNav() {
   const pathname = usePathname()
@@ -25,12 +26,14 @@ export function SiteNav() {
   const [eventsOpen, setEventsOpen] = useState(false)
   const [plansOpen, setPlansOpen] = useState(false)
   const [ideasOpen, setIdeasOpen] = useState(false)
+  const [bylawsOpen, setBylawsOpen] = useState(false)
   const coreDropdownRef = useRef<HTMLDivElement>(null)
   const policyDropdownRef = useRef<HTMLDivElement>(null)
   const governanceDropdownRef = useRef<HTMLDivElement>(null)
   const eventsDropdownRef = useRef<HTMLDivElement>(null)
   const plansDropdownRef = useRef<HTMLDivElement>(null)
   const ideasDropdownRef = useRef<HTMLDivElement>(null)
+  const bylawsDropdownRef = useRef<HTMLDivElement>(null)
 
   const isPhilosophy = pathname === "/philosophy"
   const isPlatform = pathname === "/platform"
@@ -41,6 +44,7 @@ export function SiteNav() {
   const isEventsPage = pathname.startsWith("/events")
   const isIdeasPage = pathname.startsWith("/ideas")
   const isPlansPage = pathname.startsWith("/plans")
+  const isBylawsPage = pathname.startsWith("/bylaws")
 
   useEffect(() => {
     setMobileOpen(false)
@@ -50,6 +54,7 @@ export function SiteNav() {
     setEventsOpen(false)
     setPlansOpen(false)
     setIdeasOpen(false)
+    setBylawsOpen(false)
   }, [pathname])
 
   useEffect(() => {
@@ -89,6 +94,12 @@ export function SiteNav() {
         !ideasDropdownRef.current.contains(event.target as Node)
       ) {
         setIdeasOpen(false)
+      }
+      if (
+        bylawsDropdownRef.current &&
+        !bylawsDropdownRef.current.contains(event.target as Node)
+      ) {
+        setBylawsOpen(false)
       }
     }
     document.addEventListener("mousedown", handleClickOutside)
@@ -168,6 +179,13 @@ export function SiteNav() {
                 setIsOpen={setIdeasOpen}
                 isActive={isIdeasPage}
                 dropdownRef={ideasDropdownRef}
+              />
+
+              <BylawsDropdown
+                isOpen={bylawsOpen}
+                setIsOpen={setBylawsOpen}
+                isActive={isBylawsPage}
+                dropdownRef={bylawsDropdownRef}
               />
             </div>
 
@@ -261,6 +279,14 @@ export function SiteNav() {
             isOpen={ideasOpen}
             setIsOpen={setIdeasOpen}
             isActive={isIdeasPage}
+          />
+
+          <div className="my-2 h-px bg-border" />
+
+          <BylawsDropdownMobile
+            isOpen={bylawsOpen}
+            setIsOpen={setBylawsOpen}
+            isActive={isBylawsPage}
           />
 
           <div className="my-2 h-px bg-border" />

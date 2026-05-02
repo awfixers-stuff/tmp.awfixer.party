@@ -2,6 +2,7 @@ import Link from "next/link"
 import { notFound } from "next/navigation"
 
 import { Separator } from "@/components/ui/separator"
+import { TableOfContents } from "./toc"
 
 import { notes, getNote } from "../notes"
 
@@ -96,6 +97,11 @@ export default async function NotePage({ params }: Props) {
           </Link>
         </div>
       </main>
+      <aside className="hidden lg:block lg:w-80 lg:shrink-0">
+        <div className="sticky top-20">
+          <TableOfContents items={[...note.toc]} />
+        </div>
+      </aside>
     </div>
   )
 }

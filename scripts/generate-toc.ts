@@ -32,7 +32,7 @@ function extractHeadingsFromTsx(filePath: string): TocItem[] {
   const slugger = new GithubSlugger()
   const headings: TocItem[] = []
 
-  const headingRegex = /<h([23])\b([^>]*)>(.*?)<\/h\1>/gs
+  const headingRegex = /<h([23])\b([^>]*)>([\s\S]*?)<\/h\1>/g
   let match
 
   while ((match = headingRegex.exec(content)) !== null) {
