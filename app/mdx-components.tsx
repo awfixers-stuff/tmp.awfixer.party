@@ -423,7 +423,20 @@ export function EventMeta({ date, time, location, type }: EventMetaProps) {
   )
 }
 
+interface BylawMetaProps {
+  title?: string
+  description?: string
+  order?: number
+  slug?: string
+  popoutDirection?: "right" | "left" | "auto"
+}
+
+export function BylawMeta(_props: BylawMetaProps) {
+  return null
+}
+
 const components = {
+  BylawMeta,
   Callout,
   StatCard,
   Quote,

@@ -1,3 +1,12 @@
+import americanPride from "./american-pride/content.mdx"
+import successAndFailuresOfFederalism from "./success-and-failures-of-federalism/content.mdx"
+import theAbsoluteRuleOfOligarchy from "./the-absolute-rule-of-oligarchy/content.mdx"
+import theRoleOfDecentralizationInDemocracy from "./the-role-of-decentralization-in-democracy/content.mdx"
+import economicIncentivesAnalysis from "./economic-incentives-analysis/content.mdx"
+import theWoesOfInterpositioning from "./the-woes-of-interpositioning/content.mdx"
+import introductionToOurApproach from "./introduction-to-our-approach/content.mdx"
+import healthcareMarketFailures from "./healthcare-market-failures/content.mdx"
+
 export interface Note {
   slug: string
   title: string
@@ -14,7 +23,7 @@ export const notes: Note[] = [
     description: "Why American pride is our greatest strength and greatest weakness.",
     date: "2026-04-22",
     category: "From AWFixer",
-    Component: (await import("./american-pride/content.mdx")).default,
+    Component: americanPride,
   },
 {
     slug: "success-and-failures-of-federalism",
@@ -22,7 +31,7 @@ export const notes: Note[] = [
     description: "Analyzing federalism's track record in American governance.",
     date: "2026-04-23",
     category: "Political Theory",
-    Component: (await import("./success-and-failures-of-federalism/content.mdx")).default,
+    Component: successAndFailuresOfFederalism,
   },
 {
     slug: "the-absolute-rule-of-oligarchy",
@@ -30,7 +39,7 @@ export const notes: Note[] = [
     description: "Exploring the tendency of power to concentrate in the hands of the few.",
     date: "2026-04-23",
     category: "Political Theory",
-    Component: (await import("./the-absolute-rule-of-oligarchy/content.mdx")).default,
+    Component: theAbsoluteRuleOfOligarchy,
   },
 {
     slug: "the-role-of-decentralization-in-democracy",
@@ -38,7 +47,7 @@ export const notes: Note[] = [
     description: "Examining how decentralization enables democratic participation.",
     date: "2026-04-23",
     category: "Political Theory",
-    Component: (await import("./the-role-of-decentralization-in-democracy/content.mdx")).default,
+    Component: theRoleOfDecentralizationInDemocracy,
   },
 {
     slug: "economic-incentives-analysis",
@@ -46,7 +55,7 @@ export const notes: Note[] = [
     description: "How economic incentives drive behavior in American politics.",
     date: "2025-01-15",
     category: "Economics",
-    Component: (await import("./economic-incentives-analysis/content.mdx")).default,
+    Component: economicIncentivesAnalysis,
   },
 {
     slug: "the-woes-of-interpositioning",
@@ -54,7 +63,7 @@ export const notes: Note[] = [
     description: "Examining the doctrine of interposition and its problems.",
     date: "2026-04-23",
     category: "Political Theory",
-    Component: (await import("./the-woes-of-interpositioning/content.mdx")).default,
+    Component: theWoesOfInterpositioning,
   },
 {
     slug: "introduction-to-our-approach",
@@ -62,7 +71,7 @@ export const notes: Note[] = [
     description: "How incentive structures shape policy outcomes.",
     date: "2025-01-01",
     category: "Foundation",
-    Component: (await import("./introduction-to-our-approach/content.mdx")).default,
+    Component: introductionToOurApproach,
   },
 {
     slug: "healthcare-market-failures",
@@ -70,7 +79,7 @@ export const notes: Note[] = [
     description: "The structural failures in American healthcare markets explained.",
     date: "2025-02-01",
     category: "Healthcare",
-    Component: (await import("./healthcare-market-failures/content.mdx")).default,
+    Component: healthcareMarketFailures,
   }
 ]
 
